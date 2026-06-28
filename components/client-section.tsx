@@ -17,7 +17,7 @@ export default function ClientSection() {
         <h2 className="font-heading font-normal text-fs-dark w-[800px] text-center" style={{ fontSize: "48px", lineHeight: "58px", letterSpacing: "-3.8267px" }}>
           Trusted by Industry Leaders
         </h2>
-        <p className="font-body text-[16px] leading-[22px] tracking-[-0.75px] text-center text-[#7A7D9C] w-[720px]">
+        <p className="font-body text-[16px] leading-[22px] tracking-[-0.75px] text-center text-fs-grey w-[720px]">
           Empowering Innovation for a Digital Tomorrow
         </p>
       </div>

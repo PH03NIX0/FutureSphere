@@ -42,7 +42,7 @@ export default function MissionSection() {
                 width: "501px",
                 fontSize: "16px",
                 lineHeight: "24px",
-                color: "#7A7D9C",
+                color: "var(--color-fs-grey)",
               }}
             >
               We are dedicated to empowering individuals, businesses, and
@@ -78,6 +78,7 @@ export default function MissionSection() {
               src="/images/mission-visual.png"
               alt="Our mission"
               fill
+              sizes="(max-width: 1058px) 100vw, 460px"
               className="object-cover"
             />
           </div>

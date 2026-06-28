@@ -52,7 +52,7 @@ export default function TestimonialCard({
             style={{
               fontSize: "16px",
               lineHeight: "22px",
-              color: "#7A7D9C",
+              color: "var(--color-fs-grey)",
               letterSpacing: "-0.75px",
             }}
           >

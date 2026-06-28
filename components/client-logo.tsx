@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 interface ClientLogoProps {
   src: string;
   alt: string;
@@ -9,7 +7,7 @@ interface ClientLogoProps {
 
 export default function ClientLogo({ src, alt, width, height }: ClientLogoProps) {
   return (
-    <Image
+    <img
       src={src}
       alt={alt}
       width={width}

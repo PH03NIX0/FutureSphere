@@ -110,6 +110,7 @@ export default function TestimonialsSection() {
                   src={slide.imageSrc}
                   alt={slide.imageAlt}
                   fill
+                  sizes="(max-width: 1058px) 100vw, 460px"
                   className="object-contain"
                 />
               </motion.div>
@@ -134,7 +135,7 @@ export default function TestimonialsSection() {
                     style={{
                       fontSize: "16px",
                       lineHeight: "22px",
-                      color: "#7A7D9C",
+                      color: "var(--color-fs-grey)",
                       letterSpacing: "-0.75px",
                     }}
                   >
@@ -168,7 +169,7 @@ export default function TestimonialsSection() {
         <div className="flex flex-col items-center gap-[24px]">
           <div className="flex items-center justify-center gap-[60px]">
             {row1.map((brand) => (
-              <Image
+              <img
                 key={brand.alt}
                 src={brand.src}
                 alt={brand.alt}
@@ -179,7 +180,7 @@ export default function TestimonialsSection() {
           </div>
           <div className="flex items-center justify-center gap-[60px]">
             {row2.map((brand) => (
-              <Image
+              <img
                 key={brand.alt}
                 src={brand.src}
                 alt={brand.alt}

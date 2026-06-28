@@ -17,15 +17,16 @@ export default function BlogCard({ category, title, excerpt, imageSrc, imageAlt 
           src={imageSrc}
           alt={imageAlt}
           fill
+          sizes="(max-width: 1058px) 320px, 330px"
           className="object-cover"
         />
       </div>
       <div className="flex flex-col gap-[20px]">
-        <Badge fontSize="14px">{category}</Badge>
+        <Badge fontSize="14px" variant="solid">{category}</Badge>
         <h3 className="font-heading text-[20px] font-medium leading-[24px] tracking-[-0.75px] text-[#272422]">
           {title}
         </h3>
-        <p className="font-body text-[16px] leading-[19px] tracking-[-0.96px] text-[#8B857F] line-clamp-3">
+        <p className="font-body text-[16px] leading-[19px] tracking-[-0.96px] text-[#8B857F]">
           {excerpt}
         </p>
         <a

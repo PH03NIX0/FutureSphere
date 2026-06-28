@@ -73,3 +73,36 @@
   outline-offset: 2px;
 }
 
+.newsletter-input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.newsletter-button:focus-visible {
+  outline: none;
+}
+
+.newsletter-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/newsletter-bg-rect.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  pointer-events: none;
+  transform: scale(1);
+  transition: transform 0.5s ease-out;
+  transform-origin: center;
+}
+
+.newsletter-card-active::before {
+  transform: scale(1.05);
+}
+
+.newsletter-card > * {
+  position: relative;
+  z-index: 1;
+}
+

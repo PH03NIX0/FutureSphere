@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from "react";
 import ContactUsButton from "@/components/contact-us-button";
 import FeaturedCard from "@/components/featured-card";
 import Divider from "@/components/divider";
@@ -42,8 +42,8 @@ export default function Features() {
 
         <div className="flex flex-col gap-[30px]">
           <div className="flex flex-row items-center justify-center w-[1058px] px-[65px] py-[47px] bg-white border border-[#EFF0F7] rounded-[16px] gap-[24px]">
-            {features.map((feature, i) => (
-              <React.Fragment key={feature.title}>
+              {features.map((feature, i) => (
+                <Fragment key={feature.title}>
                 <FeaturedCard
                   src={feature.src}
                   alt={feature.title}
@@ -52,13 +52,13 @@ export default function Features() {
                   index={i + 1}
                 />
                 {i < features.length - 1 && <Divider />}
-              </React.Fragment>
+                </Fragment>
             ))}
           </div>
 
           <div className="flex items-center justify-center gap-[24px]">
             <ContactUsButton />
-<ViewAllLink />
+            <ViewAllLink />
           </div>
         </div>
       </div>

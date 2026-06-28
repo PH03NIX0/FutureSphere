@@ -8,6 +8,7 @@ export default function HeroImage() {
           src="/images/hero-visual.png"
           alt="Hero visual"
           fill
+          sizes="(max-width: 1058px) 100vw, 1058px"
           className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
         />
       </div>

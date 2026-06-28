@@ -84,7 +84,7 @@ export default function ServicesSection() {
                       fontSize: "36px",
                       lineHeight: "44px",
                       letterSpacing: "-0.96px",
-                      color: "#A05BF8",
+                      color: "var(--color-fs-purple)",
                     }}
                   >
                     {slide.heading}
@@ -94,7 +94,7 @@ export default function ServicesSection() {
                     style={{
                       fontSize: "16px",
                       lineHeight: "22px",
-                      color: "#7A7D9C",
+                      color: "var(--color-fs-grey)",
                       letterSpacing: "-0.75px",
                     }}
                   >
@@ -126,7 +126,8 @@ export default function ServicesSection() {
                   src={slide.image}
                   alt={slide.imageAlt}
                   fill
-                  className="object-contain"
+                  sizes="(max-width: 1058px) 100vw, 460px"
+                  className="object-cover"
                 />
               </motion.div>
             </AnimatePresence>
