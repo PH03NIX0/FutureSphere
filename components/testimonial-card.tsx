@@ -20,7 +20,7 @@ export default function TestimonialCard({
   onPrevious,
   onNext,
 }: TestimonialCardProps) {
-  return (
+return (
     <div
       className="border border-[#EFF0F7] rounded-[32px] bg-white"
       style={{ width: "1058px", height: "480px", padding: "46px 39px" }}

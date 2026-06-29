@@ -28,8 +28,8 @@ const features = [
 
 export default function Features() {
   return (
-    <section className="flex flex-col items-center gap-[50px] w-full max-w-[1058px] mt-[80px] px-4 sm:px-6">
-      <div className="flex flex-col items-center gap-[50px] w-full">
+<section className="flex justify-center mt-[80px] w-full px-4 sm:px-6">
+       <div className="flex flex-col items-center gap-[50px] w-full max-w-[1058px] mx-auto">
         <div className="flex flex-col items-center gap-[20px] w-full max-w-[600px]">
           <Badge fontSize="16px">Features</Badge>
           <h2 className="font-heading text-[32px] sm:text-[40px] lg:text-[48px] leading-[38px] sm:leading-[48px] lg:leading-[58px] tracking-[-3.8267px] text-center text-fs-dark font-normal">
@@ -40,21 +40,22 @@ export default function Features() {
           </p>
         </div>
 
-        <div className="flex flex-col gap-[30px]">
-        <div className="flex flex-col sm:flex-row items-center justify-center w-full px-4 sm:px-6 py-8 sm:py-12 bg-white border border-[#EFF0F7] rounded-[16px] gap-[24px]">
-          {features.map((feature, i) => (
-            <Fragment key={feature.title}>
-              <FeaturedCard
-                src={feature.src}
-                alt={feature.title}
-                title={feature.title}
-                description={feature.description}
-                index={i + 1}
-                className="w-full sm:w-auto"
-              />
-              {i < features.length - 1 && <Divider className="hidden sm:block" />}
-            </Fragment>
-          ))}
+<div className="flex flex-col gap-[30px]">
+        <div className="border border-[#EFF0F7] rounded-[32px] sm:bg-white bg-transparent w-full px-6 sm:px-10 py-8 sm:py-12">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-[30px] sm:gap-[60px] w-full max-w-[1018px] mx-auto">
+            {features.map((feature, i) => (
+              <Fragment key={feature.title}>
+                <FeaturedCard
+                  src={feature.src}
+                  alt={feature.title}
+                  title={feature.title}
+                  description={feature.description}
+                  index={i + 1}
+                />
+                {i < features.length - 1 && <Divider className="hidden sm:block" />}
+              </Fragment>
+            ))}
+          </div>
         </div>
 
           <div className="flex items-center justify-center gap-[24px]">

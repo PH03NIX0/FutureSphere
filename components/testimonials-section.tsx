@@ -71,113 +71,115 @@ export default function TestimonialsSection() {
   const slide = testimonials[activeIndex];
 
   return (
-    <section className="flex flex-col items-center gap-[50px] w-full max-w-[1058px] mt-[80px] px-4 sm:px-6">
-      {/* Header */}
-      <div className="flex flex-col items-center gap-[20px] w-full max-w-[600px]">
-        <Badge fontSize="16px">Testimonials</Badge>
-        <h2
-          className="font-heading font-normal text-fs-dark w-full text-center text-[32px] sm:text-[40px] lg:text-[48px] leading-[38px] sm:leading-[48px] lg:leading-[58px] tracking-[-3.8267px]"
-        >
-          1M+ Global Customers
-        </h2>
-      </div>
-
-      {/* Animated Testimonial Card */}
-      <div
-        className="border border-[#EFF0F7] rounded-[32px] bg-white w-full p-6 sm:p-10"
-      >
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-[30px] sm:gap-[60px] w-full">
-          {/* Left: Fixed-size image container */}
-          <div
-            className="relative rounded-[16px] overflow-hidden flex-shrink-0 bg-white w-full h-[280px] sm:h-[420px]"
-            style={{ maxWidth: "460px" }}
+    <section className="flex flex-col items-center gap-[50px] w-full px-4 sm:px-6 mt-[80px]">
+      <div className="flex flex-col items-center gap-[50px] w-full max-w-[1058px] mx-auto">
+        {/* Header */}
+        <div className="flex flex-col items-center gap-[20px] w-full max-w-[600px]">
+          <Badge fontSize="16px">Testimonials</Badge>
+          <h2
+            className="font-heading font-normal text-fs-dark w-full text-center text-[32px] sm:text-[40px] lg:text-[48px] leading-[38px] sm:leading-[48px] lg:leading-[58px] tracking-[-3.8267px]"
           >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={`img-${activeIndex}`}
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 30 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="absolute inset-0"
-              >
-                <Image
-                  src={slide.imageSrc}
-                  alt={slide.imageAlt}
-                  fill
-                  sizes="(max-width: 1058px) 100vw, 460px"
-                  className="object-contain"
-                />
-              </motion.div>
-            </AnimatePresence>
-          </div>
+            1M+ Global Customers
+          </h2>
+        </div>
 
-          {/* Right: Text column - nav fixed at bottom */}
-          <div className="flex flex-col flex-1 w-full">
-            {/* Fixed-height animated text area */}
-            <div className="relative h-[280px] overflow-hidden">
+        {/* Animated Testimonial Card */}
+        <div
+          className="border border-[#EFF0F7] rounded-[32px] sm:bg-white bg-transparent w-full p-6 sm:p-10"
+        >
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-[30px] sm:gap-[60px] w-full">
+            {/* Left: Fixed-size image container */}
+            <div
+              className="relative rounded-[16px] overflow-hidden flex-shrink-0 bg-transparent sm:bg-white w-full h-[280px] sm:h-[420px]"
+              style={{ maxWidth: "460px" }}
+            >
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={activeIndex}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
+                  key={`img-${activeIndex}`}
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 30 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="absolute inset-0 flex flex-col gap-[20px]"
+                  className="absolute inset-0"
                 >
-                  <p
-                    className="font-body font-normal text-left w-full text-p2"
-                    style={{ color: "var(--color-fs-grey)" }}
-                  >
-                    {slide.quote}
-                  </p>
-
-                  <div className="flex flex-col gap-[4px]">
-                    <span className="font-heading text-[20px] sm:text-[24px] leading-[24px] sm:leading-[29px] tracking-[-0.96px] font-normal text-fs-dark">
-                      {slide.authorName}
-                    </span>
-                    <span className="font-heading text-[16px] sm:text-[20px] leading-[22px] sm:leading-[24px] tracking-[-0.96px] font-normal text-fs-dark">
-                      {slide.authorTitle}
-                    </span>
-                  </div>
+                  <Image
+                    src={slide.imageSrc}
+                    alt={slide.imageAlt}
+                    fill
+                    sizes="(max-width: 1058px) 100vw, 460px"
+                    className="object-contain"
+                  />
                 </motion.div>
               </AnimatePresence>
             </div>
 
-            {/* Fixed navigation - never animated */}
-            <div className="flex justify-end">
-              <SliderNavigation onPrevious={handlePrevious} onNext={handleNext} />
+            {/* Right: Text column - nav fixed at bottom */}
+            <div className="flex flex-col flex-1 w-full">
+              {/* Fixed-height animated text area */}
+              <div className="relative h-[280px] overflow-hidden">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeIndex}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="absolute inset-0 flex flex-col gap-[20px]"
+                  >
+                    <p
+                      className="font-body font-normal text-left w-full text-p2"
+                      style={{ color: "var(--color-fs-grey)" }}
+                    >
+                      {slide.quote}
+                    </p>
+
+                    <div className="flex flex-col gap-[4px]">
+                      <span className="font-heading text-[20px] sm:text-[24px] leading-[24px] sm:leading-[29px] tracking-[-0.96px] font-normal text-fs-dark">
+                        {slide.authorName}
+                      </span>
+                      <span className="font-heading text-[16px] sm:text-[20px] leading-[22px] sm:leading-[24px] tracking-[-0.96px] font-normal text-fs-dark">
+                        {slide.authorTitle}
+                      </span>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Fixed navigation - never animated */}
+              <div className="flex justify-end">
+                <SliderNavigation onPrevious={handlePrevious} onNext={handleNext} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Trusted By */}
-      <div className="flex flex-col items-center gap-[30px] w-full">
-        <DividerLabel>Trusted By</DividerLabel>
+        {/* Trusted By */}
+        <div className="flex flex-col items-center gap-[30px] w-full">
+          <DividerLabel>Trusted By</DividerLabel>
 
-        <div className="flex flex-col items-center gap-[24px]">
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-[60px]">
-            {row1.map((brand) => (
-              <img
-                key={brand.alt}
-                src={brand.src}
-                alt={brand.alt}
-                width={brand.width}
-                height={brand.height}
-              />
-            ))}
-          </div>
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-[60px]">
-            {row2.map((brand) => (
-              <img
-                key={brand.alt}
-                src={brand.src}
-                alt={brand.alt}
-                width={brand.width}
-                height={brand.height}
-              />
-            ))}
+          <div className="flex flex-col items-center gap-[24px]">
+            <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-[60px]">
+              {row1.map((brand) => (
+                <img
+                  key={brand.alt}
+                  src={brand.src}
+                  alt={brand.alt}
+                  width={brand.width}
+                  height={brand.height}
+                />
+              ))}
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-[60px]">
+              {row2.map((brand) => (
+                <img
+                  key={brand.alt}
+                  src={brand.src}
+                  alt={brand.alt}
+                  width={brand.width}
+                  height={brand.height}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

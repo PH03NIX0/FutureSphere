@@ -16,7 +16,7 @@ export default function FeaturedCard({
   className = "",
 }: FeaturedCardProps) {
   return (
-    <div className={`feature-card feature-card-${index} flex flex-col items-center text-center p-[20px] gap-[16px] w-full max-w-[272px] h-auto sm:h-[328px] ${className}`}>
+    <div className={`feature-card feature-card-${index} flex flex-col items-center text-center p-[20px] gap-[16px] flex-1 h-auto sm:h-full bg-transparent sm:bg-white ${className}`}>
       <img
         src={src}
         alt={alt}

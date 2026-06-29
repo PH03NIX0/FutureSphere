@@ -11,7 +11,7 @@ interface BlogCardProps {
 
 export default function BlogCard({ category, title, excerpt, imageSrc, imageAlt }: BlogCardProps) {
   return (
-    <article className="flex flex-1 flex-col justify-between rounded-[16px] border border-[#EFF0F7] bg-white p-5">
+    <article className="flex flex-1 flex-col justify-between rounded-[16px] border border-[#EFF0F7] sm:bg-white bg-transparent p-5">
       <div className="relative h-40 sm:h-[220px] overflow-hidden rounded-[8px] mb-[20px]">
         <Image
           src={imageSrc}
