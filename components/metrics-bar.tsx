@@ -115,32 +115,34 @@ export default function MetricsBar() {
     return () => observer.disconnect();
   }, []);
 
-  return (
+return (
     <section className="flex justify-center">
-      <div
-        ref={sectionRef}
-        className="w-[931px] h-[123px] bg-white border border-[#EFF0F7] rounded-2xl px-12 py-4 flex items-center"
-      >
-        {metrics.map((metric, i) => (
-          <Fragment key={i}>
-            <div className="flex-1 flex flex-col items-center justify-center text-center">
-              <span className="font-heading text-[48px] leading-[58px] font-semibold tracking-[-3.8267px] text-fs-purple">
-                <AnimatedCounter
-                  targetValue={metric.value}
-                  suffix={metric.suffix}
-                  delay={i * 120}
-                  animate={shouldAnimate}
-                />
-              </span>
-              <span className="font-body text-p2 leading-[33px] font-normal tracking-[-0.96px] text-fs-purple mt-1">
-                {metric.label}
-              </span>
-            </div>
-            {i < metrics.length - 1 && (
-              <div className="w-px bg-[#EDF0EE] h-[80px]" />
-            )}
+      <div className="w-full px-4 sm:px-6">
+        <div
+          ref={sectionRef}
+          className="w-full max-w-[1058px] bg-white border border-[#EFF0F7] rounded-2xl px-4 sm:px-12 py-4 flex flex-col sm:flex-row items-center"
+        >
+          {metrics.map((metric, i) => (
+            <Fragment key={i}>
+              <div className="flex-1 flex flex-col items-center justify-center text-center py-2 sm:py-0">
+                <span className="font-heading text-3xl sm:text-[48px] leading-[36px] sm:leading-[58px] font-semibold tracking-[-3.8267px] text-fs-purple">
+                  <AnimatedCounter
+                    targetValue={metric.value}
+                    suffix={metric.suffix}
+                    delay={i * 120}
+                    animate={shouldAnimate}
+                  />
+                </span>
+                <span className="font-body text-p2 leading-[33px] font-normal tracking-[-0.96px] text-fs-purple mt-1">
+                  {metric.label}
+                </span>
+              </div>
+              {i < metrics.length - 1 && (
+                <div className="w-full h-px sm:w-px sm:h-[80px] bg-[#EDF0EE] my-2 sm:my-0" />
+              )}
             </Fragment>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
