@@ -106,3 +106,25 @@
   z-index: 1;
 }
 
+.footer-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/Rectangle 9383.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.footer-bg > * {
+  position: relative;
+  z-index: 1;
+}
+

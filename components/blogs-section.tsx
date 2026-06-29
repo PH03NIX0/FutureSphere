@@ -29,18 +29,17 @@ const blogs = [
 
 export default function BlogsSection() {
   return (
-    <section className="max-w-[1058px] mx-auto flex flex-col gap-[50px]">
+    <section className="w-full max-w-[1058px] mx-auto flex flex-col gap-[50px] px-4 sm:px-6">
       <div className="flex flex-col items-center gap-[20px] w-full">
         <Badge fontSize="16px">Blogs</Badge>
         <h2
-          className="font-heading font-normal text-fs-dark text-center w-full"
-          style={{ fontSize: "48px", lineHeight: "58px", letterSpacing: "-3.8267px" }}
+          className="font-heading font-normal text-fs-dark text-center w-full text-[32px] sm:text-[40px] lg:text-[48px] leading-[38px] sm:leading-[48px] lg:leading-[58px] tracking-[-3.8267px]"
         >
           Latest Insights
         </h2>
       </div>
 
-      <div className="flex gap-[30px] w-full items-start">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[30px] w-full">
         {blogs.map((blog, index) => (
           <BlogCard key={index} {...blog} />
         ))}

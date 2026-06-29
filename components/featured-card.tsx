@@ -4,8 +4,7 @@ interface FeaturedCardProps {
   title: string;
   description: string;
   index: number;
-  width?: string;
-  height?: string;
+  className?: string;
 }
 
 export default function FeaturedCard({
@@ -14,11 +13,10 @@ export default function FeaturedCard({
   title,
   description,
   index,
-  width = "272px",
-  height = "328px",
+  className = "",
 }: FeaturedCardProps) {
   return (
-    <div className={`feature-card feature-card-${index} flex flex-col items-center text-center p-[20px] gap-[16px]`} style={{ width, height }}>
+    <div className={`feature-card feature-card-${index} flex flex-col items-center text-center p-[20px] gap-[16px] w-full max-w-[272px] h-auto sm:h-[328px] ${className}`}>
       <img
         src={src}
         alt={alt}
@@ -28,7 +26,7 @@ export default function FeaturedCard({
       <h3 className="font-heading text-p1 text-fs-dark font-semibold">
         {title}
       </h3>
-      <p className="font-body text-[16px] font-normal leading-[22px] tracking-[-0.75px] text-center text-fs-grey">
+      <p className="font-body text-[14px] sm:text-[16px] font-normal leading-[20px] sm:leading-[22px] tracking-[-0.75px] text-center text-fs-grey">
         {description}
       </p>
     </div>

@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import Hero from "@/components/hero";
 import HeroImage from "@/components/hero-image";
@@ -12,7 +13,7 @@ import NewsletterSection from "@/components/newsletter-section";
 
 export default function Home() {
   return (
-    <main className="bg-fs-background flex flex-col items-center gap-8">
+    <main className="bg-fs-background flex flex-col items-center gap-6 sm:gap-8 w-full">
       <Navbar />
       <Hero />
       <HeroImage />
@@ -24,6 +25,7 @@ export default function Home() {
       <TestimonialsSection />
       <BlogsSection />
       <NewsletterSection />
+      <Footer />
     </main>
   );
 }

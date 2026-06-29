@@ -11,18 +11,18 @@ const logos = [
 
 export default function ClientSection() {
   return (
-    <section className="flex flex-col items-center gap-[50px] w-[1058px] mt-[80px]">
-      <div className="flex flex-col items-center gap-[20px] w-[800px]">
+    <section className="flex flex-col items-center gap-[50px] w-full max-w-[1058px] mt-[80px] px-4 sm:px-6">
+      <div className="flex flex-col items-center gap-[20px] w-full max-w-[600px]">
         <Badge>Our Clients</Badge>
-        <h2 className="font-heading font-normal text-fs-dark w-[800px] text-center" style={{ fontSize: "48px", lineHeight: "58px", letterSpacing: "-3.8267px" }}>
+        <h2 className="font-heading font-normal text-fs-dark w-full text-center text-[32px] sm:text-[40px] lg:text-[48px] leading-[38px] sm:leading-[48px] lg:leading-[58px] tracking-[-3.8267px]">
           Trusted by Industry Leaders
         </h2>
-        <p className="font-body text-[16px] leading-[22px] tracking-[-0.75px] text-center text-fs-grey w-[720px]">
+        <p className="font-body text-[16px] leading-[22px] tracking-[-0.75px] text-center text-fs-grey w-full max-w-[720px]">
           Empowering Innovation for a Digital Tomorrow
         </p>
       </div>
 
-      <div className="flex items-center justify-between w-[1054px] h-[64px]">
+      <div className="flex items-center justify-center flex-wrap gap-6 sm:gap-8 w-full">
         {logos.map((logo) => (
           <ClientLogo key={logo.alt} {...logo} />
         ))}

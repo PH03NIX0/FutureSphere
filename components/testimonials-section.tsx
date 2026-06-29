@@ -71,13 +71,12 @@ export default function TestimonialsSection() {
   const slide = testimonials[activeIndex];
 
   return (
-    <section className="flex flex-col items-center gap-[50px] w-[1058px] mt-[80px]">
+    <section className="flex flex-col items-center gap-[50px] w-full max-w-[1058px] mt-[80px] px-4 sm:px-6">
       {/* Header */}
-      <div className="flex flex-col items-center gap-[20px] w-[800px]">
+      <div className="flex flex-col items-center gap-[20px] w-full max-w-[600px]">
         <Badge fontSize="16px">Testimonials</Badge>
         <h2
-          className="font-heading font-normal text-fs-dark w-[800px] text-center"
-          style={{ fontSize: "48px", lineHeight: "58px", letterSpacing: "-3.8267px" }}
+          className="font-heading font-normal text-fs-dark w-full text-center text-[32px] sm:text-[40px] lg:text-[48px] leading-[38px] sm:leading-[48px] lg:leading-[58px] tracking-[-3.8267px]"
         >
           1M+ Global Customers
         </h2>
@@ -85,17 +84,13 @@ export default function TestimonialsSection() {
 
       {/* Animated Testimonial Card */}
       <div
-        className="border border-[#EFF0F7] rounded-[32px] bg-white"
-        style={{ width: "1058px", height: "480px", padding: "46px 39px" }}
+        className="border border-[#EFF0F7] rounded-[32px] bg-white w-full p-6 sm:p-10"
       >
-        <div
-          className="flex flex-row items-center justify-between gap-[60px] w-full"
-          style={{ minHeight: "388px" }}
-        >
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-[30px] sm:gap-[60px] w-full">
           {/* Left: Fixed-size image container */}
           <div
-            className="relative rounded-[16px] overflow-hidden flex-shrink-0 bg-white"
-            style={{ width: "460px", height: "420px" }}
+            className="relative rounded-[16px] overflow-hidden flex-shrink-0 bg-white w-full h-[280px] sm:h-[420px]"
+            style={{ maxWidth: "460px" }}
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -118,7 +113,7 @@ export default function TestimonialsSection() {
           </div>
 
           {/* Right: Text column - nav fixed at bottom */}
-          <div className="flex flex-col flex-1 h-full justify-between">
+          <div className="flex flex-col flex-1 w-full">
             {/* Fixed-height animated text area */}
             <div className="relative h-[280px] overflow-hidden">
               <AnimatePresence mode="wait">
@@ -131,22 +126,17 @@ export default function TestimonialsSection() {
                   className="absolute inset-0 flex flex-col gap-[20px]"
                 >
                   <p
-                    className="font-body font-normal text-left"
-                    style={{
-                      fontSize: "16px",
-                      lineHeight: "22px",
-                      color: "var(--color-fs-grey)",
-                      letterSpacing: "-0.75px",
-                    }}
+                    className="font-body font-normal text-left w-full text-p2"
+                    style={{ color: "var(--color-fs-grey)" }}
                   >
                     {slide.quote}
                   </p>
 
                   <div className="flex flex-col gap-[4px]">
-                    <span className="font-heading text-[24px] leading-[29px] tracking-[-0.96px] font-normal text-fs-dark">
+                    <span className="font-heading text-[20px] sm:text-[24px] leading-[24px] sm:leading-[29px] tracking-[-0.96px] font-normal text-fs-dark">
                       {slide.authorName}
                     </span>
-                    <span className="font-heading text-[20px] leading-[24px] tracking-[-0.96px] font-normal text-fs-dark">
+                    <span className="font-heading text-[16px] sm:text-[20px] leading-[22px] sm:leading-[24px] tracking-[-0.96px] font-normal text-fs-dark">
                       {slide.authorTitle}
                     </span>
                   </div>
@@ -167,7 +157,7 @@ export default function TestimonialsSection() {
         <DividerLabel>Trusted By</DividerLabel>
 
         <div className="flex flex-col items-center gap-[24px]">
-          <div className="flex items-center justify-center gap-[60px]">
+          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-[60px]">
             {row1.map((brand) => (
               <img
                 key={brand.alt}
@@ -178,7 +168,7 @@ export default function TestimonialsSection() {
               />
             ))}
           </div>
-          <div className="flex items-center justify-center gap-[60px]">
+          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-[60px]">
             {row2.map((brand) => (
               <img
                 key={brand.alt}

@@ -28,11 +28,11 @@ const features = [
 
 export default function Features() {
   return (
-    <section className="flex flex-col items-center gap-[50px] w-[1100px] mt-[80px]">
-      <div className="flex flex-col items-center gap-[50px] w-[1100px]">
-        <div className="flex flex-col items-center gap-[20px] w-[800px]">
+    <section className="flex flex-col items-center gap-[50px] w-full max-w-[1058px] mt-[80px] px-4 sm:px-6">
+      <div className="flex flex-col items-center gap-[50px] w-full">
+        <div className="flex flex-col items-center gap-[20px] w-full max-w-[600px]">
           <Badge fontSize="16px">Features</Badge>
-          <h2 className="font-heading text-[48px] leading-[58px] tracking-[-3.8267px] text-center text-fs-dark font-normal">
+          <h2 className="font-heading text-[32px] sm:text-[40px] lg:text-[48px] leading-[38px] sm:leading-[48px] lg:leading-[58px] tracking-[-3.8267px] text-center text-fs-dark font-normal">
             Discover the Tools that Drive Success
           </h2>
           <p className="font-body text-[16px] leading-[22px] tracking-[-0.75px] text-center text-fs-grey">
@@ -41,20 +41,21 @@ export default function Features() {
         </div>
 
         <div className="flex flex-col gap-[30px]">
-          <div className="flex flex-row items-center justify-center w-[1058px] px-[65px] py-[47px] bg-white border border-[#EFF0F7] rounded-[16px] gap-[24px]">
-              {features.map((feature, i) => (
-                <Fragment key={feature.title}>
-                <FeaturedCard
-                  src={feature.src}
-                  alt={feature.title}
-                  title={feature.title}
-                  description={feature.description}
-                  index={i + 1}
-                />
-                {i < features.length - 1 && <Divider />}
-                </Fragment>
-            ))}
-          </div>
+        <div className="flex flex-col sm:flex-row items-center justify-center w-full px-4 sm:px-6 py-8 sm:py-12 bg-white border border-[#EFF0F7] rounded-[16px] gap-[24px]">
+          {features.map((feature, i) => (
+            <Fragment key={feature.title}>
+              <FeaturedCard
+                src={feature.src}
+                alt={feature.title}
+                title={feature.title}
+                description={feature.description}
+                index={i + 1}
+                className="w-full sm:w-auto"
+              />
+              {i < features.length - 1 && <Divider className="hidden sm:block" />}
+            </Fragment>
+          ))}
+        </div>
 
           <div className="flex items-center justify-center gap-[24px]">
             <ContactUsButton />

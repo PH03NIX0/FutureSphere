@@ -52,19 +52,18 @@ export default function ServicesSection() {
   };
 
   return (
-    <section className="flex justify-center mt-[80px]">
+    <section className="flex justify-center mt-[80px] w-full px-4 sm:px-6">
       <div
-        className="border border-[#EFF0F7] rounded-[32px] bg-white"
-        style={{ width: "1058px", height: "534px", padding: "43px 20px" }}
+        className="border border-[#EFF0F7] rounded-[32px] bg-white w-full max-w-[1058px] p-6 sm:p-10"
       >
         <div
-          className="flex flex-row items-center justify-between gap-[67px] mx-auto"
-          style={{ width: "1018px", height: "448px" }}
+          className="flex flex-col md:flex-row items-center justify-between gap-[40px] md:gap-[67px] mx-auto"
+          style={{ maxWidth: "1018px" }}
         >
           {/* Left Column */}
           <div
-            className="flex flex-col justify-between"
-            style={{ width: "501px", height: "346px" }}
+            className="flex flex-col justify-between w-full"
+            style={{ maxWidth: "501px" }}
           >
             {/* Fixed-height animated content area */}
             <div className="relative h-[260px] overflow-hidden">
@@ -79,24 +78,14 @@ export default function ServicesSection() {
                 >
                   <Badge>{slide.badge}</Badge>
                   <h2
-                    className="font-heading font-normal"
-                    style={{
-                      fontSize: "36px",
-                      lineHeight: "44px",
-                      letterSpacing: "-0.96px",
-                      color: "var(--color-fs-purple)",
-                    }}
+                    className="font-heading font-normal w-full text-[28px] sm:text-[32px] md:text-[36px] leading-[34px] sm:leading-[38px] md:leading-[44px] tracking-[-0.96px]"
+                    style={{ color: "var(--color-fs-purple)" }}
                   >
                     {slide.heading}
                   </h2>
                   <p
-                    className="font-body font-normal text-left"
-                    style={{
-                      fontSize: "16px",
-                      lineHeight: "22px",
-                      color: "var(--color-fs-grey)",
-                      letterSpacing: "-0.75px",
-                    }}
+                    className="font-body font-normal text-left w-full text-p2"
+                    style={{ color: "var(--color-fs-grey)" }}
                   >
                     {slide.body}
                   </p>
@@ -110,8 +99,8 @@ export default function ServicesSection() {
 
           {/* Right Image */}
           <div
-            className="relative rounded-[32px] overflow-hidden bg-white"
-            style={{ width: "460px", height: "420px" }}
+            className="relative rounded-[32px] overflow-hidden bg-white w-full h-[220px] sm:h-[420px]"
+            style={{ maxWidth: "460px" }}
           >
             <AnimatePresence mode="wait">
               <motion.div
