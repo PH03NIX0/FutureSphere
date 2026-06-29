@@ -28,7 +28,7 @@ const features = [
 
 export default function Features() {
   return (
-    <section className="flex flex-col items-center gap-[50px] w-full max-w-[1058px] mt-[80px] px-4 sm:px-6">
+    <section className="flex flex-col items-center gap-[50px] w-full max-w-[1058px] mx-auto mt-[80px] px-4 sm:px-6">
       <div className="flex flex-col items-center gap-[50px] w-full">
         <div className="flex flex-col items-center gap-[20px] w-full max-w-[600px]">
           <Badge fontSize="16px">Features</Badge>

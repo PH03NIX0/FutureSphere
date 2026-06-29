@@ -6,7 +6,7 @@ export default function NewsletterSection() {
   const [inputFocused, setInputFocused] = useState(false);
 
   return (
-    <section className="w-full max-w-[1058px] mt-[80px] px-4 sm:px-6">
+    <section className="w-full max-w-[1058px] mx-auto mt-[80px] px-4 sm:px-6">
       <div
         className={`newsletter-card relative rounded-[24px] border border-[#EFF0F7] overflow-hidden ${inputFocused ? "newsletter-card-active" : ""}`}
       >
