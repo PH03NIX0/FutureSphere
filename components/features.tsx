@@ -28,11 +28,11 @@ const features = [
 
 export default function Features() {
   return (
-    <section className="flex flex-col items-center gap-[50px] w-full max-w-[1058px] mx-auto mt-[80px] px-4 sm:px-6">
+    <section className="flex flex-col items-center gap-[50px] fs-container mx-auto mt-[80px] px-4 sm:px-6">
       <div className="flex flex-col items-center gap-[50px] w-full">
         <div className="flex flex-col items-center gap-[20px] w-full max-w-[600px]">
           <Badge fontSize="16px">Features</Badge>
-          <h2 className="font-heading text-[32px] sm:text-[40px] lg:text-[48px] leading-[38px] sm:leading-[48px] lg:leading-[58px] tracking-[-3.8267px] text-center text-fs-dark font-normal">
+          <h2 className="font-heading text-h3 sm:text-[40px] lg:text-[48px] leading-h3 sm:leading-[48px] lg:leading-[58px] tracking-[-3.8267px] text-center text-fs-dark font-normal">
             Discover the Tools that Drive Success
           </h2>
           <p className="font-body text-[16px] leading-[22px] tracking-[-0.75px] text-center text-fs-grey">
@@ -41,7 +41,7 @@ export default function Features() {
         </div>
 
         <div className="flex flex-col gap-[30px]">
-          <div className="border border-[#EFF0F7] rounded-[32px] sm:bg-white bg-transparent w-full px-6 sm:px-10 py-8 sm:py-12">
+          <div className="border border-fs-border rounded-card sm:bg-white bg-transparent w-full px-6 sm:px-10 py-8 sm:py-12">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-[30px] sm:gap-[60px] w-full max-w-[1018px] mx-auto">
               {features.map((feature, i) => (
                 <Fragment key={feature.title}>

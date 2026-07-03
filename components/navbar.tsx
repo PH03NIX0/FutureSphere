@@ -4,7 +4,7 @@ import MobileMenu from "./mobile-menu";
 export default function Navbar() {
   return (
     <header className="w-full flex justify-center pt-4 px-4 sm:px-6">
-      <nav className="w-full max-w-[1058px] h-[59px] bg-fs-dark rounded-[47px] px-4 sm:px-5 flex items-center">
+      <nav className="fs-container h-[59px] bg-fs-dark rounded-[47px] px-4 sm:px-5 flex items-center">
         <div className="w-full flex items-center justify-between">
 
           {/* Logo */}
@@ -18,21 +18,21 @@ export default function Navbar() {
 
           {/* Desktop Links */}
           <div className="hidden sm:flex gap-4 text-sm text-white font-body">
-            <a href="#" className="relative text-white/85 hover:text-white transition-colors duration-150 group cursor-pointer">
+            <a href="#" className="relative text-white/85 sm:hover:text-white transition-colors duration-150 group cursor-pointer">
               About
-              <span className="absolute left-0 -bottom-1 h-[2px] w-full bg-white scale-x-0 group-hover:scale-x-100 origin-center transition-transform duration-200" />
+              <span className="absolute left-0 -bottom-1 h-[2px] w-full bg-white scale-x-0 sm:group-hover:scale-x-100 origin-center transition-transform duration-200" />
             </a>
-            <a href="#" className="relative text-white/85 hover:text-white transition-colors duration-150 group cursor-pointer">
+            <a href="#" className="relative text-white/85 sm:hover:text-white transition-colors duration-150 group cursor-pointer">
               Careers
-              <span className="absolute left-0 -bottom-1 h-[2px] w-full bg-white scale-x-0 group-hover:scale-x-100 origin-center transition-transform duration-200" />
+              <span className="absolute left-0 -bottom-1 h-[2px] w-full bg-white scale-x-0 sm:group-hover:scale-x-100 origin-center transition-transform duration-200" />
             </a>
-            <a href="#" className="relative text-white/85 hover:text-white transition-colors duration-150 group cursor-pointer">
+            <a href="#" className="relative text-white/85 sm:hover:text-white transition-colors duration-150 group cursor-pointer">
               Blogs
-              <span className="absolute left-0 -bottom-1 h-[2px] w-full bg-white scale-x-0 group-hover:scale-x-100 origin-center transition-transform duration-200" />
+              <span className="absolute left-0 -bottom-1 h-[2px] w-full bg-white scale-x-0 sm:group-hover:scale-x-100 origin-center transition-transform duration-200" />
             </a>
-            <a href="#" className="relative text-white/85 hover:text-white transition-colors duration-150 group cursor-pointer">
+            <a href="#" className="relative text-white/85 sm:hover:text-white transition-colors duration-150 group cursor-pointer">
               Pricing
-              <span className="absolute left-0 -bottom-1 h-[2px] w-full bg-white scale-x-0 group-hover:scale-x-100 origin-center transition-transform duration-200" />
+              <span className="absolute left-0 -bottom-1 h-[2px] w-full bg-white scale-x-0 sm:group-hover:scale-x-100 origin-center transition-transform duration-200" />
             </a>
           </div>
 

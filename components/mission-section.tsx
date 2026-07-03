@@ -6,7 +6,7 @@ export default function MissionSection() {
   return (
 <section className="flex justify-center mt-[80px] w-full px-4 sm:px-6">
       <div
-        className="border border-[#EFF0F7] rounded-[32px] sm:bg-white bg-transparent w-full max-w-[1058px] mx-auto p-6 sm:p-10"
+        className="border border-fs-border rounded-card sm:bg-white bg-transparent fs-container mx-auto p-6 sm:p-10"
       >
         <div
           className="flex flex-col md:flex-row items-center justify-between gap-[40px] md:gap-[67px] mx-auto"
@@ -49,7 +49,7 @@ export default function MissionSection() {
                 className="relative font-body text-[16px] font-medium text-fs-purple transition-colors duration-150 group"
               >
                 Signup
-                <span className="absolute left-0 -bottom-1 h-[2px] w-full bg-fs-purple scale-x-0 group-hover:scale-x-100 origin-center transition-transform duration-200" />
+                <span className="absolute left-0 -bottom-1 h-[2px] w-full bg-fs-purple scale-x-0 sm:group-hover:scale-x-100 origin-center transition-transform duration-200" />
               </a>
               <ContactUsButton />
             </div>
@@ -57,7 +57,7 @@ export default function MissionSection() {
 
           {/* Right Image */}
           <div
-            className="relative rounded-[32px] overflow-hidden w-full"
+            className="relative rounded-card overflow-hidden w-full"
             style={{ maxWidth: "460px", height: "420px" }}
           >
             <Image

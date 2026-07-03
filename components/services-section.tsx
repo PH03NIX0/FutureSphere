@@ -54,7 +54,7 @@ export default function ServicesSection() {
   return (
 <section className="flex justify-center mt-[80px] w-full px-4 sm:px-6">
        <div
-        className="border border-[#EFF0F7] rounded-[32px] sm:bg-white bg-transparent w-full max-w-[1058px] mx-auto p-6 sm:p-10"
+        className="border border-fs-border rounded-card sm:bg-white bg-transparent fs-container mx-auto p-6 sm:p-10"
       >
         <div
           className="flex flex-col md:flex-row items-center justify-between gap-[40px] md:gap-[67px] mx-auto"
@@ -99,7 +99,7 @@ export default function ServicesSection() {
 
           {/* Right Image */}
           <div
-            className="relative rounded-[32px] overflow-hidden bg-transparent sm:bg-white w-full h-[220px] sm:h-[420px]"
+            className="relative rounded-card overflow-hidden bg-transparent sm:bg-white w-full h-[220px] sm:h-[420px]"
             style={{ maxWidth: "460px" }}
           >
             <AnimatePresence mode="wait">

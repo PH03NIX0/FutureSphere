@@ -117,10 +117,10 @@ export default function MetricsBar() {
 
 return (
 <section className="flex justify-center mt-[80px] w-full px-4 sm:px-6">
-       <div className="w-full max-w-[1058px] mx-auto">
+       <div className="fs-container mx-auto">
         <div
           ref={sectionRef}
-          className="w-full bg-transparent sm:bg-white border border-[#EFF0F7] rounded-2xl px-4 sm:px-12 py-4 flex flex-col sm:flex-row items-center"
+          className="w-full bg-transparent sm:bg-white border border-fs-border rounded-2xl px-4 sm:px-12 py-4 flex flex-col sm:flex-row items-center"
         >
           {metrics.map((metric, i) => (
             <Fragment key={i}>
@@ -138,7 +138,7 @@ return (
                 </span>
               </div>
               {i < metrics.length - 1 && (
-                <div className="w-full h-px sm:w-px sm:h-[80px] bg-[#EDF0EE] my-2 sm:my-0" />
+                <div className="w-full h-px sm:w-px sm:h-[80px] bg-fs-divider my-2 sm:my-0" />
               )}
             </Fragment>
           ))}

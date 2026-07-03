@@ -11,10 +11,10 @@ const logos = [
 
 export default function ClientSection() {
   return (
-    <section className="flex flex-col items-center gap-[50px] w-full max-w-[1058px] mt-[80px] px-4 sm:px-6">
+    <section className="flex flex-col items-center gap-[50px] fs-container mt-[80px] px-4 sm:px-6">
       <div className="flex flex-col items-center gap-[20px] w-full max-w-[600px]">
         <Badge>Our Clients</Badge>
-        <h2 className="font-heading font-normal text-fs-dark w-full text-center text-[32px] sm:text-[40px] lg:text-[48px] leading-[38px] sm:leading-[48px] lg:leading-[58px] tracking-[-3.8267px]">
+        <h2 className="font-heading font-normal text-fs-dark w-full text-center text-h3 sm:text-[40px] lg:text-[48px] leading-h3 sm:leading-[48px] lg:leading-[58px] tracking-[-3.8267px]">
           Trusted by Industry Leaders
         </h2>
         <p className="font-body text-[16px] leading-[22px] tracking-[-0.75px] text-center text-fs-grey w-full max-w-[720px]">

@@ -9,7 +9,7 @@ export default function SliderNavigation({ onPrevious, onNext }: SliderNavigatio
       <button
         type="button"
         onClick={onPrevious}
-        className="w-10 h-10 sm:w-[48px] sm:h-[48px] rounded-full bg-white border border-fs-purple flex items-center justify-center transition-all duration-150 hover:-translate-y-[1px] active:translate-y-0"
+        className="w-10 h-10 sm:w-[48px] sm:h-[48px] rounded-full bg-white border border-fs-purple flex items-center justify-center transition-transform duration-150 sm:hover:-translate-y-[1px] active:translate-y-0"
         aria-label="Previous"
       >
         <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="sm:w-[32px] sm:h-[32px]">
@@ -19,7 +19,7 @@ export default function SliderNavigation({ onPrevious, onNext }: SliderNavigatio
       <button
         type="button"
         onClick={onNext}
-        className="w-10 h-10 sm:w-[48px] sm:h-[48px] rounded-full bg-fs-purple flex items-center justify-center transition-all duration-150 hover:-translate-y-[1px] active:translate-y-0"
+        className="w-10 h-10 sm:w-[48px] sm:h-[48px] rounded-full bg-fs-purple flex items-center justify-center transition-transform duration-150 sm:hover:-translate-y-[1px] active:translate-y-0"
         aria-label="Next"
       >
         <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="sm:w-[32px] sm:h-[32px]">

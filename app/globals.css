@@ -7,6 +7,12 @@
   --color-fs-grey: #7A7D9C;
   --color-fs-purple: #7F56D9;
   --color-fs-purple-light: #C7A0F9;
+  --color-fs-border: #EFF0F7;
+  --color-fs-border-light: #E2E8F1;
+  --color-fs-divider: #EDF0EE;
+  --color-fs-card-text: #272422;
+  --color-fs-card-muted: #8B857F;
+  --color-fs-border-strong: #000000;
 
   /* Fonts */
   --font-heading: var(--font-inter);
@@ -31,10 +37,20 @@
   --text-body-lg: 20px;
   --text-body-lg--line-height: 24px;
 
+  --text-h3: 32px;
+  --text-h3--line-height: 38px;
+
   /* Badge tokens */
   --badge-gradient: linear-gradient(90deg, #E9D8FF -195.88%, rgba(255,255,255,0) 364.12%);
   --badge-border: 1px solid #EEE2FE;
   --badge-height: 30px;
+
+  /* Radius tokens */
+  --radius-card: 32px;
+  --radius-newsletter: 24px;
+  --radius-blog: 16px;
+  --radius-button: 20px;
+  --radius-input: 12px;
 }
 
 /* Feature card blur circles */
@@ -97,13 +113,25 @@
   transform-origin: center;
 }
 
-.newsletter-card-active::before {
+.newsletter-card:focus-within::before {
   transform: scale(1.05);
+}
+
+@media (max-width: 640px) {
+  .newsletter-card::before {
+    background-position: top center;
+  }
 }
 
 .newsletter-card > * {
   position: relative;
   z-index: 1;
+}
+
+.fs-container {
+  width: 100%;
+  max-width: 1058px;
+  margin-inline: auto;
 }
 
 .footer-bg {

@@ -4,8 +4,8 @@ import FooterSocials from "./footer-socials";
 
 export default function Footer() {
   return (
-    <footer className="footer-bg w-full bg-[#7F56D9]">
-      <div className="w-full max-w-[1058px] mx-auto flex flex-col items-center px-4 sm:px-6">
+    <footer className="footer-bg w-full bg-fs-purple">
+      <div className="fs-container mx-auto flex flex-col items-center px-4 sm:px-6">
         {/* Top Spacer */}
         <div className="h-16" />
 

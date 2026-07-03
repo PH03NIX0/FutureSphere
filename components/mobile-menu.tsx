@@ -91,7 +91,7 @@ export default function MobileMenu() {
                   <a
                     key={link.label}
                     href={link.href}
-                    className="text-white text-lg font-body hover:text-white/80 transition-colors duration-150"
+                    className="text-white text-lg font-body sm:hover:text-white/80 transition-colors duration-150"
                     onClick={closeMenu}
                   >
                     {link.label}

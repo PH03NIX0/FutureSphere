@@ -29,12 +29,12 @@ const blogs = [
 
 export default function BlogsSection() {
   return (
-    <section className="w-full max-w-[1058px] mx-auto flex flex-col gap-[50px] px-4 sm:px-6">
+    <section className="fs-container mx-auto flex flex-col gap-[50px] px-4 sm:px-6">
       <div className="flex flex-col items-center gap-[20px] w-full">
         <Badge fontSize="16px">Blogs</Badge>
-        <h2
-          className="font-heading font-normal text-fs-dark text-center w-full text-[32px] sm:text-[40px] lg:text-[48px] leading-[38px] sm:leading-[48px] lg:leading-[58px] tracking-[-3.8267px]"
-        >
+<h2
+  className="font-heading font-normal text-fs-dark text-center w-full text-h3 sm:text-[40px] lg:text-[48px] leading-h3 sm:leading-[48px] lg:leading-[58px] tracking-[-3.8267px]"
+>
           Latest Insights
         </h2>
       </div>

@@ -14,7 +14,7 @@ export default function FooterNav() {
           <a
             key={link.label}
             href={link.href}
-            className="text-white/85 hover:text-white transition-colors duration-150"
+            className="text-white/85 sm:hover:text-white transition-colors duration-150"
           >
             {link.label}
           </a>

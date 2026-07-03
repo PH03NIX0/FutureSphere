@@ -4,6 +4,6 @@ interface DividerProps {
 
 export default function Divider({ className = "" }: DividerProps) {
   return (
-    <div className={`w-[2px] h-[120px] sm:h-[201px] bg-[#EDF0EE] shrink-0 ${className}`} />
+    <div className={`w-[2px] h-[120px] sm:h-[201px] bg-fs-divider shrink-0 ${className}`} />
   );
 }

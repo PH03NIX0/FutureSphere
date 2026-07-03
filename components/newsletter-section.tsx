@@ -1,62 +1,57 @@
-"use client";
-
-import { useState } from "react";
+import NewsletterForm from "./newsletter-form";
 
 export default function NewsletterSection() {
-  const [inputFocused, setInputFocused] = useState(false);
-
   return (
-    <section className="w-full max-w-[1058px] mx-auto mt-[80px] px-4 sm:px-6">
-      <div
-        className={`newsletter-card relative rounded-[24px] border border-[#EFF0F7] overflow-hidden ${inputFocused ? "newsletter-card-active" : ""}`}
-      >
-
-        {/* Content */}
-        <div className="relative flex flex-col items-center gap-[50px] px-6 sm:px-12 py-16">
+    <section className="fs-container mx-auto mt-[80px] px-4 sm:px-6">
+      <div className="newsletter-card relative rounded-newsletter border border-fs-border overflow-hidden">
+        <div className="relative flex flex-col items-center gap-8 sm:gap-[50px] px-4 sm:px-6 py-14 sm:py-16">
           {/* Mail Icon with frame */}
           <div className="flex items-center justify-center w-[56px] h-[56px] rounded-[14px]">
-            <img src="/icons/newsletter-icon-frame.svg" alt="Newsletter" className="w-[48px] h-[48px] sm:w-[72px] sm:h-[72px]" decoding="async" />
+            <svg
+              width="58"
+              height="56"
+              viewBox="0 0 58 56"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-[48px] h-[48px] sm:w-[72px] sm:h-[72px]"
+              aria-hidden="true"
+            >
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M52.8331 27.0722V39.667C52.8331 41.3695 52.1412 42.9132 51.0269 44.0275C49.9126 45.1418 48.3689 45.8337 46.6665 45.8337H9.33316C7.6307 45.8337 6.08698 45.1418 4.97267 44.0275C3.85837 42.9132 3.1665 41.3695 3.1665 39.667V16.3337C3.1665 14.6238 3.86444 13.074 4.9873 11.9586C6.10047 10.8529 7.63818 10.167 9.33316 10.167H35.928C35.5474 11.1168 35.2756 12.122 35.1281 13.167H9.33316C9.06638 13.167 8.80752 13.1999 8.56028 13.2618L27.4462 30.168L27.4475 30.1692C27.7627 30.4481 28.2364 30.4483 28.5517 30.1695L28.5534 30.168L37.2779 22.3538C37.8469 23.1818 38.5093 23.9406 39.2499 24.615L37.1477 26.4978L49.7319 40.4657C49.798 40.2107 49.8331 40.2083 49.8331 39.667V27.8721C50.8782 27.7246 51.8833 27.4528 52.8331 27.0722ZM34.913 28.4994L47.6788 42.6688C47.3611 42.7759 47.0208 42.8337 46.6665 42.8337H9.33316C9.01578 42.8337 8.70962 42.7873 8.42086 42.7007L21.8957 29.2258L25.4491 32.4067L25.4531 32.4102C26.9055 33.7012 29.0941 33.7012 30.5465 32.4102L30.5507 32.4065L34.913 28.4994ZM19.6571 27.2218L6.29954 40.5793C6.21293 40.2906 6.1665 39.9844 6.1665 39.667V16.3337C6.1665 15.9713 6.22704 15.6235 6.33882 15.2996L19.6571 27.2218Z"
+                fill="white"
+              />
+              <path
+                d="M48 23.5C52.6944 23.5 56.5 19.6944 56.5 15C56.5 10.3056 52.6944 6.5 48 6.5C43.3056 6.5 39.5 10.3056 39.5 15C39.5 19.6944 43.3056 23.5 48 23.5Z"
+                fill="#7F56D9"
+                stroke="white"
+                strokeWidth="3"
+              />
+            </svg>
           </div>
 
           {/* Text Content */}
-          <div className="flex flex-col items-center gap-[16px] w-full max-w-[600px]">
-            <h2
-              className="font-heading font-normal text-center w-full text-[32px] sm:text-[40px] lg:text-[48px] leading-[38px] sm:leading-[48px] lg:leading-[58px] tracking-[-3.8267px] text-white"
-            >
+          <div className="flex flex-col items-center gap-[16px] w-full max-w-[284px] sm:max-w-[600px]">
+            <h2 className="font-heading font-normal text-center w-full text-[20px] sm:text-[40px] lg:text-[48px] leading-[24px] sm:leading-[48px] lg:leading-[58px] tracking-[-0.96px] sm:tracking-[-3.8267px] text-white">
               Do cool things with us.
             </h2>
-            <p
-              className="font-body font-normal text-center w-full text-base sm:text-[20px] leading-[22px] sm:leading-[24px] tracking-[-0.96px] text-white/80"
-            >
+            <p className="font-body font-normal text-center w-full text-[12px] sm:text-base leading-[16px] sm:leading-[24px] tracking-[-0.96px] text-white/80">
               Stay in the loop with updates from our team and community.
               <br />
               Once a month.
             </p>
           </div>
 
-          {/* Newsletter Form */}
-          <form
-            className="newsletter-form group flex w-full max-w-[470px] h-[48px] items-center bg-white border border-[#E2E8F1] rounded-[12px] p-[3px] shadow-[0_2px_24px_2px_rgba(29,32,36,0.02)] transition-shadow duration-200"
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <label htmlFor="newsletter-email" className="sr-only">
-              Email address
-            </label>
-            <input
-              id="newsletter-email"
-              type="email"
-              placeholder="Enter your email"
-              className="newsletter-input flex-1 h-full px-4 sm:px-6 bg-transparent border-none outline-none font-heading font-normal text-[14px] leading-[17px] placeholder:text-[rgba(95,100,134,0.7)]"
-              onFocus={() => setInputFocused(true)}
-              onBlur={() => setInputFocused(false)}
-            />
-            <button
-              type="submit"
-              className="newsletter-button h-full px-5 sm:px-7 bg-[#7F56D9] rounded-[10px] shadow-[0_1px_1px_rgba(88,111,54,0.08)] font-heading font-bold text-[11px] sm:text-[12px] leading-[15px] text-white whitespace-nowrap transition-all duration-150 hover:-translate-y-[1px]"
-            >
-              Subscribe to newsletter
-            </button>
-          </form>
+          {/* Mobile Form */}
+          <div className="sm:hidden w-full max-w-[284px]">
+            <NewsletterForm variant="mobile" />
+          </div>
+
+          {/* Desktop Form */}
+          <div className="hidden sm:block w-full max-w-[470px]">
+            <NewsletterForm variant="desktop" />
+          </div>
         </div>
       </div>
     </section>

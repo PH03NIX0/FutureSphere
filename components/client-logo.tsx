@@ -12,7 +12,7 @@ export default function ClientLogo({ src, alt, width, height }: ClientLogoProps)
       alt={alt}
       width={width}
       height={height}
-      className="grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-105 transition-all duration-300"
+      className="grayscale opacity-70 sm:hover:grayscale-0 sm:hover:opacity-100 sm:hover:scale-105 transition-transform duration-300"
     />
   );
 }

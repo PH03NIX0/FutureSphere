@@ -72,20 +72,20 @@ export default function TestimonialsSection() {
 
   return (
     <section className="flex flex-col items-center gap-[50px] w-full px-4 sm:px-6 mt-[80px]">
-      <div className="flex flex-col items-center gap-[50px] w-full max-w-[1058px] mx-auto">
+      <div className="flex flex-col items-center gap-[50px] fs-container mx-auto">
         {/* Header */}
         <div className="flex flex-col items-center gap-[20px] w-full max-w-[600px]">
           <Badge fontSize="16px">Testimonials</Badge>
-          <h2
-            className="font-heading font-normal text-fs-dark w-full text-center text-[32px] sm:text-[40px] lg:text-[48px] leading-[38px] sm:leading-[48px] lg:leading-[58px] tracking-[-3.8267px]"
-          >
+<h2
+  className="font-heading font-normal text-fs-dark w-full text-center text-h3 sm:text-[40px] lg:text-[48px] leading-h3 sm:leading-[48px] lg:leading-[58px] tracking-[-3.8267px]"
+>
             1M+ Global Customers
           </h2>
         </div>
 
         {/* Animated Testimonial Card */}
         <div
-          className="border border-[#EFF0F7] rounded-[32px] sm:bg-white bg-transparent w-full p-6 sm:p-10"
+          className="border border-fs-border rounded-card sm:bg-white bg-transparent w-full p-6 sm:p-10"
         >
           <div className="flex flex-col sm:flex-row items-center justify-center gap-[30px] sm:gap-[60px] w-full">
             {/* Left: Fixed-size image container */}
