@@ -14,6 +14,7 @@ export default function FooterSocials() {
           aria-label={social.label}
           className="text-white sm:hover:text-white/80 transition-[transform,opacity] duration-150 sm:hover:-translate-y-[2px]"
         >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={social.src} alt={social.label} className="w-4 h-4 sm:w-5 sm:h-5" />
         </a>
       ))}
