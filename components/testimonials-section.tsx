@@ -76,9 +76,9 @@ export default function TestimonialsSection() {
         {/* Header */}
         <div className="flex flex-col items-center gap-[20px] w-full max-w-[600px]">
           <Badge fontSize="16px">Testimonials</Badge>
-<h2
-  className="font-heading font-normal text-fs-dark w-full text-center text-h3 sm:text-[40px] lg:text-[48px] leading-h3 sm:leading-[48px] lg:leading-[58px] tracking-[-3.8267px]"
->
+          <h2
+            className="font-heading font-medium sm:font-normal text-fs-dark w-full text-center text-h2 sm:text-[40px] lg:text-[48px] leading-h2 sm:leading-[48px] lg:leading-[58px]"
+          >
             1M+ Global Customers
           </h2>
         </div>
@@ -90,8 +90,7 @@ export default function TestimonialsSection() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-[30px] sm:gap-[60px] w-full">
             {/* Left: Fixed-size image container */}
             <div
-              className="relative rounded-[16px] overflow-hidden flex-shrink-0 bg-transparent sm:bg-white w-full h-[280px] sm:h-[420px]"
-              style={{ maxWidth: "460px" }}
+              className="relative rounded-[16px] overflow-hidden flex-shrink-0 bg-transparent sm:bg-white w-full h-[280px] sm:h-[420px] max-w-[460px]"
             >
               <AnimatePresence mode="wait">
                 <motion.div
@@ -115,8 +114,8 @@ export default function TestimonialsSection() {
 
             {/* Right: Text column - nav fixed at bottom */}
             <div className="flex flex-col flex-1 w-full">
-              {/* Fixed-height animated text area */}
-              <div className="relative h-[280px] overflow-hidden">
+              {/* Animated text area - normal flow to avoid overlap */}
+              <div className="min-h-[280px]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeIndex}
@@ -124,20 +123,18 @@ export default function TestimonialsSection() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="absolute inset-0 flex flex-col gap-[20px]"
+                    className="flex flex-col gap-[20px]"
                   >
-                    <p
-                      className="font-body font-normal text-left w-full text-p2"
-                      style={{ color: "var(--color-fs-grey)" }}
-                    >
-                      {slide.quote}
-                    </p>
+<p
+                     className="font-body font-normal text-left w-full text-p2 text-fs-grey">
+                    {slide.quote}
+                  </p>
 
                     <div className="flex flex-col gap-[4px]">
-                      <span className="font-heading text-[20px] sm:text-[24px] leading-[24px] sm:leading-[29px] tracking-[-0.96px] font-normal text-fs-dark">
+                      <span className="font-heading text-[20px] sm:text-[24px] leading-[24px] sm:leading-[29px] font-normal text-fs-dark">
                         {slide.authorName}
                       </span>
-                      <span className="font-heading text-[16px] sm:text-[20px] leading-[22px] sm:leading-[24px] tracking-[-0.96px] font-normal text-fs-dark">
+                      <span className="font-heading text-[16px] sm:text-[20px] leading-[22px] sm:leading-[24px] font-normal text-fs-dark">
                         {slide.authorTitle}
                       </span>
                     </div>
@@ -146,7 +143,7 @@ export default function TestimonialsSection() {
               </div>
 
               {/* Fixed navigation - never animated */}
-              <div className="flex justify-end">
+              <div className="flex justify-end mt-6">
                 <SliderNavigation onPrevious={handlePrevious} onNext={handleNext} />
               </div>
             </div>
@@ -158,25 +155,25 @@ export default function TestimonialsSection() {
           <DividerLabel>Trusted By</DividerLabel>
 
           <div className="flex flex-col items-center gap-[24px]">
-            <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-[60px]">
+            <div className="flex items-center justify-center gap-6 sm:gap-[60px]">
               {row1.map((brand) => (
+                // eslint-disable-next-line @next/next/no-img-element
                 <img
                   key={brand.alt}
                   src={brand.src}
                   alt={brand.alt}
-                  width={brand.width}
-                  height={brand.height}
+                  className="h-6 sm:h-8 w-auto shrink-0"
                 />
               ))}
             </div>
             <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-[60px]">
               {row2.map((brand) => (
+                // eslint-disable-next-line @next/next/no-img-element
                 <img
                   key={brand.alt}
                   src={brand.src}
                   alt={brand.alt}
-                  width={brand.width}
-                  height={brand.height}
+                  className="h-6 sm:h-8 w-auto shrink-0"
                 />
               ))}
             </div>

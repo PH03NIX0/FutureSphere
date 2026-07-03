@@ -33,9 +33,11 @@ export default function NewsletterSection() {
 
           {/* Text Content */}
           <div className="flex flex-col items-center gap-[16px] w-full max-w-[284px] sm:max-w-[600px]">
-            <h2 className="font-heading font-normal text-center w-full text-[20px] sm:text-[40px] lg:text-[48px] leading-[24px] sm:leading-[48px] lg:leading-[58px] tracking-[-0.96px] sm:tracking-[-3.8267px] text-white">
-              Do cool things with us.
-            </h2>
+          <h2
+            className="font-heading font-normal text-center w-full text-[20px] sm:text-[40px] lg:text-[48px] leading-[24px] sm:leading-[48px] lg:leading-[58px] tracking-[-0.96px] text-white"
+          >
+            Do cool things with us.
+          </h2>
             <p className="font-body font-normal text-center w-full text-[12px] sm:text-base leading-[16px] sm:leading-[24px] tracking-[-0.96px] text-white/80">
               Stay in the loop with updates from our team and community.
               <br />

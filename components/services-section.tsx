@@ -56,17 +56,15 @@ export default function ServicesSection() {
        <div
         className="border border-fs-border rounded-card sm:bg-white bg-transparent fs-container mx-auto p-6 sm:p-10"
       >
-        <div
-          className="flex flex-col md:flex-row items-center justify-between gap-[40px] md:gap-[67px] mx-auto"
-          style={{ maxWidth: "1018px" }}
-        >
-          {/* Left Column */}
+<div
+  className="flex flex-col md:flex-row items-center justify-between gap-[40px] md:gap-[67px] mx-auto"
+>
+{/* Left Column */}
           <div
-            className="flex flex-col justify-between w-full"
-            style={{ maxWidth: "501px" }}
+            className="flex flex-col justify-between w-full max-w-[501px]"
           >
-            {/* Fixed-height animated content area */}
-            <div className="relative h-[260px] overflow-hidden">
+            {/* Animated content area - normal flow to avoid overlap */}
+            <div className="min-h-[260px]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeIndex}
@@ -74,19 +72,16 @@ export default function ServicesSection() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="absolute inset-0 flex flex-col gap-[38px]"
+                  className="flex flex-col gap-[38px]"
                 >
                   <Badge>{slide.badge}</Badge>
                   <h2
-                    className="font-heading font-normal w-full text-[28px] sm:text-[32px] md:text-[36px] leading-[34px] sm:leading-[38px] md:leading-[44px] tracking-[-0.96px]"
-                    style={{ color: "var(--color-fs-purple)" }}
+                    className="font-heading font-normal w-full text-[28px] sm:text-[32px] md:text-[36px] leading-[34px] sm:leading-[38px] md:leading-[44px] text-fs-purple"
                   >
                     {slide.heading}
                   </h2>
-                  <p
-                    className="font-body font-normal text-left w-full text-p2"
-                    style={{ color: "var(--color-fs-grey)" }}
-                  >
+<p
+                     className="font-body font-normal text-left text-p2 text-fs-grey">
                     {slide.body}
                   </p>
                 </motion.div>
@@ -94,13 +89,14 @@ export default function ServicesSection() {
             </div>
 
             {/* Fixed footer: navigation never moves */}
+            <div className="flex justify-end mt-6">
             <SliderNavigation onPrevious={handlePrevious} onNext={handleNext} />
+          </div>
           </div>
 
           {/* Right Image */}
           <div
-            className="relative rounded-card overflow-hidden bg-transparent sm:bg-white w-full h-[220px] sm:h-[420px]"
-            style={{ maxWidth: "460px" }}
+            className="relative w-full max-w-[460px] rounded-card overflow-hidden bg-transparent sm:bg-white h-[220px] sm:h-[420px]"
           >
             <AnimatePresence mode="wait">
               <motion.div

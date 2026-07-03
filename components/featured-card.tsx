@@ -16,7 +16,8 @@ export default function FeaturedCard({
   className = "",
 }: FeaturedCardProps) {
   return (
-    <div className={`feature-card feature-card-${index} flex flex-col items-center text-center p-[20px] gap-[16px] flex-1 h-auto sm:h-full bg-transparent sm:bg-white ${className}`}>
+    <div className={`feature-card feature-card-${index} flex flex-col items-center text-center p-[20px] gap-[16px] flex-1 min-h-[200px] bg-transparent sm:bg-white ${className}`}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={src}
         alt={alt}

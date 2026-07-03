@@ -23,7 +23,7 @@ export default function BlogCard({ category, title, excerpt, imageSrc, imageAlt 
       </div>
       <div className="flex flex-col gap-[20px]">
         <Badge fontSize="14px" variant="solid">{category}</Badge>
-        <h3 className="font-heading text-lg sm:text-[20px] font-medium leading-[22px] sm:leading-[24px] tracking-[-0.75px] text-fs-card-text">
+        <h3 className="font-heading text-[24px] sm:text-[29px] font-[500] leading-[29px] sm:leading-[31px] tracking-[-0.75px] text-fs-card-text">
           {title}
         </h3>
         <p className="font-body text-[16px] leading-[19px] tracking-[-0.96px] text-fs-card-muted">
@@ -31,12 +31,15 @@ export default function BlogCard({ category, title, excerpt, imageSrc, imageAlt 
         </p>
         <a
           href="#"
-          className="group inline-flex flex-col items-end text-[14px] sm:text-[16px] leading-[18px] sm:leading-[19px] tracking-[-0.75px] font-normal text-fs-card-muted transition-colors sm:hover:text-fs-dark"
+          className="group inline-flex flex-col items-end gap-1.5 text-[14px] sm:text-[16px] leading-[18px] sm:leading-[19px] font-normal text-fs-card-muted transition-colors sm:hover:text-fs-dark"
         >
-          <div className="inline-flex flex-col">
+          <div className="inline-flex items-center gap-2">
             <span>Read more</span>
-            <span className="w-full border-t border-fs-border-strong scale-x-0 sm:group-hover:scale-x-100 transition-transform duration-200 origin-center" />
+            <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
           </div>
+          <span className="w-full border-t border-fs-border-strong scale-x-0 sm:group-hover:scale-x-100 transition-transform duration-200 origin-center" />
         </a>
       </div>
     </article>

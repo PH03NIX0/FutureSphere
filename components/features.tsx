@@ -32,7 +32,9 @@ export default function Features() {
       <div className="flex flex-col items-center gap-[50px] w-full">
         <div className="flex flex-col items-center gap-[20px] w-full max-w-[600px]">
           <Badge fontSize="16px">Features</Badge>
-          <h2 className="font-heading text-h3 sm:text-[40px] lg:text-[48px] leading-h3 sm:leading-[48px] lg:leading-[58px] tracking-[-3.8267px] text-center text-fs-dark font-normal">
+          <h2
+            className="font-heading font-medium sm:font-normal text-fs-dark text-center text-h2 sm:text-[40px] lg:text-[48px] leading-h2 sm:leading-[48px] lg:leading-[58px]"
+          >
             Discover the Tools that Drive Success
           </h2>
           <p className="font-body text-[16px] leading-[22px] tracking-[-0.75px] text-center text-fs-grey">

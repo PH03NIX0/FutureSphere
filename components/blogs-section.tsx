@@ -32,11 +32,11 @@ export default function BlogsSection() {
     <section className="fs-container mx-auto flex flex-col gap-[50px] px-4 sm:px-6">
       <div className="flex flex-col items-center gap-[20px] w-full">
         <Badge fontSize="16px">Blogs</Badge>
-<h2
-  className="font-heading font-normal text-fs-dark text-center w-full text-h3 sm:text-[40px] lg:text-[48px] leading-h3 sm:leading-[48px] lg:leading-[58px] tracking-[-3.8267px]"
->
-          Latest Insights
-        </h2>
+          <h2
+            className="font-heading font-medium sm:font-normal text-fs-dark text-center w-full text-h2 sm:text-[40px] lg:text-[48px] leading-h2 sm:leading-[48px] lg:leading-[58px]"
+          >
+            Latest Insights
+          </h2>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[30px] w-full">

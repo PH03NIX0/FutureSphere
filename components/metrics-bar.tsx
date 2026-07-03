@@ -125,7 +125,7 @@ return (
           {metrics.map((metric, i) => (
             <Fragment key={i}>
               <div className="flex-1 flex flex-col items-center justify-center text-center py-2 sm:py-0">
-                <span className="font-heading text-3xl sm:text-[48px] leading-[36px] sm:leading-[58px] font-semibold tracking-[-3.8267px] text-fs-purple">
+                <span className="font-heading text-3xl sm:text-[48px] leading-[36px] sm:leading-[58px] font-semibold tracking-tight text-fs-purple">
                   <AnimatedCounter
                     targetValue={metric.value}
                     suffix={metric.suffix}

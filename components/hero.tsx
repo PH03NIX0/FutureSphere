@@ -3,7 +3,9 @@ import ContactUsButton from "@/components/contact-us-button";
 export default function Hero() {
   return (
     <section className="fs-container px-4 sm:px-6 pt-4 pb-12 flex flex-col items-center gap-4">
-      <h1 className="font-heading text-3xl sm:text-5xl lg:text-h1 text-fs-dark leading-tight text-center font-normal tracking-[-3.8267px]">
+      <h1
+        className="font-heading text-3xl sm:text-5xl lg:text-h1 text-fs-dark leading-tight text-center font-normal tracking-tight"
+      >
         Revolutionizing the Future with
         <br />
         Cutting-Edge Technology

@@ -23,8 +23,7 @@ export default function MissionSection() {
             <h2
               className="font-heading font-normal text-fs-dark w-full text-[28px] sm:text-[32px] md:text-[36px] leading-[34px] sm:leading-[38px] md:leading-[44px] tracking-[-0.96px]"
             >
-              Empowering the world through transformative technology
-              solutions
+              Empowering the world through transformative technology solutions
             </h2>
 
             {/* Body Text */}

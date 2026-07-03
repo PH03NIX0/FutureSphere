@@ -43,10 +43,10 @@ export default function TestimonialCard({
           {/* Author + Navigation */}
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0">
             <div className="flex flex-col gap-[4px]">
-              <span className="font-heading text-[20px] sm:text-[24px] leading-[24px] sm:leading-[29px] tracking-[-0.96px] font-normal text-fs-dark">
+              <span className="font-heading text-[20px] sm:text-[24px] leading-[24px] sm:leading-[29px] font-normal text-fs-dark">
                 {authorName}
               </span>
-              <span className="font-heading text-[16px] sm:text-[20px] leading-[22px] sm:leading-[24px] tracking-[-0.96px] font-normal text-fs-dark">
+              <span className="font-heading text-[16px] sm:text-[20px] leading-[22px] sm:leading-[24px] font-normal text-fs-dark">
                 {authorTitle}
               </span>
             </div>
