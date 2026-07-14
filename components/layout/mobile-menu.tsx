@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import ContactUsButton from "./contact-us-button";
+import ContactUsButton from "@/components/ui/contact-us-button";
 
 const links = [
   { href: "#", label: "About" },

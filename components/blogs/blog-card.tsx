@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Badge from "@/components/badge";
+import Badge from "@/components/ui/badge";
 
 interface BlogCardProps {
   category: string;

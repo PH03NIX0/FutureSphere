@@ -1,4 +1,4 @@
-import ContactUsButton from "@/components/contact-us-button";
+import ContactUsButton from "@/components/ui/contact-us-button";
 
 export default function Hero() {
   return (

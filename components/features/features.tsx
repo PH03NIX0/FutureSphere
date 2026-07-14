@@ -1,25 +1,26 @@
 import { Fragment } from "react";
-import ContactUsButton from "@/components/contact-us-button";
-import FeaturedCard from "@/components/featured-card";
-import Divider from "@/components/divider";
-import Badge from "@/components/badge";
-import ViewAllLink from "@/components/view-all-link";
+import ContactUsButton from "@/components/ui/contact-us-button";
+import FeaturedCard from "@/components/features/featured-card";
+import Divider from "@/components/ui/divider";
+import Badge from "@/components/ui/badge";
+import ViewAllLink from "@/components/ui/view-all-link";
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 
 const features = [
   {
-    src: "/icons/feature-innovation-icon.svg",
+    src: getCloudinaryUrl("futuresphere/icons/feature-innovation"),
     title: "Cutting-Edge Innovation",
     description:
       "Experience groundbreaking technological advancements that push the boundaries of what's possible, revolutionizing industries and transforming the way we live and work.",
   },
   {
-    src: "/icons/feature-connectivity-icon.svg",
+    src: getCloudinaryUrl("futuresphere/icons/feature-connectivity"),
     title: "Seamless Connectivity",
     description:
       "Stay connected anytime, anywhere with our robust and reliable network infrastructure, ensuring uninterrupted communication and effortless access to the digital world.",
   },
   {
-    src: "/icons/feature-ui-icon.svg",
+    src: getCloudinaryUrl("futuresphere/icons/feature-ui"),
     title: "Intuitive User Interface",
     description:
       "Enjoy a seamless and intuitive user experience with our sleek and user-friendly interface, designed to simplify complex tasks and enhance productivity.",
@@ -45,18 +46,54 @@ export default function Features() {
         <div className="flex flex-col gap-[30px]">
           <div className="border border-fs-border rounded-card sm:bg-white bg-transparent w-full px-6 sm:px-10 py-8 sm:py-12">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-[30px] sm:gap-[60px] w-full max-w-[1018px] mx-auto">
-              {features.map((feature, i) => (
-                <Fragment key={feature.title}>
+              {/* Mobile: all three cards, no dividers (dividers hidden below sm) */}
+              <div className="block sm:hidden w-full">
+                {features.map((feature) => (
                   <FeaturedCard
+                    key={feature.title}
                     src={feature.src}
                     alt={feature.title}
                     title={feature.title}
                     description={feature.description}
-                    index={i + 1}
+                    index={features.indexOf(feature) + 1}
                   />
-                  {i < features.length - 1 && <Divider className="hidden sm:block" />}
-                </Fragment>
-              ))}
+                ))}
+              </div>
+
+              {/* Tablet: first two cards with a single divider */}
+              <div className="hidden sm:flex lg:hidden items-center justify-center gap-[60px] w-full">
+                <FeaturedCard
+                  src={features[0].src}
+                  alt={features[0].title}
+                  title={features[0].title}
+                  description={features[0].description}
+                  index={1}
+                />
+                <Divider />
+                <FeaturedCard
+                  src={features[1].src}
+                  alt={features[1].title}
+                  title={features[1].title}
+                  description={features[1].description}
+                  index={2}
+                />
+              </div>
+
+              {/* Desktop: all three cards with both dividers */}
+              <div className="hidden lg:flex items-center justify-center gap-[60px] w-full">
+                {features.map((feature, i) => (
+                  <Fragment key={feature.title}>
+                    <FeaturedCard
+                      src={feature.src}
+                      alt={feature.title}
+                      title={feature.title}
+                      description={feature.description}
+                      index={i + 1}
+                    />
+                    {i < features.length - 1 && <Divider />}
+                  </Fragment>
+                ))}
+              </div>
             </div>
           </div>
 

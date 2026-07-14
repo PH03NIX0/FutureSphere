@@ -3,9 +3,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
-import Badge from "@/components/badge";
-import DividerLabel from "@/components/divider-label";
-import SliderNavigation from "@/components/slider-navigation";
+import Badge from "@/components/ui/badge";
+import DividerLabel from "@/components/ui/divider-label";
+import SliderNavigation from "@/components/testimonials/slider-navigation";
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 
 interface TestimonialSlide {
   quote: string;
@@ -20,38 +21,38 @@ const testimonials: TestimonialSlide[] = [
     quote: "I am incredibly impressed with the transformative technology solutions provided by FutureSphere. Their cutting-edge innovations have revolutionized our business operations, streamlining processes and boosting productivity. The seamless connectivity and intuitive user interface have made a significant impact on our team's efficiency. Thanks to their advanced data analytics capabilities, we now make data-driven decisions with confidence. I highly recommend FutureSphere to any organization seeking to stay ahead in the digital era.",
     authorName: "Sarah Thompson",
     authorTitle: "CEO Thompson Enterprises",
-    imageSrc: "/images/client-portrait.png",
+    imageSrc: getCloudinaryUrl("futuresphere/images/client-portrait", { fetch_format: "auto", quality: "auto" }),
     imageAlt: "Sarah Thompson testimonial portrait",
   },
   {
     quote: "FutureSphere has been a game-changer for our company. The platform's intuitive design and powerful features have transformed how we manage our operations. We've seen a significant improvement in efficiency across all departments, and the support team is always responsive and helpful when we need assistance.",
     authorName: "David Chen",
     authorTitle: "CTO NovaTech Solutions",
-    imageSrc: "/images/client-portrait.png",
+    imageSrc: getCloudinaryUrl("futuresphere/images/client-portrait", { fetch_format: "auto", quality: "auto" }),
     imageAlt: "David Chen testimonial portrait",
   },
   {
     quote: "The analytics capabilities alone have saved us countless hours. What used to take our team weeks now takes minutes. FutureSphere's commitment to innovation keeps us ahead of our competitors, and we couldn't imagine going back to our old workflows after experiencing this platform.",
     authorName: "Emily Rodriguez",
     authorTitle: "VP Operations Meridian Group",
-    imageSrc: "/images/client-portrait.png",
+    imageSrc: getCloudinaryUrl("futuresphere/images/client-portrait", { fetch_format: "auto", quality: "auto" }),
     imageAlt: "Emily Rodriguez testimonial portrait",
   },
   {
     quote: "We evaluated dozens of platforms before choosing FutureSphere, and it was the best decision we made this year. The onboarding was smooth and the interface is beautiful, the results speak for themselves. Our team morale and output have never been higher thanks to this partnership.",
     authorName: "Marcus Johnson",
     authorTitle: "Director Pinnacle Systems",
-    imageSrc: "/images/client-portrait.png",
+    imageSrc: getCloudinaryUrl("futuresphere/images/client-portrait", { fetch_format: "auto", quality: "auto" }),
     imageAlt: "Marcus Johnson testimonial portrait",
   },
 ];
 
 const trustedBrands = [
-  { src: "/icons/Airwallex.svg", alt: "Airwallex", width: 160, height: 64 },
-  { src: "/icons/Outreach.svg", alt: "Outreach", width: 160, height: 64 },
-  { src: "/icons/Razorpay.svg", alt: "Razorpay", width: 160, height: 64 },
-  { src: "/icons/Discord.svg", alt: "Discord", width: 160, height: 64 },
-  { src: "/icons/Dropbox.svg", alt: "Dropbox", width: 160, height: 64 },
+  { src: getCloudinaryUrl("futuresphere/logos/airwallex"), alt: "Airwallex", width: 160, height: 64 },
+  { src: getCloudinaryUrl("futuresphere/logos/outreach"), alt: "Outreach", width: 160, height: 64 },
+  { src: getCloudinaryUrl("futuresphere/logos/razorpay"), alt: "Razorpay", width: 160, height: 64 },
+  { src: getCloudinaryUrl("futuresphere/logos/discord"), alt: "Discord", width: 160, height: 64 },
+  { src: getCloudinaryUrl("futuresphere/logos/dropbox"), alt: "Dropbox", width: 160, height: 64 },
 ];
 
 const row1 = trustedBrands.slice(0, 3);
@@ -87,10 +88,10 @@ export default function TestimonialsSection() {
         <div
           className="border border-fs-border rounded-card sm:bg-white bg-transparent w-full p-6 sm:p-10"
         >
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-[30px] sm:gap-[60px] w-full">
+            <div className="flex flex-col lg:flex-row items-center justify-center gap-[30px] lg:gap-[67px] w-full">
             {/* Left: Fixed-size image container */}
             <div
-              className="relative rounded-[16px] overflow-hidden flex-shrink-0 bg-transparent sm:bg-white w-full h-[280px] sm:h-[420px] max-w-[460px]"
+              className="relative rounded-[16px] overflow-hidden bg-transparent sm:bg-white w-full h-[280px] lg:h-[420px] max-w-none lg:max-w-[460px]"
             >
               <AnimatePresence mode="wait">
                 <motion.div
@@ -115,7 +116,7 @@ export default function TestimonialsSection() {
             {/* Right: Text column - nav fixed at bottom */}
             <div className="flex flex-col flex-1 w-full">
               {/* Animated text area - normal flow to avoid overlap */}
-              <div className="min-h-[280px]">
+              <div className="lg:min-h-[280px]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeIndex}
@@ -125,7 +126,7 @@ export default function TestimonialsSection() {
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="flex flex-col gap-[20px]"
                   >
-<p
+ <p
                      className="font-body font-normal text-left w-full text-p2 text-fs-grey">
                     {slide.quote}
                   </p>

@@ -1,7 +1,9 @@
+import { getCloudinaryUrl } from "@/lib/cloudinary";
+
 const socials = [
-  { href: "#", label: "Twitter", src: "/icons/twitter-logo.svg" },
-  { href: "#", label: "Facebook", src: "/icons/facebook-logo.svg" },
-  { href: "#", label: "LinkedIn", src: "/icons/linkedin-logo.svg" },
+  { href: "#", label: "Twitter", src: getCloudinaryUrl("futuresphere/social/twitter") },
+  { href: "#", label: "Facebook", src: getCloudinaryUrl("futuresphere/social/facebook") },
+  { href: "#", label: "LinkedIn", src: getCloudinaryUrl("futuresphere/social/linkedin") },
 ];
 
 export default function FooterSocials() {

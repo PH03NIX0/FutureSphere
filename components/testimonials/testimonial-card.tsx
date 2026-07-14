@@ -1,5 +1,5 @@
 import Image from "next/image";
-import SliderNavigation from "@/components/slider-navigation";
+import SliderNavigation from "@/components/testimonials/slider-navigation";
 
 interface TestimonialCardProps {
   quote: string;
@@ -22,9 +22,9 @@ export default function TestimonialCard({
 }: TestimonialCardProps) {
   return (
     <div className="border border-fs-border rounded-card bg-white w-full">
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-8 sm:gap-[60px] w-full">
+      <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-[60px] w-full">
         {/* Left: Portrait Image */}
-        <div className="relative rounded-card-image overflow-hidden flex-shrink-0 w-full h-[280px] sm:h-[420px] sm:w-[460px]">
+        <div className="relative rounded-card-image overflow-hidden flex-shrink-0 w-full h-[280px] lg:h-[420px] max-w-[460px]">
           <Image
             src={imageSrc}
             alt={imageAlt}
@@ -34,15 +34,15 @@ export default function TestimonialCard({
         </div>
 
         {/* Right: Quote + Author + Navigation */}
-        <div className="flex flex-col gap-5 sm:gap-[20px] flex-1 w-full">
+        <div className="flex flex-col gap-5 lg:gap-[20px] flex-1 w-full">
           {/* Quote */}
           <p className="font-body font-normal text-left text-p2 text-fs-grey">
             {quote}
           </p>
 
           {/* Author + Navigation */}
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0">
-            <div className="flex flex-col gap-[4px]">
+            <div className="flex flex-col lg:flex-row justify-between items-center gap-4 lg:gap-0">
+              <div className="flex flex-col gap-[4px]">
               <span className="font-heading text-[20px] sm:text-[24px] leading-[24px] sm:leading-[29px] font-normal text-fs-dark">
                 {authorName}
               </span>

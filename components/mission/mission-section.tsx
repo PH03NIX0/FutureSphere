@@ -1,35 +1,48 @@
 import Image from "next/image";
-import Badge from "@/components/badge";
-import ContactUsButton from "@/components/contact-us-button";
+import Badge from "@/components/ui/badge";
+import ContactUsButton from "@/components/ui/contact-us-button";
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 
 export default function MissionSection() {
+  const missionImage = getCloudinaryUrl("futuresphere/images/mission-visual", { fetch_format: "auto", quality: "auto" });
   return (
 <section className="flex justify-center mt-[80px] w-full px-4 sm:px-6">
       <div
         className="border border-fs-border rounded-card sm:bg-white bg-transparent fs-container mx-auto p-6 sm:p-10"
       >
         <div
-          className="flex flex-col md:flex-row items-center justify-between gap-[40px] md:gap-[67px] mx-auto"
-          style={{ maxWidth: "1018px" }}
+          className="flex flex-col lg:flex-row items-center justify-between gap-[40px] lg:gap-[67px] mx-auto"
         >
           {/* Left Column */}
           <div
-            className="flex flex-col gap-[20px] w-full max-w-[501px]"
+            className="flex flex-col gap-[20px] w-full lg:max-w-[501px]"
           >
             {/* Mission Badge */}
             <Badge>Our Mission Statement</Badge>
 
+            {/* Image — visible below badge in stacked view, hidden on desktop (right column shows it) */}
+            <div
+              className="relative rounded-card overflow-hidden w-full h-[280px] lg:max-w-[460px] lg:hidden"
+            >
+              <Image
+                src={missionImage}
+                alt="Our mission"
+                fill
+                sizes="(max-width: 1058px) 100vw, 460px"
+                className="object-cover"
+              />
+            </div>
+
             {/* Heading */}
             <h2
-              className="font-heading font-normal text-fs-dark w-full text-[28px] sm:text-[32px] md:text-[36px] leading-[34px] sm:leading-[38px] md:leading-[44px] tracking-[-0.96px]"
+              className="font-heading font-normal text-fs-dark w-full text-[28px] sm:text-[32px] lg:text-[36px] leading-[34px] sm:leading-[38px] lg:leading-[44px] tracking-[-0.96px]"
             >
               Empowering the world through transformative technology solutions
             </h2>
 
             {/* Body Text */}
             <p
-              className="font-body font-normal text-left w-full text-p2"
-              style={{ color: "var(--color-fs-grey)" }}
+              className="font-body font-normal text-left w-full text-p2 text-fs-grey"
             >
               We are dedicated to empowering individuals, businesses, and
               communities by providing innovative and cutting-edge technology
@@ -54,13 +67,12 @@ export default function MissionSection() {
             </div>
           </div>
 
-          {/* Right Image */}
+          {/* Right Image — desktop only */}
           <div
-            className="relative rounded-card overflow-hidden w-full"
-            style={{ maxWidth: "460px", height: "420px" }}
+            className="relative rounded-card overflow-hidden w-full h-[420px] max-w-none lg:max-w-[460px] hidden lg:block"
           >
             <Image
-              src="/images/mission-visual.png"
+              src={missionImage}
               alt="Our mission"
               fill
               sizes="(max-width: 1058px) 100vw, 460px"

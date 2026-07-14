@@ -1,12 +1,13 @@
-import Badge from "@/components/badge";
-import ClientLogo from "@/components/client-logo";
+import Badge from "@/components/ui/badge";
+import ClientLogo from "@/components/clients/client-logo";
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 
 const logos = [
-  { src: "/icons/descript.svg", alt: "Descript", width: 160, height: 64 },
-  { src: "/icons/Shopify.svg", alt: "Shopify", width: 133, height: 64 },
-  { src: "/icons/Slack.svg", alt: "Slack", width: 120, height: 64 },
-  { src: "/icons/Elastic.svg", alt: "Elastic", width: 160, height: 64 },
-  { src: "/icons/Loom.svg", alt: "Loom", width: 107, height: 64 },
+  { src: getCloudinaryUrl("futuresphere/logos/descript"), alt: "Descript", width: 160, height: 64 },
+  { src: getCloudinaryUrl("futuresphere/logos/shopify"), alt: "Shopify", width: 133, height: 64 },
+  { src: getCloudinaryUrl("futuresphere/logos/slack"), alt: "Slack", width: 120, height: 64 },
+  { src: getCloudinaryUrl("futuresphere/logos/elastic"), alt: "Elastic", width: 160, height: 64 },
+  { src: getCloudinaryUrl("futuresphere/logos/loom"), alt: "Loom", width: 107, height: 64 },
 ];
 
 export default function ClientSection() {

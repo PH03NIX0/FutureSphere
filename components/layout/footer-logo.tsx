@@ -1,9 +1,11 @@
+import { getCloudinaryUrl } from "@/lib/cloudinary";
+
 export default function FooterLogo() {
   return (
     <div className="flex items-center gap-[12px]">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/icons/future-sphere-logo.svg"
+        src={getCloudinaryUrl("futuresphere/logos/future-sphere-logo")}
         alt=""
         aria-hidden="true"
         className="w-[27px] h-[24px]"

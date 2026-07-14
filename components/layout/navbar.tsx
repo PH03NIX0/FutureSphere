@@ -1,5 +1,5 @@
-import ContactUsButton from "./contact-us-button";
-import MobileMenu from "./mobile-menu";
+import ContactUsButton from "@/components/ui/contact-us-button";
+import MobileMenu from "@/components/layout/mobile-menu";
 
 export default function Navbar() {
   return (

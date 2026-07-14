@@ -1,28 +1,29 @@
-import Badge from "@/components/badge";
-import ContactUsButton from "@/components/contact-us-button";
-import ViewAllLink from "@/components/view-all-link";
-import BlogCard from "@/components/blog-card";
+import Badge from "@/components/ui/badge";
+import ContactUsButton from "@/components/ui/contact-us-button";
+import ViewAllLink from "@/components/ui/view-all-link";
+import BlogCard from "@/components/blogs/blog-card";
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 
 const blogs = [
   {
     category: "Healthcare",
     title: "The Future of AI in Healthcare: How Machine Learning is Revolutionizing Patient Care",
     excerpt: "Explore the incredible potential of artificial intelligence (AI) in revolutionizing healthcare. Discover how AI-driven technologies are enhancing diagnostics, personalized medicine, and patient outcomes. Dive into real-world examples and gain insights into the future of healthcare.",
-    imageSrc: "/images/blog-featured.png",
+    imageSrc: getCloudinaryUrl("futuresphere/images/blog-featured", { fetch_format: "auto", quality: "auto" }),
     imageAlt: "Healthcare AI blog post",
   },
   {
     category: "Healthcare",
     title: "The Future of AI in Healthcare: How Machine Learning is Revolutionizing Patient Care",
     excerpt: "Explore the incredible potential of artificial intelligence (AI) in revolutionizing healthcare. Discover how AI-driven technologies are enhancing diagnostics, personalized medicine, and patient outcomes. Dive into real-world examples and gain insights into the future of healthcare.",
-    imageSrc: "/images/blog-featured.png",
+    imageSrc: getCloudinaryUrl("futuresphere/images/blog-featured", { fetch_format: "auto", quality: "auto" }),
     imageAlt: "Healthcare AI blog post",
   },
   {
     category: "Healthcare",
     title: "The Future of AI in Healthcare: How Machine Learning is Revolutionizing Patient Care",
     excerpt: "Explore the incredible potential of artificial intelligence (AI) in revolutionizing healthcare. Discover how AI-driven technologies are enhancing diagnostics, personalized medicine, and patient outcomes. Dive into real-world examples and gain insights into the future of healthcare.",
-    imageSrc: "/images/blog-featured.png",
+    imageSrc: getCloudinaryUrl("futuresphere/images/blog-featured", { fetch_format: "auto", quality: "auto" }),
     imageAlt: "Healthcare AI blog post",
   },
 ];
@@ -41,7 +42,9 @@ export default function BlogsSection() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[30px] w-full">
         {blogs.map((blog, index) => (
-          <BlogCard key={index} {...blog} />
+          <div key={index} className={index === 2 ? "hidden lg:block" : ""}>
+            <BlogCard {...blog} />
+          </div>
         ))}
       </div>
 

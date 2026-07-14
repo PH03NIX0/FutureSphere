@@ -102,7 +102,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url('/images/newsletter-bg-rect.png');
+  background-image: url('https://res.cloudinary.com/wfqwup4o/image/upload/f_auto,q_auto/futuresphere/newsletter-bg-rect');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -143,7 +143,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url('/images/Rectangle 9383.png');
+  background-image: url('https://res.cloudinary.com/wfqwup4o/image/upload/f_auto,q_auto/futuresphere/Rectangle 9383');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

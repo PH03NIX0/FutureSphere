@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 
 export default function HeroImage() {
   // Mobile: increase safe zone with different composition
@@ -8,7 +9,7 @@ export default function HeroImage() {
     <div className="fs-container px-4 sm:px-6">
       <div className="relative w-full h-[280px] sm:h-[388px] rounded-2xl sm:rounded-full overflow-hidden group">
         <Image
-          src="/images/hero-visual.png"
+           src={getCloudinaryUrl("futuresphere/images/hero-visual", { fetch_format: "auto", quality: "auto" })}
           alt="Futuristic technology interface with glowing geometric elements"
           fill
           priority

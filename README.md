@@ -1,6 +1,6 @@
 # FutureSphere — Next.js Frontend
 
-Next.js 16.2.9 (Turbopack) + Tailwind CSS v4 + next/image.
+Next.js 16.2.9 (Turbopack) + Tailwind CSS v4 + next/image + Cloudinary.
 
 ## Design System
 
@@ -88,52 +88,68 @@ Next.js 16.2.9 (Turbopack) + Tailwind CSS v4 + next/image.
 
 ```
 app/
-  layout.tsx          # Root layout (Inter + Manrope fonts, lang="en", metadata)
-  page.tsx            # Home page
-  globals.css         # Tailwind v4 + theme tokens + focus-visible + blur circles
+  layout.tsx            # Root layout (Inter + Manrope fonts, lang="en", metadata)
+  page.tsx              # Home page
+  globals.css           # Tailwind v4 + theme tokens + focus-visible + blur circles
+  api/
+    upload/
+      route.ts          # Server-side Cloudinary upload endpoint
+
+lib/
+  cloudinary.ts         # Cloudinary config helper + getCloudinaryUrl()
 
 components/
-  navbar.tsx          # Dark pill navbar (1058px, rounded-[47px], accessible SVG logo)
-  hero.tsx            # H1 + subtitle + CTA buttons (uses ContactUsButton)
-  hero-image.tsx      # Hero visual (next/image, rounded-full, hover zoom)
-  metrics-bar.tsx     # White card with 3 stat columns (50K, 150K, 98%)
-  features.tsx        # 3-column feature grid with icons, dividers (2px), footer actions
-  mission-section.tsx # White card, two-column layout (content + image)
-  client-section.tsx  # "Our Clients" badge + logo row
-  services-section.tsx# "Services" badge + slider navigation + image
-  testimonials-section.tsx # Testimonial card + Trusted By logo grid
+  ui/
+    badge.tsx           # Reusable badge pill (configurable fontSize, w-fit)
+    contact-us-button.tsx # Reusable purple CTA button
+    divider.tsx         # Vertical divider line (2px, #EDF0EE)
+    divider-label.tsx   # Reusable divider with centered text (border-t, #EDF0EE)
+    view-all-link.tsx   # "View All" link with chevron hover
 
-  badge.tsx           # Reusable badge pill (configurable fontSize, w-fit)
-  contact-us-button.tsx # Reusable purple CTA button
-  client-logo.tsx     # Reusable logo with hover effects
-  slider-navigation.tsx # Reusable prev/next arrow buttons (type="button")
-  divider-label.tsx   # Reusable divider with centered text (border-t, #EDF0EE)
-  testimonial-card.tsx # White card with portrait + quote + author + nav
-  featured-card.tsx   # Feature card with icon + text + blur circle
-  divider.tsx         # Vertical divider line (2px, #EDF0EE)
-  view-all-link.tsx   # "View All" link with chevron hover
+  layout/
+    navbar.tsx          # Dark pill navbar (1058px, rounded-[47px], accessible SVG logo)
+    mobile-menu.tsx     # Mobile hamburger menu with animated overlay
+    footer.tsx          # Purple footer with logo, nav, and social icons
+    footer-logo.tsx     # Footer logo (Cloudinary)
+    footer-nav.tsx      # Footer navigation links
+    footer-socials.tsx  # Footer social icons (Cloudinary)
 
-public/
-  images/
-    hero-image-wrapper.png   # Pre-rounded hero image (transparent cutout)
-    mission-visual.png       # Mission/Services section image
-    Client Image.png         # Testimonial portrait
-  icons/
-    feature-innovation-icon.svg
-    feature-connectivity-icon.svg
-    feature-ui-icon.svg
-    Despcript.svg
-    Shopify.svg
-    Slack.svg
-    Elastic.svg
-    Loom.svg
-    Airwallex.svg
-    Outreach.svg
-    Razorpay.svg
-    Discord.svg
-    Dropbox.svg
-    FutureShereLogo.svg
-    Company logo.svg
+  hero/
+    hero.tsx            # H1 + subtitle + CTA buttons (uses ContactUsButton)
+    hero-image.tsx      # Hero visual (next/image, rounded-full, hover zoom)
+
+  features/
+    features.tsx        # 3-column feature grid with icons, dividers (2px), footer actions
+    featured-card.tsx   # Feature card with icon + text + blur circle
+
+  clients/
+    client-section.tsx  # "Our Clients" badge + logo row
+    client-logo.tsx     # Reusable logo with hover effects
+
+  mission/
+    mission-section.tsx # White card, two-column layout (content + image)
+
+  services/
+    services-section.tsx# "Services" badge + slider navigation + image
+
+  testimonials/
+    testimonials-section.tsx # Testimonial card + Trusted By logo grid
+    testimonial-card.tsx     # White card with portrait + quote + author + nav
+    slider-navigation.tsx    # Reusable prev/next arrow buttons (type="button")
+
+  blogs/
+    blogs-section.tsx   # "Latest Insights" badge + blog card grid
+    blog-card.tsx       # Blog card with image, badge, title, excerpt, and read-more link
+
+  newsletter/
+    newsletter-section.tsx # Newsletter CTA with mail icon and form
+    newsletter-form.tsx    # Email subscription form (mobile + desktop variants)
+
+  metrics/
+    metrics-bar.tsx     # Animated counter stats (50K, 150K, 98%)
+
+  forms/
+    cloudinary-uploader.tsx # Client-side Cloudinary upload component
 ```
 
 ## Current Page Flow
@@ -151,12 +167,15 @@ public/
       Signup   (px-[30px], h-[35px], rounded-[20px])
       Contact  (ContactUsButton component)
   HeroImage    (rounded-full, hover zoom effect)
-  MetricsBar   (w-[931px], 3 columns with dividers)
+  MetricsBar   (w-[931px], 3 columns with animated counters)
   Features     (w-[1100px], mt-[80px], cards with 2px dividers + footer actions)
   MissionSection (1058×534px, two-column white card)
   ClientSection  (logo row: Descript, Shopify, Slack, Elastic, Loom)
   ServicesSection (white card, slider navigation, purple heading)
-  TestimonialsSection (testimonial card 480px + Trusted By logo grid)
+  TestimonialsSection (text above image, stacked on mobile/tablet; side-by-side at lg+)
+  BlogsSection     (3-column blog card grid)
+  NewsletterSection (purple CTA card with email form)
+  Footer       (purple background, logo, nav, social icons)
 ```
 
 ## Reusable Components
@@ -173,10 +192,35 @@ public/
 | `Divider` | Vertical line (2px) | None |
 | `ViewAllLink` | Link with chevron | None |
 
+## Cloudinary Integration
+
+- Images are served from Cloudinary under the `futuresphere/` folder.
+- Automatic format and quality optimization is applied via `f_auto,q_auto`.
+- Server-side upload endpoint: `POST /api/upload`
+- Client helper: `lib/cloudinary.ts` — `getCloudinaryUrl(publicId, transformations)`
+- Environment variables in `.env.local`:
+  - `CLOUDINARY_CLOUD_NAME`
+  - `CLOUDINARY_API_KEY`
+  - `CLOUDINARY_API_SECRET`
+  - `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`
+
+## Responsive Strategy
+
+| Range | Label | Layout behavior |
+|-------|-------|-----------------|
+| <640px | Mobile | Single-column, stacked. Compact typography. |
+| 640–1023px | Tablet | **Still single-column** for complex horizontal cards (testimonials, services). Image sits above text. Card height remains at mobile value (`h-[280px]`). Typography may scale with `sm:`. |
+| ≥1024px | Desktop | Two-column layout activates (`lg:flex-row`). Image height expands (`lg:h-[420px]`). Gap widens (`lg:gap-[60px]`). |
+
+### Rule
+**Layout-causing breakpoints** (`flex-row`, gap enlargement, image height increases) must use `lg:`, not `md:` or `sm:`.
+
+**Typography breakpoints** (`sm:text-[...]`, `sm:leading-[...]`) may continue to use `sm:` because they do not change layout structure.
+
 ## Key Decisions Made
 
 1. **Badge component refactored** — removed section-based variants (`features`, `services`, `clients`, `testimonials`, `mission`). Now uses optional `fontSize` prop with `w-fit` sizing. Single source of truth.
-2. **Reusable Contact Us button** — extracted from inline usage in Mission, Services, Navbar, Hero, Features into `components/contact-us-button.tsx`
+2. **Reusable Contact Us button** — extracted from inline usage in Mission, Services, Navbar, Hero, Features into `components/ui/contact-us-button.tsx`
 3. **Reusable SliderNavigation** — extracted from Services section, used in Testimonials too. Exposes `onPrevious`/`onNext` callbacks. Buttons have `type="button"`.
 4. **Hero image rounded** — switched from `object-contain` to `rounded-full overflow-hidden` with `group-hover:scale-105` zoom effect
 5. **Feature cards** — fixed `w-[272px] h-[328px]` per Figma, dividers between cards (2px `#EDF0EE`), centered blur circles via `::before` pseudo-elements with `isolation: isolate` stacking context
@@ -184,10 +228,12 @@ public/
 7. **Single spacing system per stack** — Hero uses `gap-4` on the wrapper, no `mt-*` on children
 8. **Figma-exact values preserved** — arbitrary pixel values (`[15px]`, `[35px]`, etc.) are intentional per project convention
 9. **SVG attributes camelCased** — `fillRule` / `clipRule` in JSX
-10. **Phase 1 complete, Phase 2 pending** — all sections built to Figma fidelity. Responsive refactor (`flex-1`, `max-w-`, content-driven heights) planned for later.
+10. **Phase 1 complete** — all sections built to Figma fidelity. Responsive layout strategy established: horizontal layouts use `lg:` breakpoint, typography scales may use `sm:`. Tablet frame confirmed stacked.
 11. **Accessibility baseline** — `lang="en"` in html, `<title>` + `aria-label` on logo, `href="#"` on nav links, `:focus-visible` ring in globals.css, `type="button"` on slider arrows
 12. **Design token consistency** — blur circle uses `var(--color-fs-purple)` instead of hardcoded rgba
 13. **Divider standardization** — all divider lines (feature cards + Trusted By) use 2px thickness (`w-[2px]` / `border-t`) with `#EDF0EE` color
+14. **Cloudinary migration** — all image assets migrated from local `/public` to Cloudinary `futuresphere/` folder. Local images removed. `next.config.ts` updated to allow Cloudinary remote patterns.
+15. **Component organization** — components refactored into feature-based directories: `ui/`, `layout/`, `hero/`, `features/`, `clients/`, `mission/`, `services/`, `testimonials/`, `blogs/`, `newsletter/`, `metrics/`, `forms/`
 
 ## Commands
 
@@ -202,5 +248,4 @@ npm run build    # Production build (Turbopack)
 - All builds verified with `npm run build` — zero errors
 - `next/image` used throughout with `fill` + `object-cover` or `object-contain`
 - React 19.2.4 — no `import React` needed for JSX; use `<>...</>` shorthand or `<Fragment>` with key when needed
-- Client logo files renamed: `Vector.svg`→`Discord`, `Company logo.svg`→`Airwallex`, `Company logo (2).svg`→`Razorpay`, `Company logo (1).svg`→`Outreach`, `Company logo (3).svg`→`Dropbox`
-- Desktop-first workflow: fixed widths/heights are intentional during Phase 1; responsive refactor comes after Figma fidelity is complete
+- Desktop-first workflow: fixed widths/heights are intentional during Phase 1; responsive refactor (layout breakpoints) is complete per Figma tablet stacked strategy

@@ -1,3 +1,5 @@
+import { getCloudinaryUrl } from "@/lib/cloudinary";
+
 interface ClientLogoProps {
   src: string;
   alt: string;
@@ -6,10 +8,12 @@ interface ClientLogoProps {
 }
 
 export default function ClientLogo({ src, alt, width, height }: ClientLogoProps) {
+  const cloudinarySrc = src.startsWith("/") ? getCloudinaryUrl(src.replace(/^\/(images|icons)\//, "futuresphere/").replace(/\.\w+$/, "")) : src;
+
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src={src}
+      src={cloudinarySrc}
       alt={alt}
       width={width}
       height={height}
