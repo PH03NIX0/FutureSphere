@@ -1,10 +1,10 @@
 interface FeaturedCardProps {
-  src: string;
-  alt: string;
-  title: string;
-  description: string;
-  index: number;
-  className?: string;
+  readonly src: string;
+  readonly alt: string;
+  readonly title: string;
+  readonly description: string;
+  readonly index: number;
+  readonly className?: string;
 }
 
 export default function FeaturedCard({

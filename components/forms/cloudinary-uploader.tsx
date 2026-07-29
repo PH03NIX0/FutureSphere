@@ -12,9 +12,9 @@ interface UploadResult {
 }
 
 interface CloudinaryUploaderProps {
-  onUploadComplete: (result: UploadResult) => void;
-  accept?: string;
-  children?: React.ReactNode;
+  readonly onUploadComplete: (result: UploadResult) => void;
+  readonly accept?: string;
+  readonly children?: React.ReactNode;
 }
 
 export default function CloudinaryUploader({

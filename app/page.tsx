@@ -6,10 +6,12 @@ import MetricsBar from "@/components/metrics/metrics-bar";
 import Features from "@/components/features/features";
 import MissionSection from "@/components/mission/mission-section";
 import ClientSection from "@/components/clients/client-section";
-import ServicesSection from "@/components/services/services-section";
-import TestimonialsSection from "@/components/testimonials/testimonials-section";
 import BlogsSection from "@/components/blogs/blogs-section";
 import NewsletterSection from "@/components/newsletter/newsletter-section";
+import dynamic from "next/dynamic";
+
+const ServicesSection = dynamic(() => import("@/components/services/services-section"));
+const TestimonialsSection = dynamic(() => import("@/components/testimonials/testimonials-section"));
 
 export default function Home() {
   return (

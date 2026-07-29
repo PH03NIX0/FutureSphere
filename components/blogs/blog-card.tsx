@@ -2,11 +2,11 @@ import Image from "next/image";
 import Badge from "@/components/ui/badge";
 
 interface BlogCardProps {
-  category: string;
-  title: string;
-  excerpt: string;
-  imageSrc: string;
-  imageAlt: string;
+  readonly category: string;
+  readonly title: string;
+  readonly excerpt: string;
+  readonly imageSrc: string;
+  readonly imageAlt: string;
 }
 
 export default function BlogCard({ category, title, excerpt, imageSrc, imageAlt }: BlogCardProps) {

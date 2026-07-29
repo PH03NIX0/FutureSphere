@@ -1,4 +1,4 @@
-export default function DividerLabel({ children }: { children: React.ReactNode }) {
+export default function DividerLabel({ children }: { readonly children: React.ReactNode }) {
   return (
     <div className="flex items-center gap-[12px] sm:gap-[16px] w-full">
       <div className="flex-1 h-[2px] bg-fs-divider" />

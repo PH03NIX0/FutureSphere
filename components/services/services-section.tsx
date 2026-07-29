@@ -42,18 +42,18 @@ const services: ServiceSlide[] = [
 export default function ServicesSection() {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const slide = services[activeIndex];
+  const activeService = services[activeIndex];
 
-  const handlePrevious = () => {
+  const goToPreviousService = () => {
     setActiveIndex((prev) => (prev === 0 ? services.length - 1 : prev - 1));
   };
 
-  const handleNext = () => {
+  const goToNextService = () => {
     setActiveIndex((prev) => (prev + 1) % services.length);
   };
 
   return (
-<section className="flex justify-center mt-[80px] w-full px-4 sm:px-6">
+<section className="hidden lg:flex justify-center mt-[80px] w-full px-4 sm:px-6">
        <div
         className="border border-fs-border rounded-card sm:bg-white bg-transparent fs-container mx-auto p-6 sm:p-10"
       >
@@ -75,15 +75,15 @@ export default function ServicesSection() {
                    transition={{ duration: 0.3, ease: "easeInOut" }}
                    className="flex flex-col gap-[38px]"
                  >
-                   <Badge>{slide.badge}</Badge>
+                   <Badge>{activeService.badge}</Badge>
                    <h2
                      className="font-heading font-normal w-full text-[28px] sm:text-[32px] md:text-[36px] leading-[34px] sm:leading-[38px] md:leading-[44px] text-fs-purple"
                    >
-                     {slide.heading}
+                     {activeService.heading}
                    </h2>
  <p
                       className="font-body font-normal text-left text-p2 text-fs-grey">
-                     {slide.body}
+                     {activeService.body}
                    </p>
                  </motion.div>
                </AnimatePresence>
@@ -91,7 +91,7 @@ export default function ServicesSection() {
 
              {/* Fixed footer: navigation never moves */}
              <div className="flex justify-end mt-6">
-             <SliderNavigation onPrevious={handlePrevious} onNext={handleNext} />
+              <SliderNavigation onPrevious={goToPreviousService} onNext={goToNextService} />
            </div>
            </div>
 
@@ -109,8 +109,8 @@ export default function ServicesSection() {
                  className="absolute inset-0"
                >
                  <Image
-                   src={slide.image}
-                   alt={slide.imageAlt}
+                   src={activeService.image}
+                   alt={activeService.imageAlt}
                    fill
                    sizes="(max-width: 1058px) 100vw, 460px"
                    className="object-cover"

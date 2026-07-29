@@ -2,13 +2,13 @@ import Image from "next/image";
 import SliderNavigation from "@/components/testimonials/slider-navigation";
 
 interface TestimonialCardProps {
-  quote: string;
-  authorName: string;
-  authorTitle: string;
-  imageSrc: string;
-  imageAlt: string;
-  onPrevious?: () => void;
-  onNext?: () => void;
+  readonly quote: string;
+  readonly authorName: string;
+  readonly authorTitle: string;
+  readonly imageSrc: string;
+  readonly imageAlt: string;
+  readonly onPrevious?: () => void;
+  readonly onNext?: () => void;
 }
 
 export default function TestimonialCard({
@@ -22,9 +22,9 @@ export default function TestimonialCard({
 }: TestimonialCardProps) {
   return (
     <div className="border border-fs-border rounded-card bg-white w-full">
-      <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-[60px] w-full">
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-[60px] w-full">
         {/* Left: Portrait Image */}
-        <div className="relative rounded-card-image overflow-hidden flex-shrink-0 w-full h-[280px] lg:h-[420px] max-w-[460px]">
+        <div className="relative rounded-card-image overflow-hidden flex-shrink-0 w-full h-[280px] lg:h-[420px] max-w-none lg:max-w-[460px]">
           <Image
             src={imageSrc}
             alt={imageAlt}

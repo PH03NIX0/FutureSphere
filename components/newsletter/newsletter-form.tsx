@@ -4,73 +4,51 @@ import { useState } from "react";
 
 type FormState = "idle" | "loading" | "success" | "error";
 
-interface NewsletterFormProps {
-  variant?: "mobile" | "desktop";
-}
-
-export default function NewsletterForm({ variant = "desktop" }: NewsletterFormProps) {
+export default function NewsletterForm() {
   const [formState, setFormState] = useState<FormState>("idle");
+  let buttonLabel: string;
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  if (formState === "success") {
+    buttonLabel = "Subscribed!";
+  } else if (formState === "loading") {
+    buttonLabel = "Subscribing...";
+  } else {
+    buttonLabel = "Subscribe to newsletter";
+  }
+
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormState("loading");
 
-    // Future: replace with actual API call
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     setFormState("success");
     setTimeout(() => setFormState("idle"), 3000);
   };
 
-  if (variant === "mobile") {
-    return (
-      <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
-        <label htmlFor="newsletter-email-mobile" className="sr-only">
-          Email address
-        </label>
-        <input
-          id="newsletter-email-mobile"
-          type="email"
-          autoComplete="email"
-          inputMode="email"
-          required
-          placeholder="Enter your email"
-          className="w-full h-[48px] px-4 bg-white border border-fs-border-light rounded-[12px] font-heading font-normal text-[14px] leading-[17px] placeholder:text-fs-grey/70 outline-none"
-        />
-        <button
-          type="submit"
-          disabled={formState === "loading" || formState === "success"}
-          className="w-full h-[48px] bg-fs-purple rounded-[12px] shadow-[0_1px_1px_rgba(88,111,54,0.08)] font-heading font-bold text-[12px] leading-[15px] text-white whitespace-nowrap transition-transform duration-150 sm:hover:-translate-y-[1px] disabled:opacity-70"
-        >
-          {formState === "success" ? "Subscribed!" : formState === "loading" ? "Subscribing..." : "Subscribe to newsletter"}
-        </button>
-      </form>
-    );
-  }
-
   return (
     <form
-      className="flex w-full max-w-[470px] h-[48px] items-center bg-white border border-fs-border-light rounded-[12px] p-[3px] shadow-[0_2px_12px_rgba(29,32,36,0.04)] transition-shadow duration-200"
+      className="flex w-full flex-col gap-3 sm:max-w-[470px] sm:flex-row sm:gap-0 sm:items-center sm:h-[48px] sm:bg-white sm:border sm:border-fs-border-light sm:rounded-[12px] sm:p-[3px] sm:shadow-[0_2px_12px_rgba(29,32,36,0.04)] sm:transition-shadow sm:duration-200 sm:focus-within:ring-2 sm:focus-within:ring-[#7F56D9] sm:focus-within:ring-offset-0"
       onSubmit={handleSubmit}
     >
-      <label htmlFor="newsletter-email-desktop" className="sr-only">
+      <label htmlFor="newsletter-email" className="sr-only">
         Email address
       </label>
       <input
-        id="newsletter-email-desktop"
+        id="newsletter-email"
         type="email"
         autoComplete="email"
         inputMode="email"
         required
         placeholder="Enter your email"
-        className="flex-1 h-full px-4 bg-transparent border-none outline-none font-heading font-normal text-[14px] leading-[17px] placeholder:text-fs-grey/70"
+        className="newsletter-input w-full h-[48px] px-4 bg-white border border-fs-border-light rounded-[12px] outline-none focus:ring-2 focus:ring-[#7F56D9] focus:border-transparent sm:flex-1 sm:h-full sm:bg-transparent sm:border-none sm:focus:ring-0 font-heading font-normal text-[14px] leading-[17px] placeholder:text-fs-grey/70"
       />
       <button
         type="submit"
         disabled={formState === "loading" || formState === "success"}
-        className="h-full px-5 bg-fs-purple rounded-[10px] shadow-[0_1px_1px_rgba(88,111,54,0.08)] font-heading font-bold text-[12px] leading-[15px] text-white whitespace-nowrap transition-transform duration-150 sm:hover:-translate-y-[1px] disabled:opacity-70"
+        className="newsletter-button h-[48px] w-[80%] mx-auto bg-fs-purple rounded-[12px] shadow-[0_1px_1px_rgba(88,111,54,0.08)] sm:h-full sm:px-5 sm:w-auto sm:mx-0 sm:rounded-[10px] font-heading font-bold text-[12px] leading-[15px] text-white whitespace-nowrap transition-transform duration-150 sm:hover:-translate-y-[1px] disabled:opacity-70"
       >
-        {formState === "success" ? "Subscribed!" : formState === "loading" ? "Subscribing..." : "Subscribe to newsletter"}
+        {buttonLabel}
       </button>
     </form>
   );

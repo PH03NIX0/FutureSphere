@@ -1,34 +1,27 @@
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 import NewsletterForm from "@/components/newsletter/newsletter-form";
 
 export default function NewsletterSection() {
   return (
     <section className="fs-container mx-auto mt-[80px] px-4 sm:px-6">
-      <div className="newsletter-card relative rounded-newsletter border border-fs-border overflow-hidden">
+      <div
+        className="newsletter-card relative rounded-newsletter border border-fs-border overflow-hidden"
+        style={
+          {
+            "--newsletter-bg": `url(${getCloudinaryUrl("futuresphere/newsletter-bg-rect", { fetch_format: "auto", quality: "auto" })})`,
+          } as React.CSSProperties
+        }
+      >
         <div className="relative flex flex-col items-center gap-8 sm:gap-[50px] px-4 sm:px-6 py-14 sm:py-16">
           {/* Mail Icon with frame */}
           <div className="flex items-center justify-center w-[56px] h-[56px] rounded-[14px]">
-            <svg
-              width="58"
-              height="56"
-              viewBox="0 0 58 56"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-[48px] h-[48px] sm:w-[72px] sm:h-[72px]"
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://res.cloudinary.com/wfqwup4o/image/upload/v1783948712/futuresphere/newsletter-icon-frame.svg"
+              alt=""
               aria-hidden="true"
-            >
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M52.8331 27.0722V39.667C52.8331 41.3695 52.1412 42.9132 51.0269 44.0275C49.9126 45.1418 48.3689 45.8337 46.6665 45.8337H9.33316C7.6307 45.8337 6.08698 45.1418 4.97267 44.0275C3.85837 42.9132 3.1665 41.3695 3.1665 39.667V16.3337C3.1665 14.6238 3.86444 13.074 4.9873 11.9586C6.10047 10.8529 7.63818 10.167 9.33316 10.167H35.928C35.5474 11.1168 35.2756 12.122 35.1281 13.167H9.33316C9.06638 13.167 8.80752 13.1999 8.56028 13.2618L27.4462 30.168L27.4475 30.1692C27.7627 30.4481 28.2364 30.4483 28.5517 30.1695L28.5534 30.168L37.2779 22.3538C37.8469 23.1818 38.5093 23.9406 39.2499 24.615L37.1477 26.4978L49.7319 40.4657C49.798 40.2107 49.8331 40.2083 49.8331 39.667V27.8721C50.8782 27.7246 51.8833 27.4528 52.8331 27.0722ZM34.913 28.4994L47.6788 42.6688C47.3611 42.7759 47.0208 42.8337 46.6665 42.8337H9.33316C9.01578 42.8337 8.70962 42.7873 8.42086 42.7007L21.8957 29.2258L25.4491 32.4067L25.4531 32.4102C26.9055 33.7012 29.0941 33.7012 30.5465 32.4102L30.5507 32.4065L34.913 28.4994ZM19.6571 27.2218L6.29954 40.5793C6.21293 40.2906 6.1665 39.9844 6.1665 39.667V16.3337C6.1665 15.9713 6.22704 15.6235 6.33882 15.2996L19.6571 27.2218Z"
-                fill="white"
-              />
-              <path
-                d="M48 23.5C52.6944 23.5 56.5 19.6944 56.5 15C56.5 10.3056 52.6944 6.5 48 6.5C43.3056 6.5 39.5 10.3056 39.5 15C39.5 19.6944 43.3056 23.5 48 23.5Z"
-                fill="#7F56D9"
-                stroke="white"
-                strokeWidth="3"
-              />
-            </svg>
+              className="w-[48px] h-[48px] sm:w-[72px] sm:h-[72px]"
+            />
           </div>
 
           {/* Text Content */}
@@ -45,14 +38,9 @@ export default function NewsletterSection() {
             </p>
           </div>
 
-          {/* Mobile Form */}
-          <div className="sm:hidden w-full max-w-[284px]">
-            <NewsletterForm variant="mobile" />
-          </div>
-
-          {/* Desktop Form */}
-          <div className="hidden sm:block w-full max-w-[470px]">
-            <NewsletterForm variant="desktop" />
+          {/* Form */}
+          <div className="w-full max-w-[284px] sm:max-w-[470px]">
+            <NewsletterForm />
           </div>
         </div>
       </div>

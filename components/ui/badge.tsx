@@ -1,7 +1,7 @@
 interface BadgeProps {
-  children: React.ReactNode;
-  fontSize?: string;
-  variant?: "default" | "solid";
+  readonly children: React.ReactNode;
+  readonly fontSize?: string;
+  readonly variant?: "default" | "solid";
 }
 
 export default function Badge({ children, fontSize = "14px", variant = "default" }: BadgeProps) {

@@ -89,11 +89,6 @@
   outline-offset: 2px;
 }
 
-.newsletter-input:focus-visible {
-  outline: none;
-  box-shadow: none;
-}
-
 .newsletter-button:focus-visible {
   outline: none;
 }
@@ -102,7 +97,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url('https://res.cloudinary.com/wfqwup4o/image/upload/f_auto,q_auto/futuresphere/newsletter-bg-rect');
+  background-image: var(--newsletter-bg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -143,7 +138,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url('https://res.cloudinary.com/wfqwup4o/image/upload/f_auto,q_auto/futuresphere/Rectangle 9383');
+  background-image: var(--footer-bg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

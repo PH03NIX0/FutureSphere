@@ -61,15 +61,15 @@ const row2 = trustedBrands.slice(3, 5);
 export default function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const handlePrevious = () => {
+  const goToPreviousTestimonial = () => {
     setActiveIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
   };
 
-  const handleNext = () => {
+  const goToNextTestimonial = () => {
     setActiveIndex((prev) => (prev + 1) % testimonials.length);
   };
 
-  const slide = testimonials[activeIndex];
+  const activeTestimonial = testimonials[activeIndex];
 
   return (
     <section className="flex flex-col items-center gap-[50px] w-full px-4 sm:px-6 mt-[80px]">
@@ -103,11 +103,11 @@ export default function TestimonialsSection() {
                   className="absolute inset-0"
                 >
                   <Image
-                    src={slide.imageSrc}
-                    alt={slide.imageAlt}
+                    src={activeTestimonial.imageSrc}
+                    alt={activeTestimonial.imageAlt}
                     fill
                     sizes="(max-width: 1058px) 100vw, 460px"
-                    className="object-contain"
+                    className="object-cover"
                   />
                 </motion.div>
               </AnimatePresence>
@@ -128,15 +128,15 @@ export default function TestimonialsSection() {
                   >
  <p
                      className="font-body font-normal text-left w-full text-p2 text-fs-grey">
-                    {slide.quote}
+                    {activeTestimonial.quote}
                   </p>
 
                     <div className="flex flex-col gap-[4px]">
                       <span className="font-heading text-[20px] sm:text-[24px] leading-[24px] sm:leading-[29px] font-normal text-fs-dark">
-                        {slide.authorName}
+                        {activeTestimonial.authorName}
                       </span>
                       <span className="font-heading text-[16px] sm:text-[20px] leading-[22px] sm:leading-[24px] font-normal text-fs-dark">
-                        {slide.authorTitle}
+                        {activeTestimonial.authorTitle}
                       </span>
                     </div>
                   </motion.div>
@@ -145,7 +145,7 @@ export default function TestimonialsSection() {
 
               {/* Fixed navigation - never animated */}
               <div className="flex justify-end mt-6">
-                <SliderNavigation onPrevious={handlePrevious} onNext={handleNext} />
+                <SliderNavigation onPrevious={goToPreviousTestimonial} onNext={goToNextTestimonial} />
               </div>
             </div>
           </div>

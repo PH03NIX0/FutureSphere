@@ -25,10 +25,10 @@ function AnimatedCounter({
   delay,
   animate,
 }: {
-  targetValue: number;
-  suffix?: string;
-  delay: number;
-  animate: boolean;
+  readonly targetValue: number;
+  readonly suffix?: string;
+  readonly delay: number;
+  readonly animate: boolean;
 }) {
   const [displayValue, setDisplayValue] = useState(0);
   const [scale, setScale] = useState(1);
@@ -120,7 +120,7 @@ return (
        <div className="fs-container mx-auto">
         <div
           ref={sectionRef}
-          className="w-full bg-transparent sm:bg-white border border-fs-border rounded-2xl px-4 sm:px-12 py-4 flex flex-col sm:flex-row items-center"
+          className="w-full bg-transparent sm:bg-white border border-fs-border rounded-2xl px-4 sm:px-12 py-4 flex flex-col lg:flex-row items-center"
         >
           {metrics.map((metric, i) => (
             <Fragment key={i}>
@@ -138,7 +138,7 @@ return (
                 </span>
               </div>
               {i < metrics.length - 1 && (
-                <div className="w-full h-px sm:w-px sm:h-[80px] bg-fs-divider my-2 sm:my-0" />
+                <div className="hidden lg:block w-px h-[80px] bg-fs-divider" />
               )}
             </Fragment>
           ))}

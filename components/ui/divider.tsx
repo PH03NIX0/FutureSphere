@@ -1,5 +1,5 @@
 interface DividerProps {
-  className?: string;
+  readonly className?: string;
 }
 
 export default function Divider({ className = "" }: DividerProps) {

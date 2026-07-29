@@ -1,6 +1,6 @@
 interface SliderNavigationProps {
-  onPrevious?: () => void;
-  onNext?: () => void;
+  readonly onPrevious?: () => void;
+  readonly onNext?: () => void;
 }
 
 export default function SliderNavigation({ onPrevious, onNext }: SliderNavigationProps) {

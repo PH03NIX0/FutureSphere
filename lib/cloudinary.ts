@@ -1,7 +1,7 @@
 export function getCloudinaryUrl(
   publicId: string,
   transformations?: Record<string, string | number | boolean>
-) {
+): string {
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
 
   if (!cloudName) {
@@ -33,5 +33,6 @@ export function getCloudinaryUrl(
     url += `/${transforms}`;
   }
 
-  return `${url}/${publicId}`;
+  const encodedPublicId = publicId.split("/").map(encodeURIComponent).join("/");
+  return `${url}/${encodedPublicId}`;
 }

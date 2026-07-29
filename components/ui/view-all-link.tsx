@@ -1,5 +1,5 @@
 interface ViewAllLinkProps {
-  href?: string;
+  readonly href?: string;
 }
 
 export default function ViewAllLink({ href = "#" }: ViewAllLinkProps) {

@@ -2,27 +2,30 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import ContactUsButton from "@/components/ui/contact-us-button";
 
 const links = [
-  { href: "#", label: "About" },
-  { href: "#", label: "Careers" },
-  { href: "#", label: "Blogs" },
-  { href: "#", label: "Pricing" },
+  { href: "/about", label: "About" },
+  { href: "/careers", label: "Careers" },
+  { href: "/blogs", label: "Blogs" },
+  { href: "/pricing", label: "Pricing" },
   { href: "#", label: "Contact Us" },
 ];
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
-  const openMenu = useCallback(() => setIsOpen(true), []);
-  const closeMenu = useCallback(() => setIsOpen(false), []);
+  const openMobileMenu = useCallback(() => setIsOpen(true), []);
+  const closeMobileMenu = useCallback(() => setIsOpen(false), []);
 
   useEffect(() => {
     if (!isOpen) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeMenu();
+      if (e.key === "Escape") closeMobileMenu();
     };
 
     document.addEventListener("keydown", handleKeyDown);
@@ -32,14 +35,14 @@ export default function MobileMenu() {
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
     };
-  }, [isOpen, closeMenu]);
+  }, [isOpen, closeMobileMenu]);
 
   return (
     <>
       {/* Hamburger button */}
       <button
         type="button"
-        onClick={openMenu}
+        onClick={openMobileMenu}
         className="flex flex-col items-center justify-center w-10 h-10 gap-[6px] sm:hidden"
         aria-label="Open menu"
         aria-expanded={isOpen}
@@ -62,7 +65,7 @@ export default function MobileMenu() {
             {/* Backdrop */}
             <motion.div
               className="absolute inset-0 bg-black/50"
-              onClick={closeMenu}
+              onClick={closeMobileMenu}
             />
 
             {/* Panel */}
@@ -76,7 +79,7 @@ export default function MobileMenu() {
               {/* Close button */}
               <button
                 type="button"
-                onClick={closeMenu}
+                onClick={closeMobileMenu}
                 className="self-end mb-8 w-10 h-10 flex items-center justify-center text-white"
                 aria-label="Close menu"
               >
@@ -87,16 +90,34 @@ export default function MobileMenu() {
 
               {/* Nav links */}
               <nav className="flex flex-col gap-6">
-                {links.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    className="text-white text-lg font-body sm:hover:text-white/80 transition-colors duration-150"
-                    onClick={closeMenu}
-                  >
-                    {link.label}
-                  </a>
-                ))}
+                {links.map((link) => {
+                  const isActive = pathname === link.href;
+                  const className = `text-lg font-body transition-colors duration-150 ${isActive ? "text-white font-medium" : "text-white sm:hover:text-white/80"}`;
+                  if (link.href === "#") {
+                    return (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        className={className}
+                        aria-current={isActive ? "page" : undefined}
+                        onClick={closeMobileMenu}
+                      >
+                        {link.label}
+                      </a>
+                    );
+                  }
+                  return (
+                    <Link
+                      key={link.label}
+                      href={link.href}
+                      className={className}
+                      aria-current={isActive ? "page" : undefined}
+                      onClick={closeMobileMenu}
+                    >
+                      {link.label}
+                    </Link>
+                  );
+                })}
               </nav>
 
               {/* CTA */}
