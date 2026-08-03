@@ -1,4 +1,5 @@
 import ContactUsButton from "@/components/ui/contact-us-button";
+import SignUpButton from "@/components/ui/sign-up-button";
 
 export default function Hero() {
   return (
@@ -14,9 +15,7 @@ export default function Hero() {
         Empowering Innovation for a Digital Tomorrow
       </p>
       <div className="flex flex-row items-center justify-center gap-[10px] sm:gap-[15px]">
-         <button className="bg-fs-dark text-white font-body px-[30px] py-[8px] rounded-button h-[35px] flex items-center justify-center transition-transform duration-150 sm:hover:-translate-y-[1px] active:translate-y-0">
-           Signup
-         </button>
+         <SignUpButton>Signup</SignUpButton>
          <ContactUsButton />
       </div>
     </section>

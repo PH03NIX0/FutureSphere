@@ -11,6 +11,8 @@ export async function POST(request: Request) {
   try {
     const formData = await request.formData();
     const file = formData.get("file") as File | null;
+    const folder = (formData.get("folder") as string | null) ?? "redo";
+    const publicId = formData.get("public_id") as string | null;
 
     if (!file) {
       return NextResponse.json(
@@ -23,9 +25,20 @@ export async function POST(request: Request) {
     const buffer = Buffer.from(bytes);
     const dataUri = `data:${file.type};base64,${buffer.toString("base64")}`;
 
-    const result = await cloudinary.uploader.upload(dataUri, {
-      folder: "redo",
-    });
+    const uploadOptions: Record<string, unknown> = {};
+
+    if (publicId && publicId.includes("/")) {
+      uploadOptions.public_id = publicId;
+      uploadOptions.overwrite = true;
+    } else {
+      uploadOptions.folder = folder;
+      if (publicId) {
+        uploadOptions.public_id = publicId;
+        uploadOptions.overwrite = true;
+      }
+    }
+
+    const result = await cloudinary.uploader.upload(dataUri, uploadOptions);
 
     return NextResponse.json({
       secure_url: result.secure_url,

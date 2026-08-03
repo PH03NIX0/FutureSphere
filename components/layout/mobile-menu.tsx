@@ -5,12 +5,10 @@ import { motion, AnimatePresence } from "motion/react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import ContactUsButton from "@/components/ui/contact-us-button";
+import { mainNavLinks } from "@/lib/navigation";
 
-const links = [
-  { href: "/about", label: "About" },
-  { href: "/careers", label: "Careers" },
-  { href: "/blogs", label: "Blogs" },
-  { href: "/pricing", label: "Pricing" },
+const mobileLinks = [
+  ...mainNavLinks,
   { href: "#", label: "Contact Us" },
 ];
 
@@ -88,9 +86,9 @@ export default function MobileMenu() {
                 </svg>
               </button>
 
-              {/* Nav links */}
-              <nav className="flex flex-col gap-6">
-                {links.map((link) => {
+               {/* Nav links */}
+               <nav className="flex flex-col gap-6">
+                 {mobileLinks.map((link) => {
                   const isActive = pathname === link.href;
                   const className = `text-lg font-body transition-colors duration-150 ${isActive ? "text-white font-medium" : "text-white sm:hover:text-white/80"}`;
                   if (link.href === "#") {

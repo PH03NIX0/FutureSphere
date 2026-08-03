@@ -5,13 +5,7 @@ import ContactUsButton from "@/components/ui/contact-us-button";
 import MobileMenu from "@/components/layout/mobile-menu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-const navLinks = [
-  { href: "/about", label: "About" },
-  { href: "/careers", label: "Careers" },
-  { href: "/blogs", label: "Blogs" },
-  { href: "/pricing", label: "Pricing" },
-];
+import { mainNavLinks } from "@/lib/navigation";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -22,7 +16,7 @@ export default function Navbar() {
         <div className="w-full flex items-center justify-between">
 
           {/* Logo */}
-          <div className="flex items-center gap-[5px] h-[24px] text-white font-heading">
+          <Link href="/" className="flex items-center gap-[5px] h-[24px] text-white font-heading" aria-label="FutureSphere — Home">
             <img
               src={getCloudinaryUrl("futuresphere/logos/future-sphere-logo.svg")}
               alt=""
@@ -30,11 +24,11 @@ export default function Navbar() {
               className="h-[24px] w-auto"
             />
             FutureSphere
-          </div>
+          </Link>
 
           {/* Desktop Links */}
           <div className="hidden sm:flex gap-4 text-sm text-white font-body">
-            {navLinks.map((link) => {
+            {mainNavLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
