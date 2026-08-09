@@ -17,7 +17,7 @@ export default function AboutHero() {
           <ContactUsButton />
         </div>
       </div>
-      <div className="relative w-full h-[701px] rounded-card overflow-hidden group">
+      <div className="relative w-full h-[280px] sm:h-[420px] lg:h-[701px] rounded-card overflow-hidden group">
         <Image
           src="https://res.cloudinary.com/wfqwup4o/image/upload/v1785420077/about_hero_image_tgrh77.png"
           alt="About us hero visual"

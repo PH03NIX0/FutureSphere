@@ -3,14 +3,13 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
 import ContactUsButton from "@/components/ui/contact-us-button";
-import { mainNavLinks } from "@/lib/navigation";
+import { implementedNavHrefs, mainNavLinks } from "@/lib/navigation";
 
 const mobileLinks = [
   ...mainNavLinks,
-  { href: "#", label: "Contact Us" },
-];
+  { href: "/contact", label: "Contact Us" },
+] as const;
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,7 +36,6 @@ export default function MobileMenu() {
 
   return (
     <>
-      {/* Hamburger button */}
       <button
         type="button"
         onClick={openMobileMenu}
@@ -50,7 +48,6 @@ export default function MobileMenu() {
         <span className="block w-6 h-[2px] bg-white rounded-full transition-transform duration-200" />
       </button>
 
-      {/* Overlay */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -60,13 +57,8 @@ export default function MobileMenu() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            {/* Backdrop */}
-            <motion.div
-              className="absolute inset-0 bg-black/50"
-              onClick={closeMobileMenu}
-            />
+            <motion.div className="absolute inset-0 bg-black/50" onClick={closeMobileMenu} />
 
-            {/* Panel */}
             <motion.div
               className="absolute right-0 top-0 h-full w-[280px] bg-fs-dark flex flex-col p-6"
               initial={{ x: "100%" }}
@@ -74,7 +66,6 @@ export default function MobileMenu() {
               exit={{ x: "100%" }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              {/* Close button */}
               <button
                 type="button"
                 onClick={closeMobileMenu}
@@ -86,26 +77,26 @@ export default function MobileMenu() {
                 </svg>
               </button>
 
-               {/* Nav links */}
-               <nav className="flex flex-col gap-6">
-                 {mobileLinks.map((link) => {
+              <nav className="flex flex-col gap-6">
+                {mobileLinks.map((link) => {
                   const isActive = pathname === link.href;
                   const className = `text-lg font-body transition-colors duration-150 ${isActive ? "text-white font-medium" : "text-white sm:hover:text-white/80"}`;
-                  if (link.href === "#") {
+
+                  if (!implementedNavHrefs.has(link.href)) {
                     return (
-                      <a
+                      <button
                         key={link.label}
-                        href={link.href}
-                        className={className}
-                        aria-current={isActive ? "page" : undefined}
+                        type="button"
+                        className={`${className} text-left`}
                         onClick={closeMobileMenu}
                       >
                         {link.label}
-                      </a>
+                      </button>
                     );
                   }
+
                   return (
-                    <Link
+                    <a
                       key={link.label}
                       href={link.href}
                       className={className}
@@ -113,12 +104,11 @@ export default function MobileMenu() {
                       onClick={closeMobileMenu}
                     >
                       {link.label}
-                    </Link>
+                    </a>
                   );
                 })}
               </nav>
 
-              {/* CTA */}
               <div className="mt-auto">
                 <ContactUsButton />
               </div>

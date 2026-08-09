@@ -4,3 +4,12 @@ export const mainNavLinks = [
   { href: "/blogs", label: "Blogs" },
   { href: "/pricing", label: "Pricing" },
 ] as const;
+
+/** Routes that currently exist as App Router pages. */
+export const implementedNavHrefs = new Set<string>([
+  "/about",
+  "/careers",
+  "/blogs",
+  "/pricing",
+  "/contact",
+]);

@@ -45,9 +45,8 @@ export default function Features() {
 
         <div className="flex flex-col gap-[30px]">
           <div className="border border-fs-border rounded-card sm:bg-white bg-transparent w-full px-6 sm:px-10 py-8 sm:py-12">
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-[30px] sm:gap-[60px] w-full max-w-[1018px] mx-auto">
-              {/* Mobile: all three cards, no dividers (dividers hidden below sm) */}
-              <div className="block sm:hidden w-full">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-[30px] sm:gap-[40px] lg:gap-[60px] w-full max-w-[1018px] mx-auto">
+              <div className="flex flex-col lg:hidden w-full gap-6">
                 {features.map((feature) => (
                   <FeaturedCard
                     key={feature.title}
@@ -60,26 +59,6 @@ export default function Features() {
                 ))}
               </div>
 
-              {/* Tablet: first two cards with a single divider */}
-              <div className="hidden sm:flex lg:hidden items-center justify-center gap-[60px] w-full">
-                <FeaturedCard
-                  src={features[0].src}
-                  alt={features[0].title}
-                  title={features[0].title}
-                  description={features[0].description}
-                  index={1}
-                />
-                <Divider />
-                <FeaturedCard
-                  src={features[1].src}
-                  alt={features[1].title}
-                  title={features[1].title}
-                  description={features[1].description}
-                  index={2}
-                />
-              </div>
-
-              {/* Desktop: all three cards with both dividers */}
               <div className="hidden lg:flex items-center justify-center gap-[60px] w-full">
                 {features.map((feature, i) => (
                   <Fragment key={feature.title}>

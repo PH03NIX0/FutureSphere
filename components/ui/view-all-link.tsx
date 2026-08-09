@@ -2,7 +2,7 @@ interface ViewAllLinkProps {
   readonly href?: string;
 }
 
-export default function ViewAllLink({ href = "#" }: ViewAllLinkProps) {
+export default function ViewAllLink({ href = "/blogs" }: ViewAllLinkProps) {
   return (
     <a href={href} className="group flex items-center gap-[8px]">
       <span className="text-fs-dark font-body text-[16px] font-normal">View All</span>

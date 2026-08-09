@@ -88,6 +88,7 @@ export default function TeamCarousel({ members, activeIndex, onActiveIndexChange
                 alt={member.name}
                 fill
                 sizes={`${pos.size}px`}
+                unoptimized
                 className="object-cover"
               />
             </button>

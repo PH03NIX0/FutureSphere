@@ -1,15 +1,14 @@
+import { mainNavLinks } from "@/lib/navigation";
+
 const links = [
-  { href: "/about", label: "About" },
-  { href: "#", label: "Careers" },
-  { href: "#", label: "Blogs" },
-  { href: "#", label: "Pricing" },
-  { href: "#", label: "Contact Us" },
-];
+  ...mainNavLinks,
+  { href: "/contact", label: "Contact Us" },
+] as const;
 
 export default function FooterNav() {
   return (
     <nav aria-label="Footer navigation">
-      <div className="flex items-center gap-6">
+      <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
         {links.map((link) => (
           <a
             key={link.label}

@@ -8,37 +8,37 @@ const values = [
   {
     title: "Integrity",
     description:
-      "We uphold the highest ethical standards in every interaction, building trust through transparency and honesty.",
+      "Upholding honesty and ethical conduct in everything we do, building trust with our stakeholders.",
     iconSrc: getCloudinaryUrl("futuresphere/icons/value-integrity", { fetch_format: "svg", quality: "auto" }),
   },
   {
     title: "Innovation",
     description:
-      "We push boundaries and embrace new ideas to create transformative solutions that shape the future.",
+      "Embracing a culture of creativity and continuous improvement to drive groundbreaking solutions.",
     iconSrc: getCloudinaryUrl("futuresphere/icons/value-innovation", { fetch_format: "svg", quality: "auto" }),
-  },
-  {
-    title: "Excellence",
-    description:
-      "We are committed to delivering outstanding quality in everything we do, exceeding expectations at every turn.",
-    iconSrc: getCloudinaryUrl("futuresphere/icons/value-excellence", { fetch_format: "svg", quality: "auto" }),
   },
   {
     title: "Collaboration",
     description:
-      "We believe the best results come from working together, fostering an environment of shared knowledge and teamwork.",
+      "Fostering a collaborative environment that encourages teamwork, diversity, and shared success.",
     iconSrc: getCloudinaryUrl("futuresphere/icons/value-collaboration", { fetch_format: "svg", quality: "auto" }),
   },
   {
-    title: "Customer Focus",
+    title: "Customer-centric",
     description:
-      "We put our customers at the heart of every decision, ensuring their success drives our own.",
+      "Putting our customers at the heart of everything we do, delivering exceptional experiences and exceeding their expectations.",
     iconSrc: getCloudinaryUrl("futuresphere/icons/value-customer-focus", { fetch_format: "svg", quality: "auto" }),
   },
   {
-    title: "Accountability",
+    title: "Sustainability",
     description:
-      "We take ownership of our actions and outcomes, learning and growing from every experience.",
+      "Operating with a focus on environmental and social responsibility, striving for a more sustainable future.",
+    iconSrc: "/icons/value-sustainability.svg",
+  },
+  {
+    title: "Excellence",
+    description:
+      "Pursuing excellence in all aspects of our work, setting high standards and striving for continuous growth and improvement.",
     iconSrc: getCloudinaryUrl("futuresphere/icons/value-excellence", { fetch_format: "svg", quality: "auto" }),
   },
 ];
@@ -60,16 +60,14 @@ export default function ValuesSection() {
             </p>
           </div>
 
-          <div className="w-full max-w-[1168px] rounded-card border border-fs-border bg-white px-[65px] py-[47px]">
+          <div className="w-full max-w-[1168px] rounded-blog border border-fs-border bg-white px-5 py-6 sm:px-10 sm:py-10 lg:px-[65px] lg:py-[47px]">
             <div className="flex flex-col gap-[81px]">
-              {/* Mobile: single column */}
               <div className="flex flex-col sm:hidden">
                 {values.map((value) => (
                   <ValueCard key={value.title} title={value.title} description={value.description} iconSrc={value.iconSrc} />
                 ))}
               </div>
 
-              {/* Tablet: 2 columns */}
               <div className="hidden sm:flex lg:hidden flex-col gap-[81px]">
                 {[values.slice(0, 2), values.slice(2, 4), values.slice(4, 6)].map((row) => (
                   <div key={row[0].title} className="flex items-center justify-center gap-[55px]">
@@ -83,7 +81,6 @@ export default function ValuesSection() {
                 ))}
               </div>
 
-              {/* Desktop: 3 columns */}
               <div className="hidden lg:flex flex-col gap-[81px]">
                 {[values.slice(0, 3), values.slice(3, 6)].map((row) => (
                   <div key={row[0].title} className="flex items-center justify-center gap-[55px]">

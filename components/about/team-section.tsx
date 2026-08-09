@@ -55,7 +55,7 @@ const team: TeamMember[] = [
     id: "4",
     name: "John Wick",
     role: "CEO FutureSphere",
-    bio: "During a train ride, a moment of inspiration struck Vasily. He wished for a convenient study tool on his phone to help him prepare for the LSAT. However, such an app didn&apos;t exist at the time. Determined to overcome this hurdle, Vasily took matters into his own hands and developed one of the earliest and most comprehensive LSAT apps on the market. The app quickly gained popularity, becoming the #1 paid LSAT app for over a year.",
+    bio: "During a train ride, a moment of inspiration struck Vasily. He wished for a convenient study tool on his phone to help him prepare for the LSAT. However, such an app didn't exist at the time. Determined to overcome this hurdle, Vasily took matters into his own hands and developed one of the earliest and most comprehensive LSAT apps on the market. The app quickly gained popularity, becoming the #1 paid LSAT app for over a year.",
     avatarSrc: "Member_Image_3_euaglk",
     socials: [
       { href: "#", label: "Twitter", iconSrc: "futuresphere/social/twitter-purple.svg" },
@@ -122,7 +122,7 @@ export default function TeamSection() {
           </div>
 
           {/* White card with member details */}
-          <div className="w-full max-w-[842px] rounded-card border border-fs-border bg-white px-[65px] py-[47px]">
+          <div className="w-full max-w-[842px] rounded-card border border-fs-border bg-white px-5 py-6 sm:px-10 sm:py-10 lg:px-[65px] lg:py-[47px]">
             <TeamMemberCard
               bio={activeMember.bio}
               name={activeMember.name}

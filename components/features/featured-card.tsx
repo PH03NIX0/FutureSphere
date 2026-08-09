@@ -27,7 +27,7 @@ export default function FeaturedCard({
       <h3 className="font-heading text-p1 text-fs-dark font-semibold">
         {title}
       </h3>
-      <p className="font-body text-[14px] sm:text-[16px] font-normal leading-[20px] sm:leading-[22px] tracking-[-0.75px] text-center text-fs-grey">
+      <p className="font-body text-p2 text-fs-grey max-w-[231px]">
         {description}
       </p>
     </div>

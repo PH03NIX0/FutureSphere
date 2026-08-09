@@ -53,12 +53,12 @@ export default function ServicesSection() {
   };
 
   return (
-<section className="hidden lg:flex justify-center mt-[80px] w-full px-4 sm:px-6">
+<section className="flex justify-center mt-[80px] w-full px-4 sm:px-6">
        <div
         className="border border-fs-border rounded-card sm:bg-white bg-transparent fs-container mx-auto p-6 sm:p-10"
       >
  <div
-   className="flex flex-col md:flex-row items-center justify-between gap-[40px] md:gap-[67px] mx-auto"
+   className="flex flex-col lg:flex-row items-center justify-between gap-[40px] lg:gap-[67px] mx-auto"
  >
  {/* Left Column */}
            <div

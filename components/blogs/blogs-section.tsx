@@ -51,7 +51,7 @@ export default function BlogsSection() {
       <div className="flex justify-center">
         <div className="flex items-center gap-[24px]">
           <ContactUsButton />
-          <ViewAllLink />
+          <ViewAllLink href="/blogs" />
         </div>
       </div>
     </section>
