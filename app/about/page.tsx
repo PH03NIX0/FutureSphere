@@ -17,7 +17,7 @@ export const metadata = {
 
 export default function About() {
   return (
-    <main className="bg-fs-background flex flex-col items-center gap-6 sm:gap-8 w-full">
+    <main className="bg-fs-background flex flex-col items-center w-full overflow-x-hidden">
       <Navbar />
       <AboutHero />
       <StorySection />

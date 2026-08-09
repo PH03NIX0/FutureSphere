@@ -2,9 +2,9 @@ import StoryCard from "./story-card";
 
 export default function StorySection() {
   return (
-    <section className="flex justify-center mt-[80px] w-full px-4 sm:px-6">
+    <section className="flex justify-center mt-12 sm:mt-16 lg:mt-[80px] w-full px-4 sm:px-6">
       <div className="fs-container mx-auto">
-        <div className="border border-fs-border rounded-card bg-white p-6 sm:p-10 flex flex-col gap-[50px]">
+        <div className="border border-fs-border rounded-[16px] sm:rounded-card bg-white p-5 sm:p-8 lg:p-10 flex flex-col gap-8 sm:gap-10 lg:gap-[50px]">
           <StoryCard
             badge="Our Story"
             description={[

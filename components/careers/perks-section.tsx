@@ -39,7 +39,7 @@ export default function PerksSection() {
     <section className="flex w-full justify-center px-4 sm:px-6 mt-10 sm:mt-16">
       <div className="fs-container mx-auto flex w-full flex-col gap-[30px]">
         <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:gap-10 lg:justify-center">
-          <div className="relative h-[280px] w-full max-w-[561px] overflow-hidden rounded-[32px] sm:h-[406px]">
+          <div className="relative h-[220px] w-full max-w-[561px] overflow-hidden rounded-[20px] sm:rounded-[32px] sm:h-[406px]">
             <Image
               src="/careers/perks-image.png"
               alt="Team member working remotely"
@@ -49,12 +49,12 @@ export default function PerksSection() {
             />
           </div>
 
-          <div className="flex w-full max-w-[480px] flex-col items-start gap-5">
+          <div className="flex w-full max-w-[480px] flex-col items-start gap-4 sm:gap-5">
             <Badge>Perks</Badge>
-            <h2 className="font-heading text-h2 leading-[29px] font-medium text-fs-dark sm:text-[48px] sm:leading-[58px] sm:tracking-[-3.8267px] sm:font-normal">
+            <h2 className="font-heading text-[28px] leading-[34px] font-medium text-fs-dark sm:text-[40px] sm:leading-[48px] lg:text-[48px] lg:leading-[58px] sm:tracking-[-3.8267px] sm:font-normal">
               Perks That Go Beyond Borders
             </h2>
-            <p className="font-body text-fs-grey text-[16px] leading-[19px] sm:leading-[24px]">
+            <p className="font-body text-fs-grey text-[15px] leading-[22px] sm:text-[16px] sm:leading-[24px]">
               Experience a world of benefits with our global presence. Enjoy flexible work environments, cultural diversity, professional development opportunities, travel adventures, global networking, and competitive compensation.
             </p>
           </div>
@@ -64,13 +64,13 @@ export default function PerksSection() {
           {perks.map((perk) => (
             <article
               key={perk.title}
-              className="flex flex-col gap-5 rounded-[8px] border border-fs-border bg-white px-5 py-[22px]"
+              className="flex flex-col gap-4 sm:gap-5 rounded-[8px] border border-fs-border bg-white px-4 py-5 sm:px-5 sm:py-[22px]"
             >
               <h3 className="font-heading text-[16px] tracking-[-0.96px] text-fs-purple">
                 {perk.title}
               </h3>
               <div className="h-px w-full bg-fs-border" />
-              <p className="font-body text-[16px] leading-[22px] tracking-[-0.75px] text-fs-grey">
+              <p className="font-body text-[15px] leading-[22px] sm:text-[16px] tracking-[-0.75px] text-fs-grey">
                 {perk.description}
               </p>
             </article>

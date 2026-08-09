@@ -72,21 +72,23 @@ function CrossIcon() {
 
 export default function PricingPlans() {
   return (
-    <section className="fs-container px-4 sm:px-6 flex w-full flex-col items-center gap-[50px]">
-      <div className="flex flex-col items-center gap-[15px] w-full max-w-[935px]">
-        <h1 className="font-heading text-h2 leading-[29px] font-medium text-center text-fs-dark sm:text-[48px] sm:leading-[58px] sm:tracking-[-3.8267px] sm:font-normal">
+    <section className="fs-container px-4 sm:px-6 flex w-full flex-col items-center gap-8 sm:gap-12 lg:gap-[50px] pt-2">
+      <div className="flex flex-col items-center gap-3 sm:gap-[15px] w-full max-w-[935px]">
+        <h1 className="font-heading text-[28px] leading-[34px] font-medium text-center text-fs-dark sm:text-[40px] sm:leading-[48px] lg:text-[48px] lg:leading-[58px] sm:tracking-[-3.8267px] sm:font-normal">
           Transparent Pricing for Exceptional Value
         </h1>
-        <p className="font-body text-center text-fs-grey max-w-[930px] text-[16px] leading-[19px] sm:leading-[24px]">
+        <p className="font-body text-center text-fs-grey max-w-[930px] text-[15px] leading-[22px] sm:text-[16px] sm:leading-[24px]">
           Find the perfect plan for your needs with our straightforward pricing options. Discover competitive rates and unlock the exceptional value we offer for our top-notch services.
         </p>
       </div>
 
-      <div className="grid w-full max-w-[1146px] grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-4 lg:items-start">
+      <div className="grid w-full grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-4 lg:items-start">
         {plans.map((plan) => (
           <article
             key={plan.name}
-            className="relative flex flex-col items-center gap-[30px] rounded-[8px] border border-fs-border bg-white px-8 py-[30px] sm:px-[60px]"
+            className={`relative flex flex-col items-center gap-6 sm:gap-[30px] rounded-[8px] border border-fs-border bg-white px-5 py-7 sm:px-8 sm:py-[30px] lg:px-[40px] ${
+              plan.recommended ? "sm:col-span-2 lg:col-span-1 order-first sm:order-none" : ""
+            }`}
           >
             {plan.recommended ? (
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">

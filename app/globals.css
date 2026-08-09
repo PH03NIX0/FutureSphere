@@ -134,6 +134,11 @@
   margin-inline: auto;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 .footer-bg {
   position: relative;
   overflow: hidden;

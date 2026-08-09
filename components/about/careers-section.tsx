@@ -4,23 +4,23 @@ import { jobs } from "@/lib/jobs";
 
 export default function CareersSection() {
   return (
-    <section className="flex justify-center w-full px-4 sm:px-6 mt-[80px]">
-      <div className="fs-container mx-auto flex flex-col items-center gap-[50px]">
-        <div className="flex flex-col items-center gap-[20px] w-full max-w-[800px]">
+    <section className="flex justify-center w-full px-4 sm:px-6 mt-12 sm:mt-16 lg:mt-[80px]">
+      <div className="fs-container mx-auto flex flex-col items-center gap-8 sm:gap-[50px]">
+        <div className="flex flex-col items-center gap-3 sm:gap-5 w-full max-w-[800px]">
           <Badge>Careers</Badge>
-          <h2 className="font-heading text-h2 leading-[29px] font-medium text-center text-fs-dark sm:text-[48px] sm:leading-[58px] sm:tracking-[-3.8267px] sm:font-normal">
+          <h2 className="font-heading text-[28px] leading-[34px] font-medium text-center text-fs-dark sm:text-[40px] sm:leading-[48px] lg:text-[48px] lg:leading-[58px] sm:tracking-[-3.8267px] sm:font-normal">
             New job opportunities
           </h2>
-          <p className="font-body text-center text-fs-grey max-w-[720px] text-[16px] leading-[19px] sm:leading-[24px]">
+          <p className="font-body text-center text-fs-grey max-w-[720px] text-[15px] leading-[22px] sm:text-[16px] sm:leading-[24px]">
             Browse through vacancies. internships and job postings at FutureSphere
           </p>
         </div>
 
-        <div className="flex w-full max-w-[1065px] flex-col gap-[10px]">
+        <div className="flex w-full flex-col gap-[10px]">
           {jobs.map((job) => (
             <article
               key={job.title}
-              className="group flex items-center justify-between gap-4 rounded-[8px] border border-fs-border bg-white px-5 py-5 transition-transform duration-150 sm:hover:-translate-y-[1px]"
+              className="group flex items-center justify-between gap-3 sm:gap-4 rounded-[8px] border border-fs-border bg-white px-4 py-4 sm:px-5 sm:py-5 transition-transform duration-150 sm:hover:-translate-y-[1px]"
             >
               <div className="flex min-w-0 flex-col gap-[15px]">
                 <div className="flex flex-col gap-[15px]">

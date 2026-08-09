@@ -1,11 +1,15 @@
 interface SliderNavigationProps {
   readonly onPrevious?: () => void;
   readonly onNext?: () => void;
+  readonly align?: "start" | "center" | "end";
 }
 
-export default function SliderNavigation({ onPrevious, onNext }: SliderNavigationProps) {
+export default function SliderNavigation({ onPrevious, onNext, align = "end" }: SliderNavigationProps) {
+  const alignClass =
+    align === "center" ? "justify-center" : align === "start" ? "justify-start" : "justify-end";
+
   return (
-    <div className="flex items-center justify-end gap-[15px]">
+    <div className={`flex w-full items-center gap-[15px] ${alignClass}`}>
       <button
         type="button"
         onClick={onPrevious}

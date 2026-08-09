@@ -12,7 +12,7 @@ export default function ValueCard({ title, description, iconSrc }: ValueCardProp
         {title}
       </h3>
 
-      <p className="font-body text-p2 text-fs-grey max-w-[231px]">
+      <p className="font-body text-p2 text-fs-grey max-w-none sm:max-w-[231px]">
         {description}
       </p>
     </div>

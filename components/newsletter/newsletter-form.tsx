@@ -46,7 +46,7 @@ export default function NewsletterForm() {
       <button
         type="submit"
         disabled={formState === "loading" || formState === "success"}
-        className="newsletter-button h-[48px] w-[80%] mx-auto bg-fs-purple rounded-[12px] shadow-[0_1px_1px_rgba(88,111,54,0.08)] sm:h-full sm:px-5 sm:w-auto sm:mx-0 sm:rounded-[10px] font-heading font-bold text-[12px] leading-[15px] text-white whitespace-nowrap transition-transform duration-150 sm:hover:-translate-y-[1px] disabled:opacity-70"
+        className="newsletter-button mx-auto h-[48px] w-[80%] bg-fs-purple rounded-[12px] shadow-[0_1px_1px_rgba(88,111,54,0.08)] sm:mx-0 sm:h-full sm:w-auto sm:px-5 sm:rounded-[10px] font-heading font-bold text-[12px] leading-[15px] text-white whitespace-nowrap transition-transform duration-150 sm:hover:-translate-y-[1px] disabled:opacity-70"
       >
         {buttonLabel}
       </button>

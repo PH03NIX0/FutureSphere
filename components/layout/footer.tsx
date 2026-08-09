@@ -13,27 +13,27 @@ export default function Footer() {
         } as React.CSSProperties
       }
     >
-      <div className="fs-container mx-auto flex flex-col items-center px-4 sm:px-6">
-        {/* Top Spacer */}
-        <div className="h-16" />
+      {/* Top spacer */}
+      <div className="h-[40px] md:h-[60px]" aria-hidden="true" />
 
-        {/* Divider */}
-        <div className="w-full h-px bg-white/20" />
+      {/* Divider */}
+      <div className="w-full h-px bg-white/20" aria-hidden="true" />
 
-        {/* Middle Row */}
-        <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4 py-6">
-          <FooterLogo />
-          <FooterNav />
-        </div>
+      {/* Logo + Nav — mobile: stack left; tablet/desktop: split */}
+      <div className="flex flex-col items-start gap-[24px] px-[20px] py-[28px] md:flex-row md:items-center md:justify-between md:px-[80px] md:py-[30px]">
+        <FooterLogo />
+        <FooterNav />
+      </div>
 
-        {/* Divider */}
-        <div className="w-full h-px bg-white/20" />
+      {/* Divider */}
+      <div className="w-full h-px bg-white/20" aria-hidden="true" />
 
-        {/* Bottom Row */}
-        <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4 py-6">
-          <p className="text-white/60 text-s font-body">
-            &copy; 2023 FutureSphere. All rights reserved.
-          </p>
+      {/* Copyright — mobile: alone; tablet/desktop: + socials */}
+      <div className="flex items-center justify-between px-[20px] py-[24px] md:px-[80px] md:py-[30px]">
+        <p className="font-body text-[14px] leading-[1.6] text-white/70">
+          FutureSphere 2023. All rights reserved
+        </p>
+        <div className="hidden md:block">
           <FooterSocials />
         </div>
       </div>

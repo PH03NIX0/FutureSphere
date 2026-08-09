@@ -3,7 +3,7 @@ import NewsletterForm from "@/components/newsletter/newsletter-form";
 
 export default function NewsletterSection() {
   return (
-    <section className="fs-container mx-auto mt-[80px] px-4 sm:px-6">
+    <section className="fs-container mx-auto mt-12 sm:mt-16 lg:mt-[80px] px-4 sm:px-6 w-full">
       <div
         className="newsletter-card relative rounded-newsletter border border-fs-border overflow-hidden"
         style={
@@ -12,8 +12,7 @@ export default function NewsletterSection() {
           } as React.CSSProperties
         }
       >
-        <div className="relative flex flex-col items-center gap-8 sm:gap-[50px] px-4 sm:px-6 py-14 sm:py-16">
-          {/* Mail Icon with frame */}
+        <div className="relative flex flex-col items-center gap-6 sm:gap-8 lg:gap-[50px] px-5 sm:px-6 py-12 sm:py-14 lg:py-16">
           <div className="flex items-center justify-center w-[56px] h-[56px] rounded-[14px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -24,22 +23,18 @@ export default function NewsletterSection() {
             />
           </div>
 
-          {/* Text Content */}
-          <div className="flex flex-col items-center gap-[16px] w-full max-w-[284px] sm:max-w-[600px]">
-          <h2
-            className="font-heading font-normal text-center w-full text-[20px] sm:text-[40px] lg:text-[48px] leading-[24px] sm:leading-[48px] lg:leading-[58px] tracking-[-0.96px] text-white"
-          >
-            Do cool things with us.
-          </h2>
-            <p className="font-body font-normal text-center w-full text-[12px] sm:text-base leading-[16px] sm:leading-[24px] tracking-[-0.96px] text-white/80">
+          <div className="flex flex-col items-center gap-3 sm:gap-4 w-full max-w-[600px]">
+            <h2 className="font-heading font-normal text-center w-full text-[28px] leading-[34px] sm:text-[40px] sm:leading-[48px] lg:text-[48px] lg:leading-[58px] tracking-[-0.96px] text-white">
+              Do cool things with us.
+            </h2>
+            <p className="font-body font-normal text-center w-full text-[14px] leading-[20px] sm:text-base sm:leading-[24px] tracking-[-0.96px] text-white/80">
               Stay in the loop with updates from our team and community.
-              <br />
-              Once a month.
+              <br className="hidden sm:block" />
+              {" "}Once a month.
             </p>
           </div>
 
-          {/* Form */}
-          <div className="w-full max-w-[284px] sm:max-w-[470px]">
+          <div className="w-full max-w-[470px]">
             <NewsletterForm />
           </div>
         </div>

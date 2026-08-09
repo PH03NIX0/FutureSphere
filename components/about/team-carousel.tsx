@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "motion/react";
 import Image from "next/image";
 import { getCloudinaryUrl } from "@/lib/cloudinary";
 import SliderNavigation from "@/components/testimonials/slider-navigation";
@@ -17,86 +20,138 @@ interface TeamCarouselProps {
   readonly onActiveIndexChange: (index: number) => void;
 }
 
-interface PositionConfig {
+type Slot = {
   readonly size: number;
   readonly offset: number;
-  readonly zIndex: number;
   readonly opacity: number;
-  readonly scale: number;
-}
+  readonly z: number;
+  readonly y: number;
+};
 
-const POSITIONS: readonly PositionConfig[] = [
-  { size: 180, offset: -456, zIndex: 5, opacity: 0.45, scale: 0.8 },
-  { size: 193, offset: -324, zIndex: 15, opacity: 0.6, scale: 0.85 },
-  { size: 222, offset: -192, zIndex: 25, opacity: 0.85, scale: 0.92 },
-  { size: 315, offset: 0, zIndex: 40, opacity: 1, scale: 1 },
-  { size: 222, offset: 192, zIndex: 30, opacity: 0.85, scale: 0.92 },
-  { size: 193, offset: 324, zIndex: 20, opacity: 0.6, scale: 0.85 },
-  { size: 180, offset: 456, zIndex: 10, opacity: 0.45, scale: 0.8 },
+/** Mobile: 3 larger faces (kept separate from tablet/desktop) */
+const MOBILE_SLOTS: readonly Slot[] = [
+  { size: 152, offset: -118, opacity: 0.5, z: 1, y: 22 },
+  { size: 220, offset: 0, opacity: 1, z: 3, y: 0 },
+  { size: 152, offset: 118, opacity: 0.5, z: 1, y: 22 },
 ];
 
-export default function TeamCarousel({ members, activeIndex, onActiveIndexChange }: TeamCarouselProps) {
-  const total = members.length;
+/** Tablet + desktop: Figma-scale 7-person arc (center ~315) */
+const DESKTOP_SLOTS: readonly Slot[] = [
+  { size: 180, offset: -456, opacity: 0.45, z: 1, y: 36 },
+  { size: 193, offset: -324, opacity: 0.6, z: 2, y: 22 },
+  { size: 222, offset: -192, opacity: 0.85, z: 3, y: 10 },
+  { size: 315, offset: 0, opacity: 1, z: 5, y: 0 },
+  { size: 222, offset: 192, opacity: 0.85, z: 3, y: 10 },
+  { size: 193, offset: 324, opacity: 0.6, z: 2, y: 22 },
+  { size: 180, offset: 456, opacity: 0.45, z: 1, y: 36 },
+];
 
-  const getDisplayOrder = (active: number): number[] => {
-    const order: number[] = [];
-    for (let i = -3; i <= 3; i++) {
-      const idx = ((active + i) % total + total) % total;
-      order.push(idx);
-    }
-    return order;
-  };
+const SLIDE_TRANSITION = {
+  type: "spring" as const,
+  stiffness: 280,
+  damping: 28,
+  mass: 0.85,
+};
 
-  const displayOrder = getDisplayOrder(activeIndex);
-
-  const goToPrevious = () => {
-    onActiveIndexChange((activeIndex - 1 + total) % total);
-  };
-
-  const goToNext = () => {
-    onActiveIndexChange((activeIndex + 1) % total);
-  };
+function CarouselStage({
+  members,
+  activeIndex,
+  onActiveIndexChange,
+  slots,
+  className,
+  height,
+}: {
+  readonly members: readonly TeamMember[];
+  readonly activeIndex: number;
+  readonly onActiveIndexChange: (index: number) => void;
+  readonly slots: readonly Slot[];
+  readonly className: string;
+  readonly height: number;
+}) {
+  const count = members.length;
+  const radius = (slots.length - 1) / 2;
 
   return (
-    <div className="flex flex-col items-center gap-[24px]">
-      <div className="relative flex items-center justify-center w-full h-[380px]">
-        {displayOrder.map((memberIndex, displayIndex) => {
-          const member = members[memberIndex];
-          const pos = POSITIONS[displayIndex];
-          const isActive = displayIndex === 3;
+    <div
+      className={`relative mx-auto w-full ${className}`}
+      style={{ height }}
+      aria-live="polite"
+    >
+      {slots.map((slot, slotIndex) => {
+        const relative = slotIndex - radius;
+        const memberIndex = (activeIndex + relative + count * 10) % count;
+        const member = members[memberIndex];
+        const isCenter = relative === 0;
 
-          return (
-            <button
-              key={member.id}
-              type="button"
-              onClick={() => onActiveIndexChange(memberIndex)}
-              className="absolute rounded-full overflow-hidden transition-all duration-200"
-              aria-label={`View ${member.name}`}
-              aria-pressed={isActive}
-              style={{
-                width: `${pos.size}px`,
-                height: `${pos.size}px`,
-                top: "50%",
-                left: "50%",
-                transform: `translate(-50%, -50%) translateX(${pos.offset}px) scale(${pos.scale})`,
-                zIndex: pos.zIndex,
-                opacity: pos.opacity,
-              }}
-            >
-              <Image
-                src={getCloudinaryUrl(member.avatarSrc, { fetch_format: "auto", quality: "auto" })}
-                alt={member.name}
-                fill
-                sizes={`${pos.size}px`}
-                unoptimized
-                className="object-cover"
-              />
-            </button>
-          );
-        })}
-      </div>
+        return (
+          <motion.button
+            key={member.id}
+            type="button"
+            onClick={() => onActiveIndexChange(memberIndex)}
+            aria-label={`Show ${member.name}`}
+            aria-current={isCenter ? "true" : undefined}
+            initial={false}
+            animate={{
+              x: `calc(-50% + ${slot.offset}px)`,
+              width: slot.size,
+              height: slot.size,
+              opacity: slot.opacity,
+              y: slot.y,
+              zIndex: slot.z,
+            }}
+            transition={SLIDE_TRANSITION}
+            className="absolute top-0 left-1/2 overflow-hidden rounded-full border border-white/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fs-purple"
+          >
+            <Image
+              src={getCloudinaryUrl(member.avatarSrc)}
+              alt={member.name}
+              width={320}
+              height={320}
+              className="h-full w-full object-cover"
+              draggable={false}
+            />
+          </motion.button>
+        );
+      })}
+    </div>
+  );
+}
 
-      <SliderNavigation onPrevious={goToPrevious} onNext={goToNext} />
+export default function TeamCarousel({
+  members,
+  activeIndex,
+  onActiveIndexChange,
+}: TeamCarouselProps) {
+  const count = members.length;
+
+  function goTo(index: number) {
+    onActiveIndexChange(((index % count) + count) % count);
+  }
+
+  return (
+    <div className="flex w-full flex-col items-center gap-[24px] md:gap-[28px]">
+      <CarouselStage
+        members={members}
+        activeIndex={activeIndex}
+        onActiveIndexChange={onActiveIndexChange}
+        slots={MOBILE_SLOTS}
+        className="md:hidden"
+        height={260}
+      />
+      <CarouselStage
+        members={members}
+        activeIndex={activeIndex}
+        onActiveIndexChange={onActiveIndexChange}
+        slots={DESKTOP_SLOTS}
+        className="hidden md:block"
+        height={380}
+      />
+
+      <SliderNavigation
+        onPrevious={() => goTo(activeIndex - 1)}
+        onNext={() => goTo(activeIndex + 1)}
+        align="center"
+      />
     </div>
   );
 }

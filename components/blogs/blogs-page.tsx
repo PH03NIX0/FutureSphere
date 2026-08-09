@@ -16,18 +16,18 @@ export default function BlogsPageContent() {
 
   return (
     <>
-      <section className="fs-container px-4 sm:px-6 pt-4 flex flex-col items-center gap-[15px]">
-        <h1 className="font-heading text-h2 leading-[29px] font-medium text-center text-fs-dark sm:text-[48px] sm:leading-[58px] sm:tracking-[-3.8267px] sm:font-normal max-w-[935px]">
+      <section className="fs-container px-4 sm:px-6 pt-4 flex flex-col items-center gap-3 sm:gap-[15px]">
+        <h1 className="font-heading text-[28px] leading-[34px] font-medium text-center text-fs-dark sm:text-[40px] sm:leading-[48px] lg:text-[48px] lg:leading-[58px] sm:tracking-[-3.8267px] sm:font-normal max-w-[935px]">
           Discover Insights and Inspiration
         </h1>
-        <p className="font-body text-center text-fs-grey max-w-[930px] text-[16px] leading-[19px] sm:leading-[24px]">
+        <p className="font-body text-center text-fs-grey max-w-[930px] text-[15px] leading-[22px] sm:text-[16px] sm:leading-[24px]">
           Explore our captivating blog filled with thought-provoking articles and inspiring content that will ignite your creativity and expand your knowledge.
         </p>
       </section>
 
       <section className="fs-container px-4 sm:px-6 w-full">
-        <article className="flex w-full flex-col gap-6 rounded-[16px] bg-white p-5 shadow-[3px_0px_4px_0px_rgba(113,136,225,0.1),0px_4px_4px_0px_rgba(113,136,225,0.1)] sm:flex-row sm:items-center sm:gap-9">
-          <div className="relative h-[220px] w-full shrink-0 overflow-hidden rounded-[8px] sm:h-[344px] sm:w-[495px]">
+        <article className="flex w-full flex-col gap-5 rounded-[16px] bg-white p-4 sm:p-5 shadow-[3px_0px_4px_0px_rgba(113,136,225,0.1),0px_4px_4px_0px_rgba(113,136,225,0.1)] sm:flex-row sm:items-center sm:gap-9">
+          <div className="relative h-[200px] w-full shrink-0 overflow-hidden rounded-[8px] sm:h-[344px] sm:w-[495px]">
             <Image
               src={featuredBlog.imageSrc}
               alt={featuredBlog.imageAlt}

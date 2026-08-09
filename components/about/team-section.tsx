@@ -106,32 +106,38 @@ export default function TeamSection() {
   const activeMember = team[activeIndex];
 
   return (
-    <section className="flex justify-center w-full px-4 sm:px-6 mt-20">
+    <section className="flex justify-center w-full px-4 sm:px-6 mt-12 sm:mt-16 lg:mt-20">
       <div className="fs-container mx-auto">
-        <div className="flex flex-col items-center gap-[50px]">
-          <div className="flex flex-col items-center gap-[15px] w-full max-w-[800px]">
+        <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-[50px]">
+          <div className="flex flex-col items-center gap-3 sm:gap-[15px] w-full max-w-[800px]">
             <Badge>Our Team</Badge>
 
-            <h2 className="font-heading text-h2 leading-[29px] font-medium text-center text-fs-dark sm:text-[48px] sm:leading-[58px] sm:tracking-[-3.8267px] sm:font-normal">
+            <h2 className="font-heading text-[28px] leading-[34px] font-medium text-center text-fs-dark sm:text-[40px] sm:leading-[48px] lg:text-[48px] lg:leading-[58px] sm:tracking-[-3.8267px] sm:font-normal">
               Meet our team
             </h2>
 
-            <p className="font-body text-center text-fs-grey max-w-[800px] text-[16px] leading-[19px] sm:leading-[24px]">
+            <p className="font-body text-center text-fs-grey max-w-[800px] text-[15px] leading-[22px] sm:text-[16px] sm:leading-[24px]">
               Meet our passionate and talented team, committed to delivering exceptional results, driving innovation, and transforming your vision into reality.
             </p>
           </div>
 
-          {/* White card with member details */}
-          <div className="w-full max-w-[842px] rounded-card border border-fs-border bg-white px-5 py-6 sm:px-10 sm:py-10 lg:px-[65px] lg:py-[47px]">
-            <TeamMemberCard
-              bio={activeMember.bio}
-              name={activeMember.name}
-              role={activeMember.role}
-              socials={activeMember.socials}
+          {/* Active member write-up — paragraph, name, role, socials above carousel */}
+          <div className="relative w-full max-w-[842px]">
+            <div className="rounded-[16px] sm:rounded-card border border-fs-border bg-white px-4 py-5 sm:px-8 sm:py-8 lg:px-[65px] lg:py-[47px] shadow-[0_12px_40px_rgba(26,11,46,0.04)]">
+              <TeamMemberCard
+                key={activeMember.id}
+                bio={activeMember.bio}
+                name={activeMember.name}
+                role={activeMember.role}
+                socials={activeMember.socials}
+              />
+            </div>
+            <div
+              className="absolute left-1/2 top-full -translate-x-1/2 -mt-px h-0 w-0 border-l-[12px] border-r-[12px] border-t-[14px] border-l-transparent border-r-transparent border-t-white"
+              aria-hidden="true"
             />
           </div>
 
-          {/* Carousel and navigation outside the card */}
           <TeamCarousel members={team} activeIndex={activeIndex} onActiveIndexChange={setActiveIndex} />
         </div>
       </div>
