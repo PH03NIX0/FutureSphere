@@ -13,6 +13,8 @@
   --color-fs-card-text: #272422;
   --color-fs-card-muted: #8B857F;
   --color-fs-border-strong: #000000;
+  /* Auth pages: header text (Sign Up Request, success title, etc.) */
+  --color-fs-auth-heading: #42307D;
 
   /* Fonts */
   --font-heading: var(--font-inter);
@@ -51,6 +53,23 @@
   --radius-blog: 16px;
   --radius-button: 20px;
   --radius-input: 12px;
+}
+
+/* Auth / brand gradient — opaque stops only (logo wordmark, 404 title, magic-link CTA) */
+:root {
+  --fs-brand-gradient: linear-gradient(90deg, #8932F6 0%, #6D3FEA 50%, #4C5BD4 100%);
+}
+
+.fs-brand-gradient-text {
+  background-image: var(--fs-brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.fs-brand-gradient-bg {
+  background-image: var(--fs-brand-gradient);
 }
 
 /* Feature card blur circles */
@@ -159,5 +178,11 @@ body {
 .footer-bg > * {
   position: relative;
   z-index: 1;
+}
+
+/* Skip offscreen layout/paint work for heavy below-fold blocks */
+.content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
 }
 

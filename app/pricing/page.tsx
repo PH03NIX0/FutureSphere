@@ -1,7 +1,9 @@
 import Footer from "@/components/layout/footer";
 import Navbar from "@/components/layout/navbar";
 import PricingPlans from "@/components/pricing/pricing-plans";
-import NewsletterSection from "@/components/newsletter/newsletter-section";
+import dynamic from "next/dynamic";
+
+const NewsletterSection = dynamic(() => import("@/components/newsletter/newsletter-section"));
 
 export const metadata = {
   title: "Pricing | FutureSphere",

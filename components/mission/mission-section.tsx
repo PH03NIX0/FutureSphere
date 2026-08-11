@@ -30,6 +30,7 @@ export default function MissionSection() {
                 fill
                 sizes="(max-width: 1058px) 100vw, 460px"
                 className="object-cover"
+                loading="lazy"
               />
             </div>
 
@@ -57,7 +58,7 @@ export default function MissionSection() {
               className="flex items-center justify-center sm:justify-start gap-[25px] mt-2 sm:mt-0"
             >
               <a
-                href="#"
+                href="/signup"
                 className="relative font-body text-[16px] font-medium text-fs-purple transition-colors duration-150 group"
               >
                 Signup
@@ -77,6 +78,7 @@ export default function MissionSection() {
               fill
               sizes="(max-width: 1058px) 100vw, 460px"
               className="object-cover"
+              loading="lazy"
             />
           </div>
         </div>

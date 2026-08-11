@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { getCloudinaryUrl } from "@/lib/cloudinary";
@@ -58,14 +59,12 @@ function CarouselStage({
   activeIndex,
   onActiveIndexChange,
   slots,
-  className,
   height,
 }: {
   readonly members: readonly TeamMember[];
   readonly activeIndex: number;
   readonly onActiveIndexChange: (index: number) => void;
   readonly slots: readonly Slot[];
-  readonly className: string;
   readonly height: number;
 }) {
   const count = members.length;
@@ -73,7 +72,7 @@ function CarouselStage({
 
   return (
     <div
-      className={`relative mx-auto w-full ${className}`}
+      className="relative mx-auto w-full"
       style={{ height }}
       aria-live="polite"
     >
@@ -107,8 +106,11 @@ function CarouselStage({
               alt={member.name}
               width={320}
               height={320}
+              sizes="(max-width: 767px) 220px, 315px"
               className="h-full w-full object-cover"
               draggable={false}
+              // Only the center face needs to be eager; neighbors can wait.
+              loading={isCenter ? "eager" : "lazy"}
             />
           </motion.button>
         );
@@ -123,29 +125,39 @@ export default function TeamCarousel({
   onActiveIndexChange,
 }: TeamCarouselProps) {
   const count = members.length;
+  // Mount a single stage so we do not download every avatar twice (mobile + desktop trees).
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   function goTo(index: number) {
     onActiveIndexChange(((index % count) + count) % count);
   }
 
+  const showMobile = isMobile !== false;
+  const slots = showMobile ? MOBILE_SLOTS : DESKTOP_SLOTS;
+  const height = showMobile ? 260 : 380;
+
   return (
     <div className="flex w-full flex-col items-center gap-[24px] md:gap-[28px]">
-      <CarouselStage
-        members={members}
-        activeIndex={activeIndex}
-        onActiveIndexChange={onActiveIndexChange}
-        slots={MOBILE_SLOTS}
-        className="md:hidden"
-        height={260}
-      />
-      <CarouselStage
-        members={members}
-        activeIndex={activeIndex}
-        onActiveIndexChange={onActiveIndexChange}
-        slots={DESKTOP_SLOTS}
-        className="hidden md:block"
-        height={380}
-      />
+      {/* Reserve height before matchMedia resolves to avoid layout shift */}
+      <div className="w-full min-h-[260px] md:min-h-[380px]">
+        {isMobile !== null && (
+          <CarouselStage
+            members={members}
+            activeIndex={activeIndex}
+            onActiveIndexChange={onActiveIndexChange}
+            slots={slots}
+            height={height}
+          />
+        )}
+      </div>
 
       <SliderNavigation
         onPrevious={() => goTo(activeIndex - 1)}

@@ -29,50 +29,50 @@ const features = [
 
 export default function Features() {
   return (
-    <section className="flex flex-col items-center gap-[50px] fs-container mx-auto mt-[80px] px-4 sm:px-6">
-      <div className="flex flex-col items-center gap-[50px] w-full">
-        <div className="flex flex-col items-center gap-[20px] w-full max-w-[600px]">
+    <section className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-[50px] fs-container mx-auto mt-12 sm:mt-16 lg:mt-[80px] px-4 sm:px-6">
+      <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-[50px] w-full">
+        <div className="flex flex-col items-center gap-3 sm:gap-5 w-full max-w-[600px]">
           <Badge fontSize="16px">Features</Badge>
-          <h2
-            className="font-heading font-medium sm:font-normal text-fs-dark text-center text-h2 sm:text-[40px] lg:text-[48px] leading-h2 sm:leading-[48px] lg:leading-[58px]"
-          >
+          <h2 className="font-heading font-medium sm:font-normal text-fs-dark text-center text-[28px] leading-[34px] sm:text-[40px] sm:leading-[48px] lg:text-[48px] lg:leading-[58px]">
             Discover the Tools that Drive Success
           </h2>
-          <p className="font-body text-[16px] leading-[22px] tracking-[-0.75px] text-center text-fs-grey">
+          <p className="font-body text-[15px] leading-[22px] sm:text-[16px] sm:leading-[22px] tracking-[-0.75px] text-center text-fs-grey">
             Unleash innovation and accelerate growth with our dynamic product.
           </p>
         </div>
 
-        <div className="flex flex-col gap-[30px]">
-          <div className="border border-fs-border rounded-card sm:bg-white bg-transparent w-full px-6 sm:px-10 py-8 sm:py-12">
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-[30px] sm:gap-[40px] lg:gap-[60px] w-full max-w-[1018px] mx-auto">
-              <div className="flex flex-col lg:hidden w-full gap-6">
-                {features.map((feature) => (
+        <div className="flex flex-col gap-6 sm:gap-[30px] w-full">
+          <div className="border border-fs-border rounded-card bg-white w-full px-5 py-6 sm:px-10 sm:py-12">
+            {/* Mobile / tablet: stacked features with horizontal rules */}
+            <div className="flex flex-col lg:hidden w-full">
+              {features.map((feature, index) => (
+                <div key={feature.title}>
+                  {index > 0 && <div className="h-px w-full bg-fs-border" aria-hidden="true" />}
                   <FeaturedCard
-                    key={feature.title}
                     src={feature.src}
                     alt={feature.title}
                     title={feature.title}
                     description={feature.description}
-                    index={features.indexOf(feature) + 1}
+                    index={index + 1}
                   />
-                ))}
-              </div>
+                </div>
+              ))}
+            </div>
 
-              <div className="hidden lg:flex items-center justify-center gap-[60px] w-full">
-                {features.map((feature, i) => (
-                  <Fragment key={feature.title}>
-                    <FeaturedCard
-                      src={feature.src}
-                      alt={feature.title}
-                      title={feature.title}
-                      description={feature.description}
-                      index={i + 1}
-                    />
-                    {i < features.length - 1 && <Divider />}
-                  </Fragment>
-                ))}
-              </div>
+            {/* Desktop: horizontal features with vertical dividers */}
+            <div className="hidden lg:flex items-center justify-center gap-[60px] w-full max-w-[1018px] mx-auto">
+              {features.map((feature, i) => (
+                <Fragment key={feature.title}>
+                  <FeaturedCard
+                    src={feature.src}
+                    alt={feature.title}
+                    title={feature.title}
+                    description={feature.description}
+                    index={i + 1}
+                  />
+                  {i < features.length - 1 && <Divider />}
+                </Fragment>
+              ))}
             </div>
           </div>
 

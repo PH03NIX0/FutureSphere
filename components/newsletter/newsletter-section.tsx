@@ -3,7 +3,7 @@ import NewsletterForm from "@/components/newsletter/newsletter-form";
 
 export default function NewsletterSection() {
   return (
-    <section className="fs-container mx-auto mt-12 sm:mt-16 lg:mt-[80px] px-4 sm:px-6 w-full">
+    <section className="content-visibility-auto fs-container mx-auto mt-12 sm:mt-16 lg:mt-[80px] mb-12 sm:mb-16 lg:mb-[80px] px-4 sm:px-6 w-full">
       <div
         className="newsletter-card relative rounded-newsletter border border-fs-border overflow-hidden"
         style={

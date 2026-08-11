@@ -84,6 +84,6 @@ export const featuredBlog = {
   title: "The Benefits of Email Marketing for Small Businesses",
   excerpt:
     "In this article, we discuss how email marketing can help small businesses reach their target audience, increase brand awareness, and drive sales.",
-  imageSrc: "/blogs/featured.png",
+  imageSrc: getCloudinaryUrl("futuresphere/images/blog-featured", { fetch_format: "auto", quality: "auto" }),
   imageAlt: "Email marketing for small businesses",
 } as const;

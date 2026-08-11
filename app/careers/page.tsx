@@ -2,9 +2,11 @@ import Footer from "@/components/layout/footer";
 import Navbar from "@/components/layout/navbar";
 import CareersHero from "@/components/careers/careers-hero";
 import PerksSection from "@/components/careers/perks-section";
-import OfficesSection from "@/components/about/offices-section";
-import CareersSection from "@/components/about/careers-section";
-import NewsletterSection from "@/components/newsletter/newsletter-section";
+import dynamic from "next/dynamic";
+
+const OfficesSection = dynamic(() => import("@/components/about/offices-section"));
+const CareersSection = dynamic(() => import("@/components/about/careers-section"));
+const NewsletterSection = dynamic(() => import("@/components/newsletter/newsletter-section"));
 
 export const metadata = {
   title: "Careers | FutureSphere",

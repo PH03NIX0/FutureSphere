@@ -163,6 +163,10 @@ export default function TestimonialsSection() {
                   key={brand.alt}
                   src={brand.src}
                   alt={brand.alt}
+                  width={brand.width}
+                  height={brand.height}
+                  loading="lazy"
+                  decoding="async"
                   className="h-6 sm:h-8 w-auto shrink-0"
                 />
               ))}
@@ -174,6 +178,10 @@ export default function TestimonialsSection() {
                   key={brand.alt}
                   src={brand.src}
                   alt={brand.alt}
+                  width={brand.width}
+                  height={brand.height}
+                  loading="lazy"
+                  decoding="async"
                   className="h-6 sm:h-8 w-auto shrink-0"
                 />
               ))}

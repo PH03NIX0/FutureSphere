@@ -2,12 +2,14 @@ import Footer from "@/components/layout/footer";
 import Navbar from "@/components/layout/navbar";
 import AboutHero from "@/components/about/about-hero";
 import StorySection from "@/components/about/story-section";
-import ValuesSection from "@/components/about/values-section";
-import TeamSection from "@/components/about/team-section";
-import ClientSection from "@/components/clients/client-section";
-import OfficesSection from "@/components/about/offices-section";
-import CareersSection from "@/components/about/careers-section";
-import NewsletterSection from "@/components/newsletter/newsletter-section";
+import dynamic from "next/dynamic";
+
+const ValuesSection = dynamic(() => import("@/components/about/values-section"));
+const ClientSection = dynamic(() => import("@/components/clients/client-section"));
+const TeamSection = dynamic(() => import("@/components/about/team-section"));
+const OfficesSection = dynamic(() => import("@/components/about/offices-section"));
+const CareersSection = dynamic(() => import("@/components/about/careers-section"));
+const NewsletterSection = dynamic(() => import("@/components/newsletter/newsletter-section"));
 
 export const metadata = {
   title: "About Us | FutureSphere",

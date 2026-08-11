@@ -10,7 +10,14 @@ export function getCloudinaryUrl(
 
   let url = `https://res.cloudinary.com/${cloudName}/image/upload`;
 
-  if (transformations && Object.keys(transformations).length > 0) {
+  const isLikelySvg = publicId.endsWith(".svg") || publicId.includes("/icons/") || publicId.includes("/social/");
+  const defaults: Record<string, string | number | boolean> = isLikelySvg
+    ? {}
+    : { fetch_format: "auto", quality: "auto" };
+
+  const merged = { ...defaults, ...transformations };
+
+  if (Object.keys(merged).length > 0) {
     const alias: Record<string, string> = {
       fetch_format: "f",
       quality: "q",
@@ -27,7 +34,7 @@ export function getCloudinaryUrl(
       flags: "fl",
     };
 
-    const transforms = Object.entries(transformations)
+    const transforms = Object.entries(merged)
       .map(([key, value]) => `${alias[key] || key}_${value}`)
       .join(",");
     url += `/${transforms}`;

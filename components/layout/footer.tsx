@@ -6,7 +6,7 @@ import FooterSocials from "./footer-socials";
 export default function Footer() {
   return (
     <footer
-      className="footer-bg w-full bg-fs-purple"
+      className="content-visibility-auto footer-bg w-full bg-fs-purple"
       style={
         {
           "--footer-bg": `url(${getCloudinaryUrl("futuresphere/Rectangle 9383", { fetch_format: "auto", quality: "auto" })})`,

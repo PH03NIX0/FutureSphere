@@ -5,6 +5,7 @@ import { useState } from "react";
 type FormState = "idle" | "loading" | "success" | "error";
 
 export default function NewsletterForm() {
+  const [email, setEmail] = useState("");
   const [formState, setFormState] = useState<FormState>("idle");
   let buttonLabel: string;
 
@@ -22,6 +23,7 @@ export default function NewsletterForm() {
 
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
+    setEmail("");
     setFormState("success");
     setTimeout(() => setFormState("idle"), 3000);
   };
@@ -40,6 +42,8 @@ export default function NewsletterForm() {
         autoComplete="email"
         inputMode="email"
         required
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         placeholder="Enter your email"
         className="newsletter-input w-full h-[48px] px-4 bg-white border border-fs-border-light rounded-[12px] outline-none focus:ring-2 focus:ring-[#7F56D9] focus:border-transparent sm:flex-1 sm:h-full sm:bg-transparent sm:border-none sm:focus:ring-0 font-heading font-normal text-[14px] leading-[17px] placeholder:text-fs-grey/70"
       />

@@ -30,7 +30,9 @@ function AnimatedCounter({
   readonly delay: number;
   readonly animate: boolean;
 }) {
-  const [displayValue, setDisplayValue] = useState(0);
+  // Start at the final value for SSR / no-JS; reset to 0 only when the
+  // intersection-triggered animation begins (avoids a permanent "0" flash).
+  const [displayValue, setDisplayValue] = useState(targetValue);
   const [scale, setScale] = useState(1);
   const hasAnimated = useRef(false);
   const rafRef = useRef<number>(0);
@@ -39,6 +41,7 @@ function AnimatedCounter({
   useEffect(() => {
     if (!animate || hasAnimated.current) return;
     hasAnimated.current = true;
+    setDisplayValue(0);
 
     const startDelay = setTimeout(() => {
       const duration = 1400;

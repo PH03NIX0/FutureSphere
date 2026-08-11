@@ -12,4 +12,6 @@ export const implementedNavHrefs = new Set<string>([
   "/blogs",
   "/pricing",
   "/contact",
+  "/signup",
+  "/login",
 ]);
