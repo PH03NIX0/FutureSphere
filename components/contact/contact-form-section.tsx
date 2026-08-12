@@ -37,6 +37,7 @@ export default function ContactFormSection() {
   const [selectedServices, setSelectedServices] = useState<string[]>(["Web Design"]);
   const [agreed, setAgreed] = useState(true);
   const [formState, setFormState] = useState<FormState>("idle");
+  const [errorMessage, setErrorMessage] = useState("Please agree to the terms before submitting.");
 
   const toggleService = (service: string) => {
     setSelectedServices((current) =>
@@ -47,14 +48,57 @@ export default function ContactFormSection() {
   const handleSubmit = async (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!agreed) {
+      setErrorMessage("Please agree to the terms before submitting.");
       setFormState("error");
       return;
     }
 
+    if (selectedServices.length === 0) {
+      setErrorMessage("Please select at least one service.");
+      setFormState("error");
+      return;
+    }
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
     setFormState("loading");
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setFormState("success");
-    setTimeout(() => setFormState("idle"), 3000);
+    setErrorMessage("Something went wrong. Please try again.");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: String(formData.get("firstName") ?? ""),
+          lastName: String(formData.get("lastName") ?? ""),
+          email: String(formData.get("email") ?? ""),
+          subject: String(formData.get("subject") ?? ""),
+          message: String(formData.get("message") ?? ""),
+          services: selectedServices,
+          agreed: true,
+        }),
+      });
+
+      const data = (await response.json().catch(() => null)) as
+        | { ok?: boolean; error?: string }
+        | null;
+
+      if (!response.ok) {
+        setErrorMessage(data?.error ?? "Something went wrong. Please try again.");
+        setFormState("error");
+        return;
+      }
+
+      form.reset();
+      setSelectedServices(["Web Design"]);
+      setAgreed(true);
+      setFormState("success");
+      setTimeout(() => setFormState("idle"), 3000);
+    } catch {
+      setErrorMessage("Something went wrong. Please try again.");
+      setFormState("error");
+    }
   };
 
   let submitLabel = "Submit";
@@ -149,7 +193,7 @@ export default function ContactFormSection() {
 
           {formState === "error" && (
             <p className="font-body text-[12px] text-red-600" role="alert">
-              Please agree to the terms before submitting.
+              {errorMessage}
             </p>
           )}
           {formState === "success" && (

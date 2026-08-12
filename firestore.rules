@@ -1,0 +1,59 @@
+rules_version = '2';
+
+/**
+ * FutureSphere Firestore Security Rules
+ *
+ * Default deny. Public form submissions (newsletter, contact, signup requests)
+ * will be written via the Admin SDK on the server — those collections have no
+ * client access by design.
+ *
+ * users/{userId} is reserved for authenticated profile docs once Auth is wired.
+ * Clients must never set roles or other authorization fields.
+ */
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidUserCreate() {
+      let data = request.resource.data;
+      return data.keys().hasOnly(['email', 'displayName', 'createdAt', 'updatedAt'])
+        && data.email is string
+        && data.email.size() > 3
+        && data.email.size() < 320
+        && data.createdAt is timestamp
+        && data.updatedAt is timestamp
+        && (!('displayName' in data) || (data.displayName is string && data.displayName.size() <= 120));
+    }
+
+    function isValidUserUpdate() {
+      let affected = request.resource.data.diff(resource.data).affectedKeys();
+      return affected.hasOnly(['displayName', 'updatedAt'])
+        && request.resource.data.updatedAt is timestamp
+        && (!('displayName' in request.resource.data)
+          || (request.resource.data.displayName is string
+            && request.resource.data.displayName.size() <= 120))
+        // email and createdAt are immutable from the client
+        && request.resource.data.email == resource.data.email
+        && request.resource.data.createdAt == resource.data.createdAt;
+    }
+
+    // Authenticated user profile — owner only, least privilege
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      allow create: if isOwner(userId) && isValidUserCreate();
+      allow update: if isOwner(userId) && isValidUserUpdate();
+      allow delete: if false;
+    }
+
+    // Everything else: deny client access (Admin SDK bypasses rules)
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

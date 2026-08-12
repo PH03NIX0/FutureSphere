@@ -10,8 +10,13 @@ export function getCloudinaryUrl(
 
   let url = `https://res.cloudinary.com/${cloudName}/image/upload`;
 
-  const isLikelySvg = publicId.endsWith(".svg") || publicId.includes("/icons/") || publicId.includes("/social/");
-  const defaults: Record<string, string | number | boolean> = isLikelySvg
+  // Logos/icons/social marks are usually SVG — f_auto would rasterize them to tiny PNGs and look blurry.
+  const preserveVectorFormat =
+    publicId.endsWith(".svg") ||
+    publicId.includes("/icons/") ||
+    publicId.includes("/social/") ||
+    publicId.includes("/logos/");
+  const defaults: Record<string, string | number | boolean> = preserveVectorFormat
     ? {}
     : { fetch_format: "auto", quality: "auto" };
 
