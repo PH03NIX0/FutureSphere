@@ -11,6 +11,8 @@ export default function NotFoundIllustration() {
         alt=""
         width={320}
         height={280}
+        sizes="(max-width: 640px) 280px, 320px"
+        priority
         className="h-auto w-full object-contain"
       />
     </div>

@@ -34,6 +34,7 @@ export default function BlogsPageContent() {
                 sizes="(max-width: 640px) 100vw, 495px"
                 className="object-cover transition-transform duration-300 sm:group-hover:scale-[1.02]"
                 priority
+                fetchPriority="high"
               />
             </div>
             <div className="flex flex-1 flex-col gap-5 items-start">

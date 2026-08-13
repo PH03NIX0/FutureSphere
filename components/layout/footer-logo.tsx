@@ -8,6 +8,10 @@ export default function FooterLogo() {
         src={getCloudinaryUrl("futuresphere/logos/future-sphere-logo")}
         alt=""
         aria-hidden="true"
+        width={27}
+        height={24}
+        loading="lazy"
+        decoding="async"
         className="w-[27px] h-[24px]"
       />
       <span className="font-heading font-medium text-white">FutureSphere</span>

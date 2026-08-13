@@ -22,6 +22,19 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   title: "FutureSphere — Empowering Innovation Through Technology",
   description: "Cutting-edge technology solutions that streamline business operations and drive growth.",
+  applicationName: "FutureSphere",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icon.png", type: "image/png", sizes: "32x32" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+  },
+  appleWebApp: {
+    capable: true,
+    title: "FutureSphere",
+    statusBarStyle: "default",
+  },
 };
 
 export const viewport: Viewport = {

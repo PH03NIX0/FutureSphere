@@ -30,6 +30,7 @@ export default function OfficesSection() {
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 330px"
                       className="object-cover"
+                      loading="lazy"
                     />
                   </div>
                   <div className="flex flex-col gap-2 sm:gap-[10px] font-heading tracking-[-0.96px]">

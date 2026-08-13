@@ -9,7 +9,7 @@ export default function Footer() {
       className="content-visibility-auto footer-bg w-full bg-fs-purple"
       style={
         {
-          "--footer-bg": `url(${getCloudinaryUrl("futuresphere/Rectangle 9383", { fetch_format: "auto", quality: "auto" })})`,
+          "--footer-bg": `url(${getCloudinaryUrl("futuresphere/Rectangle 9383", { fetch_format: "auto", quality: "auto", width: 1920, crop: "limit" })})`,
         } as React.CSSProperties
       }
     >

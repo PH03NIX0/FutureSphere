@@ -7,7 +7,17 @@ interface ValueCardProps {
 export default function ValueCard({ title, description, iconSrc }: ValueCardProps) {
   return (
     <div className="feature-card flex flex-col gap-4 items-center justify-center text-center p-5">
-      <img src={iconSrc} alt="" className="w-9 h-9 shrink-0" aria-hidden="true" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={iconSrc}
+        alt=""
+        width={36}
+        height={36}
+        loading="lazy"
+        decoding="async"
+        className="w-9 h-9 shrink-0"
+        aria-hidden="true"
+      />
       <h3 className="font-heading text-p1 font-semibold text-fs-dark">
         {title}
       </h3>

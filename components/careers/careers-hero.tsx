@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 
 export default function CareersHero() {
   return (
@@ -12,16 +13,15 @@ export default function CareersHero() {
         </p>
       </div>
 
-      {/* Native img avoids next/image optimizer quirks that clipped this asset. */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="https://res.cloudinary.com/wfqwup4o/image/upload/f_auto,q_auto,w_1200,c_limit/v1786281198/futuresphere/images/careers-hero-composition.png"
+      <Image
+        src={getCloudinaryUrl("futuresphere/images/careers-hero-composition")}
         alt="FutureSphere team collage with global presence and 30+ talented team members"
         width={834}
         height={706}
+        priority
         fetchPriority="high"
-        decoding="async"
-        className="block w-full max-w-[834px] h-auto overflow-visible"
+        sizes="(max-width: 834px) 100vw, 834px"
+        className="block h-auto w-full max-w-[834px]"
       />
     </section>
   );

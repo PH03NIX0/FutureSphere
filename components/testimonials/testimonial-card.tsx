@@ -29,7 +29,9 @@ export default function TestimonialCard({
             src={imageSrc}
             alt={imageAlt}
             fill
+            sizes="(max-width: 1058px) 100vw, 460px"
             className="object-contain"
+            loading="lazy"
           />
         </div>
 

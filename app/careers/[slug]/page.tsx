@@ -46,7 +46,7 @@ export default async function CareerSingle({
   }
 
   return (
-    <main className="bg-fs-background flex flex-col items-center w-full">
+    <main className="bg-fs-background flex flex-col items-center w-full pb-12 sm:pb-16 lg:pb-[80px]">
       <Navbar />
       <CareerHero job={job} />
       <JobDescription job={job} />

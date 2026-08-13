@@ -49,6 +49,7 @@ export default function PerksSection() {
               fill
               sizes="(max-width: 1058px) 100vw, 561px"
               className="object-cover"
+              loading="lazy"
             />
           </div>
 

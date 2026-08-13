@@ -35,6 +35,7 @@ export default function BlogHero({ post }: BlogHeroProps) {
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 340px, 400px"
             className="object-cover"
             priority
+            fetchPriority="high"
           />
         </div>
       </article>

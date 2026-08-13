@@ -38,6 +38,7 @@ export default function StoryCard({
           fill
           sizes="(max-width: 1058px) 100vw, 460px"
           className="object-cover"
+          loading="lazy"
         />
       </div>
     </div>

@@ -104,13 +104,12 @@ function CarouselStage({
             <Image
               src={getCloudinaryUrl(member.avatarSrc)}
               alt={member.name}
-              width={320}
-              height={320}
-              sizes="(max-width: 767px) 220px, 315px"
+              width={slot.size}
+              height={slot.size}
+              sizes={`${slot.size}px`}
               className="h-full w-full object-cover"
               draggable={false}
-              // Only the center face needs to be eager; neighbors can wait.
-              loading={isCenter ? "eager" : "lazy"}
+              loading="lazy"
             />
           </motion.button>
         );

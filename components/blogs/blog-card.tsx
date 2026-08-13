@@ -54,7 +54,7 @@ export default function BlogCard({
             src={imageSrc}
             alt={imageAlt}
             fill
-            sizes="(max-width: 1058px) 320px, 330px"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 330px"
             className="object-cover transition-transform duration-300 sm:group-hover:scale-[1.02]"
           />
         </div>

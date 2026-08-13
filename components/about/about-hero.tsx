@@ -25,6 +25,7 @@ export default function AboutHero() {
           sizes="(max-width: 1058px) 100vw, 1058px"
           className="object-cover sm:group-hover:scale-105 transition-transform duration-500 ease-out"
           priority
+          fetchPriority="high"
         />
       </div>
     </section>

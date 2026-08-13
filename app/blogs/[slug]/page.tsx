@@ -52,7 +52,7 @@ export default async function BlogSingle({
   const relatedPosts = getRelatedBlogPosts(slug);
 
   return (
-    <main className="bg-fs-background flex flex-col items-center w-full">
+    <main className="bg-fs-background flex flex-col items-center w-full pb-12 sm:pb-16 lg:pb-[80px]">
       <Navbar />
       <BlogHero post={post} />
       <BlogArticle post={post} />

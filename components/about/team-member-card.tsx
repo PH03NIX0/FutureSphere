@@ -33,7 +33,7 @@ export default function TeamMemberCard({ name, role, bio, socials = [] }: TeamMe
                 className="text-fs-grey hover:text-fs-purple transition-colors duration-150"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={getCloudinaryUrl(social.iconSrc, { fetch_format: "svg", quality: "auto" })} alt={social.label} width={20} height={20} className="object-contain" />
+                <img src={getCloudinaryUrl(social.iconSrc, { fetch_format: "svg", quality: "auto" })} alt={social.label} width={20} height={20} loading="lazy" decoding="async" className="object-contain" />
               </a>
             ))}
           </div>

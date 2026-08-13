@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Badge from "@/components/ui/badge";
 import type { Job } from "@/lib/jobs";
 import { getJobOffice } from "@/lib/jobs";
@@ -59,14 +60,13 @@ export default function CareerHero({ job }: CareerHeroProps) {
           aria-hidden="true"
           className="pointer-events-none absolute inset-y-0 right-0 w-[58%] max-w-[560px] [mask-image:linear-gradient(to_right,transparent,black_22%)]"
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={careerGlobeSrc}
             alt=""
-            width={632}
-            height={358}
-            decoding="async"
-            className="h-full w-full object-contain object-right object-center"
+            fill
+            sizes="(max-width: 640px) 70vw, 560px"
+            className="object-contain object-right"
+            loading="eager"
           />
         </div>
       </div>

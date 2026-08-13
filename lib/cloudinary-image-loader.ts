@@ -26,6 +26,14 @@ export default function cloudinaryImageLoader({ src, width, quality }: ImageLoad
     const segments = afterUpload.split("/");
     const transformLike = /^([a-z]+_|,)/i;
     const hasTransforms = segments.length > 0 && transformLike.test(segments[0] ?? "");
+    const existing = hasTransforms ? (segments[0] ?? "") : "";
+
+    // Keep vector assets as SVG — f_auto would rasterize them into blurry PNGs.
+    const isSvg =
+      url.pathname.toLowerCase().endsWith(".svg") || /(^|,)f_svg(,|$)/.test(existing);
+    if (isSvg) {
+      return src;
+    }
 
     const q = quality || "auto";
     const widthTransform = `w_${width},c_limit,f_auto,q_${q}`;
@@ -33,7 +41,6 @@ export default function cloudinaryImageLoader({ src, width, quality }: ImageLoad
     let pathname: string;
     if (hasTransforms) {
       // Replace/append onto existing transform segment
-      const existing = segments[0] ?? "";
       const rest = segments.slice(1).join("/");
       const cleaned = existing
         .split(",")

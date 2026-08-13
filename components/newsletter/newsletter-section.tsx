@@ -8,7 +8,7 @@ export default function NewsletterSection() {
         className="newsletter-card relative rounded-newsletter border border-fs-border overflow-hidden"
         style={
           {
-            "--newsletter-bg": `url(${getCloudinaryUrl("futuresphere/newsletter-bg-rect", { fetch_format: "auto", quality: "auto" })})`,
+            "--newsletter-bg": `url(${getCloudinaryUrl("futuresphere/newsletter-bg-rect", { fetch_format: "auto", quality: "auto", width: 1600, crop: "limit" })})`,
           } as React.CSSProperties
         }
       >
@@ -19,6 +19,10 @@ export default function NewsletterSection() {
               src="https://res.cloudinary.com/wfqwup4o/image/upload/v1783948712/futuresphere/newsletter-icon-frame.svg"
               alt=""
               aria-hidden="true"
+              width={72}
+              height={72}
+              loading="lazy"
+              decoding="async"
               className="w-[48px] h-[48px] sm:w-[72px] sm:h-[72px]"
             />
           </div>
