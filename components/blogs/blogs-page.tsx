@@ -23,7 +23,7 @@ export default function BlogsPageContent() {
       <section className="fs-container px-4 sm:px-6 w-full">
         <article className="group flex w-full flex-col gap-5 rounded-[16px] bg-white p-4 sm:p-5 shadow-[3px_0px_4px_0px_rgba(113,136,225,0.1),0px_4px_4px_0px_rgba(113,136,225,0.1)] sm:flex-row sm:items-center sm:gap-9">
           <Link
-            href="/blogs"
+            href={`/blogs/${featuredBlog.slug}`}
             className="flex w-full flex-col gap-5 sm:flex-row sm:items-center sm:gap-9 outline-none focus-visible:ring-2 focus-visible:ring-fs-purple focus-visible:ring-offset-2 rounded-[8px]"
           >
             <div className="relative h-[200px] w-full shrink-0 overflow-hidden rounded-[8px] sm:h-[344px] sm:w-[495px]">

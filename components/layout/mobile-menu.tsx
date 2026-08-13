@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import ContactUsButton from "@/components/ui/contact-us-button";
-import { implementedNavHrefs, mainNavLinks } from "@/lib/navigation";
+import { implementedNavHrefs, isNavHrefActive, mainNavLinks } from "@/lib/navigation";
 
 const mobileLinks = [
   ...mainNavLinks,
@@ -91,7 +91,7 @@ export default function MobileMenu() {
 
             <nav className="flex flex-col gap-6">
               {mobileLinks.map((link) => {
-                const isActive = pathname === link.href;
+                const isActive = isNavHrefActive(link.href, pathname);
                 const className = `text-lg font-body transition-colors duration-150 ${isActive ? "text-white font-medium" : "text-white sm:hover:text-white/80"}`;
 
                 if (!implementedNavHrefs.has(link.href)) {

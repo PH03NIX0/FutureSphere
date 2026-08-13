@@ -1,5 +1,6 @@
 import { Inter, Manrope } from "next/font/google";
 import type { Metadata, Viewport } from "next";
+import { AuthProvider } from "@/components/auth/auth-provider";
 import "./globals.css";
 
 // Variable fonts (no weight list) → one file each instead of multiple static cuts.
@@ -40,7 +41,9 @@ export default function RootLayout({
         <link rel="preconnect" href="https://res.cloudinary.com" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
       </head>
-      <body className="bg-fs-background min-h-screen antialiased">{children}</body>
+      <body className="bg-fs-background min-h-screen antialiased">
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }

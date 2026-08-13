@@ -15,7 +15,8 @@ export function getCloudinaryUrl(
     publicId.endsWith(".svg") ||
     publicId.includes("/icons/") ||
     publicId.includes("/social/") ||
-    publicId.includes("/logos/");
+    publicId.includes("/logos/") ||
+    publicId.includes("/auth/");
   const defaults: Record<string, string | number | boolean> = preserveVectorFormat
     ? {}
     : { fetch_format: "auto", quality: "auto" };

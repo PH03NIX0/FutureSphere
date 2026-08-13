@@ -1,3 +1,10 @@
+import { getCloudinaryUrl } from "@/lib/cloudinary";
+
+const authLogoSrc = getCloudinaryUrl("futuresphere/auth/logo", {
+  fetch_format: "svg",
+  quality: "auto",
+});
+
 interface AuthLogoProps {
   readonly href?: string;
 }
@@ -11,7 +18,7 @@ export default function AuthLogo({ href = "/" }: AuthLogoProps) {
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/auth/logo.svg"
+        src={authLogoSrc}
         alt=""
         aria-hidden="true"
         className="h-7 w-auto sm:h-8"

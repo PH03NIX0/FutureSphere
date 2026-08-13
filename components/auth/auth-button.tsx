@@ -1,4 +1,14 @@
-import Image from "next/image";
+import { getCloudinaryUrl } from "@/lib/cloudinary";
+
+const magicLinkIconSrc = getCloudinaryUrl("futuresphere/auth/magic-link", {
+  fetch_format: "svg",
+  quality: "auto",
+});
+
+const successCheckSrc = getCloudinaryUrl("futuresphere/auth/success-check", {
+  fetch_format: "svg",
+  quality: "auto",
+});
 
 type AuthButtonVariant = "solid" | "gradient" | "magic";
 
@@ -9,6 +19,7 @@ interface AuthButtonProps {
   readonly href?: string;
   readonly disabled?: boolean;
   readonly fullWidth?: boolean;
+  readonly onClick?: () => void;
   /** Show trailing magic-link icon (login CTA). */
   readonly showMagicIcon?: boolean;
   /** Show leading back chevron (Back to Home). */
@@ -43,7 +54,7 @@ function BackIcon() {
 function MagicIcon() {
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src="/auth/magic-link.svg" alt="" aria-hidden="true" className="h-5 w-5 shrink-0" width={24} height={24} />
+    <img src={magicLinkIconSrc} alt="" aria-hidden="true" className="h-5 w-5 shrink-0" width={24} height={24} />
   );
 }
 
@@ -54,6 +65,7 @@ export default function AuthButton({
   href,
   disabled = false,
   fullWidth = false,
+  onClick,
   showMagicIcon = false,
   showBackIcon = false,
   className = "",
@@ -84,7 +96,7 @@ export default function AuthButton({
   }
 
   return (
-    <button type={type} disabled={disabled} className={classes}>
+    <button type={type} disabled={disabled} className={classes} onClick={onClick}>
       {content}
     </button>
   );
@@ -93,13 +105,14 @@ export default function AuthButton({
 /** Success-page checkmark asset wrapper. */
 export function AuthSuccessCheck() {
   return (
-      <Image
-        src="/auth/success-check.svg"
-        alt=""
-        aria-hidden="true"
-        width={142}
-        height={142}
-        className="h-[88px] w-[88px] sm:h-[104px] sm:w-[104px]"
-      />
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={successCheckSrc}
+      alt=""
+      aria-hidden="true"
+      width={142}
+      height={142}
+      className="h-[88px] w-[88px] sm:h-[104px] sm:w-[104px]"
+    />
   );
 }

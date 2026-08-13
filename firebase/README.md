@@ -44,3 +44,31 @@ Do not deploy open/test-mode rules.
 
 `POST /api/contact` accepts `{ firstName, lastName, email, subject, message, services, agreed }` and writes to `contactSubmissions` via the Admin SDK. Services must be a non-empty subset of: Web Design, App Design, Consulting, Marketing. Clients cannot read or write this collection.
 
+## Signup requests
+
+`POST /api/signup` accepts `{ name, email, phone, country, dialCode? }` and writes to `signupRequests` via the Admin SDK. `country` must be one of: US, GB, NG, CA. When `dialCode` is provided it must match that country; otherwise the server derives it. Clients cannot read or write this collection.
+
+## Magic link sign-in (Stage 5A)
+
+Client-only flow on `/login` using the Firebase Web SDK:
+
+1. `sendSignInLinkToEmail` with `ActionCodeSettings` (`handleCodeInApp: true`, continue URL `/login`)
+2. Email stored in `localStorage` (`emailForSignIn`) for the return trip
+3. On return, `isSignInWithEmailLink` + `signInWithEmailLink` complete auth
+
+### Firebase Console (manual)
+
+1. **Authentication → Sign-in method → Email/Password**: enable the provider, then enable **Email link (passwordless sign-in)**.
+2. **Authentication → Settings → Authorized domains**: include `localhost` and your production Vercel domain (plus any preview domains you use for magic-link testing).
+3. No Admin credentials are used for this flow.
+
+Optional env: `NEXT_PUBLIC_APP_URL` overrides the continue-URL origin (defaults to `window.location.origin`).
+
+## Auth session (Stage 5B)
+
+- `AuthProvider` (root layout) listens with `onAuthStateChanged`.
+- Session persistence: Firebase `browserLocalPersistence` (survives refresh and navigation).
+- Logout: Firebase Client `signOut`, exposed on `/login` when authenticated.
+- No site-wide route gates yet — the marketing site has no authenticated-only areas.
+- **`users/{uid}` is intentionally deferred**: Auth alone covers Stage 5B; no feature needs durable user profile documents yet. Existing Firestore rules for `users/{uid}` remain reserved for a later stage and are unchanged.
+

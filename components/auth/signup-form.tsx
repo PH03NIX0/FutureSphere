@@ -3,37 +3,70 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import AuthButton from "@/components/auth/auth-button";
+import { authInputClassName } from "@/components/auth/auth-styles";
+import {
+  SIGNUP_COUNTRIES,
+  type SignupCountryCode,
+} from "@/lib/signup";
 
 type FormState = "idle" | "loading" | "error";
 
-const countries = [
-  { code: "US", dial: "+1", placeholder: "+1 (555) 000-0000" },
-  { code: "GB", dial: "+44", placeholder: "+44 7700 000000" },
-  { code: "NG", dial: "+234", placeholder: "+234 800 000 0000" },
-  { code: "CA", dial: "+1", placeholder: "+1 (555) 000-0000" },
-] as const;
+const countryPlaceholders: Record<SignupCountryCode, string> = {
+  US: "+1 (555) 000-0000",
+  GB: "+44 7700 000000",
+  NG: "+234 800 000 0000",
+  CA: "+1 (555) 000-0000",
+};
 
-const inputClassName =
-  "h-[48px] w-full rounded-input border border-fs-border-light bg-white px-3.5 font-body text-[15px] leading-[22px] text-fs-dark outline-none transition-shadow placeholder:text-fs-grey/60 focus:ring-2 focus:ring-fs-purple/40 focus:border-fs-purple/40";
+const countries = SIGNUP_COUNTRIES.map((country) => ({
+  ...country,
+  placeholder: countryPlaceholders[country.code],
+}));
 
 export default function SignupForm() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [countryCode, setCountryCode] = useState<(typeof countries)[number]["code"]>("US");
+  const [countryCode, setCountryCode] = useState<SignupCountryCode>("US");
   const [formState, setFormState] = useState<FormState>("idle");
+  const [errorMessage, setErrorMessage] = useState(
+    "Something went wrong. Please try again."
+  );
 
   const selectedCountry = countries.find((c) => c.code === countryCode) ?? countries[0];
 
   const handleSubmit = async (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     setFormState("loading");
+    setErrorMessage("Something went wrong. Please try again.");
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 900));
+      const response = await fetch("/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          country: countryCode,
+          dialCode: selectedCountry.dial,
+        }),
+      });
+
+      const data = (await response.json().catch(() => null)) as
+        | { ok?: boolean; error?: string }
+        | null;
+
+      if (!response.ok) {
+        setErrorMessage(data?.error ?? "Something went wrong. Please try again.");
+        setFormState("error");
+        return;
+      }
+
       router.push("/signup/success");
     } catch {
+      setErrorMessage("Something went wrong. Please try again.");
       setFormState("error");
     }
   };
@@ -57,7 +90,7 @@ export default function SignupForm() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="futuresphere"
-          className={inputClassName}
+          className={authInputClassName}
         />
       </div>
 
@@ -75,7 +108,7 @@ export default function SignupForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="hussain@finesse.com"
-          className={inputClassName}
+          className={authInputClassName}
         />
       </div>
 
@@ -92,7 +125,7 @@ export default function SignupForm() {
               id="signup-country"
               name="country"
               value={countryCode}
-              onChange={(e) => setCountryCode(e.target.value as (typeof countries)[number]["code"])}
+              onChange={(e) => setCountryCode(e.target.value as SignupCountryCode)}
               className="appearance-none bg-transparent pr-5 font-body text-[14px] font-medium text-fs-dark outline-none"
             >
               {countries.map((country) => (
@@ -137,7 +170,7 @@ export default function SignupForm() {
 
       {formState === "error" ? (
         <p className="font-body text-[13px] text-red-600" role="alert">
-          Something went wrong. Please try again.
+          {errorMessage}
         </p>
       ) : null}
 

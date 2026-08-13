@@ -1,4 +1,9 @@
 import { isValidEmail, normalizeEmail } from "@/lib/email";
+import {
+  normalizeText,
+  parseAllowedObjectBody,
+  type ValidationResult,
+} from "@/lib/validation";
 
 export const CONTACT_COLLECTION = "contactSubmissions";
 
@@ -37,15 +42,7 @@ export type ContactPayload = {
   services: ContactService[];
 };
 
-export type ContactValidationResult =
-  | { ok: true; data: ContactPayload }
-  | { ok: false; error: string };
-
-function normalizeText(value: unknown): string | null {
-  if (typeof value !== "string") return null;
-  const trimmed = value.trim().replace(/\s+/g, " ");
-  return trimmed;
-}
+export type ContactValidationResult = ValidationResult<ContactPayload>;
 
 function isAllowedService(value: string): value is ContactService {
   return (CONTACT_SERVICES as readonly string[]).includes(value);
@@ -71,15 +68,10 @@ function parseServices(value: unknown): ContactService[] | null {
  * Strict server-side validation. Rejects unexpected keys and invalid services.
  */
 export function validateContactBody(body: unknown): ContactValidationResult {
-  if (body === null || typeof body !== "object" || Array.isArray(body)) {
-    return { ok: false, error: "Invalid request body." };
-  }
+  const parsed = parseAllowedObjectBody(body, ALLOWED_BODY_KEYS);
+  if (!parsed.ok) return parsed;
 
-  const record = body as Record<string, unknown>;
-  const keys = Object.keys(record);
-  if (keys.length === 0 || keys.some((key) => !ALLOWED_BODY_KEYS.has(key))) {
-    return { ok: false, error: "Invalid request body." };
-  }
+  const record = parsed.data;
 
   if (record.agreed !== true) {
     return { ok: false, error: "Please agree to the terms before submitting." };

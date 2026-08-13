@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { implementedNavHrefs, mainNavLinks } from "@/lib/navigation";
+import { implementedNavHrefs, isNavHrefActive, mainNavLinks } from "@/lib/navigation";
 
 export default function NavDesktopLinks() {
   const pathname = usePathname();
@@ -9,7 +9,7 @@ export default function NavDesktopLinks() {
   return (
     <div className="hidden sm:flex gap-4 text-sm text-white font-body">
       {mainNavLinks.map((link) => {
-        const isActive = pathname === link.href;
+        const isActive = isNavHrefActive(link.href, pathname);
         const className = `relative transition-colors duration-150 group cursor-pointer ${isActive ? "font-medium" : "text-white/85 sm:hover:text-white"}`;
         const underline = (
           <span

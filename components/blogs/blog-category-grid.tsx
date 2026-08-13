@@ -38,8 +38,8 @@ export default function BlogCategoryGrid() {
       </div>
 
       <div className="grid w-full grid-cols-1 gap-[30px] sm:grid-cols-2 lg:grid-cols-3">
-        {filteredPosts.map((post, index) => (
-          <BlogCard key={`${post.category}-${index}`} {...post} />
+        {filteredPosts.map((post) => (
+          <BlogCard key={post.slug} {...post} />
         ))}
       </div>
     </section>

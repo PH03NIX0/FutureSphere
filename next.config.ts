@@ -14,10 +14,9 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
-  // Tree-shake motion barrel imports in client chunks that still use it
-  // (testimonials, team carousel).
+  // Tree-shake barrel imports in client chunks.
   experimental: {
-    optimizePackageImports: ["motion"],
+    optimizePackageImports: ["motion", "firebase/auth", "firebase/app"],
   },
 };
 

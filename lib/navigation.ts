@@ -15,3 +15,8 @@ export const implementedNavHrefs = new Set<string>([
   "/signup",
   "/login",
 ]);
+
+export function isNavHrefActive(href: string, pathname: string): boolean {
+  if (pathname === href) return true;
+  return href !== "/" && pathname.startsWith(`${href}/`);
+}

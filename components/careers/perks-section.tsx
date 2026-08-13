@@ -1,5 +1,8 @@
 import Image from "next/image";
 import Badge from "@/components/ui/badge";
+import { getCloudinaryUrl } from "@/lib/cloudinary";
+
+const perksImageSrc = getCloudinaryUrl("futuresphere/images/careers-perks");
 
 const perks = [
   {
@@ -41,7 +44,7 @@ export default function PerksSection() {
         <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:gap-10 lg:justify-center">
           <div className="relative h-[220px] w-full max-w-[561px] overflow-hidden rounded-[20px] sm:rounded-[32px] sm:h-[406px]">
             <Image
-              src="/careers/perks-image.png"
+              src={perksImageSrc}
               alt="Team member working remotely"
               fill
               sizes="(max-width: 1058px) 100vw, 561px"

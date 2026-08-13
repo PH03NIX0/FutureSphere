@@ -33,7 +33,7 @@ const values = [
     title: "Sustainability",
     description:
       "Operating with a focus on environmental and social responsibility, striving for a more sustainable future.",
-    iconSrc: "/icons/value-sustainability.svg",
+    iconSrc: getCloudinaryUrl("futuresphere/icons/value-sustainability", { fetch_format: "svg", quality: "auto" }),
   },
   {
     title: "Excellence",

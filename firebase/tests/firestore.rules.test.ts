@@ -214,4 +214,59 @@ describe("Firestore security rules", () => {
     const user = testEnv.authenticatedContext("user-a");
     await assertFails(getDoc(doc(user.firestore(), "signupRequests/abc")));
   });
+
+  it("denies unauthenticated read of signupRequests", async () => {
+    await testEnv.withSecurityRulesDisabled(async (context) => {
+      await setDoc(doc(context.firestore(), "signupRequests/abc"), {
+        email: "s@example.com",
+        name: "Sam",
+      });
+    });
+
+    const anon = testEnv.unauthenticatedContext();
+    await assertFails(getDoc(doc(anon.firestore(), "signupRequests/abc")));
+  });
+
+  it("denies unauthenticated create on signupRequests", async () => {
+    const anon = testEnv.unauthenticatedContext();
+    await assertFails(
+      setDoc(doc(anon.firestore(), "signupRequests/abc"), {
+        name: "Sam",
+        email: "s@example.com",
+        phone: "+1 555 000 0000",
+        country: "US",
+        dialCode: "+1",
+        status: "new",
+      })
+    );
+  });
+
+  it("denies unauthenticated update on signupRequests", async () => {
+    await testEnv.withSecurityRulesDisabled(async (context) => {
+      await setDoc(doc(context.firestore(), "signupRequests/abc"), {
+        email: "s@example.com",
+        name: "Sam",
+        status: "new",
+      });
+    });
+
+    const anon = testEnv.unauthenticatedContext();
+    await assertFails(
+      updateDoc(doc(anon.firestore(), "signupRequests/abc"), {
+        status: "approved",
+      })
+    );
+  });
+
+  it("denies unauthenticated delete on signupRequests", async () => {
+    await testEnv.withSecurityRulesDisabled(async (context) => {
+      await setDoc(doc(context.firestore(), "signupRequests/abc"), {
+        email: "s@example.com",
+        name: "Sam",
+      });
+    });
+
+    const anon = testEnv.unauthenticatedContext();
+    await assertFails(deleteDoc(doc(anon.firestore(), "signupRequests/abc")));
+  });
 });

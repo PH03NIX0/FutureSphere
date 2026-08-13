@@ -1,6 +1,11 @@
 import { FieldValue } from "firebase-admin/firestore";
-import { NextResponse } from "next/server";
 import { getAdminFirestore } from "@/lib/firebase/admin";
+import {
+  jsonError,
+  jsonOk,
+  methodNotAllowed,
+  readJsonBody,
+} from "@/lib/http";
 import {
   NEWSLETTER_COLLECTION,
   isValidNewsletterEmail,
@@ -22,23 +27,18 @@ type NewsletterBody = {
  */
 export async function POST(request: Request) {
   try {
-    let body: NewsletterBody;
-    try {
-      body = (await request.json()) as NewsletterBody;
-    } catch {
-      return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
-    }
+    const parsed = await readJsonBody(request);
+    if (!parsed.ok) return parsed.response;
+
+    const body = parsed.body as NewsletterBody;
 
     if (typeof body.email !== "string" || !isValidNewsletterEmail(body.email)) {
-      return NextResponse.json(
-        { error: "Please enter a valid email address." },
-        { status: 400 }
-      );
+      return jsonError("Please enter a valid email address.", 400);
     }
 
     const source = body.source ?? "newsletter-section";
     if (!isValidNewsletterSource(source)) {
-      return NextResponse.json({ error: "Invalid source." }, { status: 400 });
+      return jsonError("Invalid source.", 400);
     }
 
     const email = normalizeNewsletterEmail(body.email);
@@ -68,16 +68,13 @@ export async function POST(request: Request) {
     }
 
     // Same response whether new or existing — avoid email enumeration
-    return NextResponse.json({ ok: true });
+    return jsonOk();
   } catch (error) {
     console.error("Newsletter subscribe error:", error);
-    return NextResponse.json(
-      { error: "Something went wrong. Please try again." },
-      { status: 500 }
-    );
+    return jsonError("Something went wrong. Please try again.", 500);
   }
 }
 
 export async function GET() {
-  return NextResponse.json({ error: "Method not allowed." }, { status: 405 });
+  return methodNotAllowed();
 }

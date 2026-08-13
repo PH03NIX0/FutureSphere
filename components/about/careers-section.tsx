@@ -1,15 +1,21 @@
-import Image from "next/image";
 import Badge from "@/components/ui/badge";
+import JobCard from "@/components/careers/job-card";
 import { jobs } from "@/lib/jobs";
 
-export default function CareersSection() {
+interface CareersSectionProps {
+  readonly heading?: string;
+}
+
+export default function CareersSection({
+  heading = "New job opportunities",
+}: CareersSectionProps) {
   return (
     <section className="flex justify-center w-full px-4 sm:px-6 mt-12 sm:mt-16 lg:mt-[80px]">
       <div className="fs-container mx-auto flex flex-col items-center gap-8 sm:gap-[50px]">
         <div className="flex flex-col items-center gap-3 sm:gap-5 w-full max-w-[800px]">
           <Badge>Careers</Badge>
           <h2 className="font-heading text-[28px] leading-[34px] font-medium text-center text-fs-dark sm:text-[40px] sm:leading-[48px] lg:text-[48px] lg:leading-[58px] sm:tracking-[-3.8267px] sm:font-normal">
-            New job opportunities
+            {heading}
           </h2>
           <p className="font-body text-center text-fs-grey max-w-[720px] text-[15px] leading-[22px] sm:text-[16px] sm:leading-[24px]">
             Browse through vacancies. internships and job postings at FutureSphere
@@ -18,40 +24,7 @@ export default function CareersSection() {
 
         <div className="flex w-full flex-col gap-[10px]">
           {jobs.map((job) => (
-            <article
-              key={job.title}
-              className="group flex items-center justify-between gap-3 sm:gap-4 rounded-[8px] border border-fs-border bg-white px-4 py-4 sm:px-5 sm:py-5 transition-transform duration-150 sm:hover:-translate-y-[1px]"
-            >
-              <div className="flex min-w-0 flex-col gap-[15px]">
-                <div className="flex flex-col gap-[15px]">
-                  <h3 className="font-heading text-[20px] font-medium leading-[24px] tracking-[-0.75px] text-fs-card-text">
-                    {job.title}
-                  </h3>
-                  <p className="font-heading text-[16px] tracking-[-0.96px]">
-                    <span className="text-fs-grey">{job.type}</span>
-                    <span className="text-fs-card-muted"> - </span>
-                    <span className={job.locationTone === "purple" ? "text-fs-purple" : "text-[#9f5af7]"}>
-                      {job.location}
-                    </span>
-                  </p>
-                </div>
-                <p className="font-body text-[14px] leading-[20px] text-fs-grey sm:text-[16px] sm:leading-[22px]">
-                  {job.description}
-                </p>
-              </div>
-
-              <span className="hidden size-[55.11px] shrink-0 items-center justify-center rounded-full border border-fs-purple opacity-80 sm:inline-flex">
-                <Image
-                  src="/icons/arrow-right.svg"
-                  alt=""
-                  width={21}
-                  height={21}
-                  unoptimized
-                  className="transition-transform duration-150 group-hover:translate-x-[2px]"
-                  aria-hidden="true"
-                />
-              </span>
-            </article>
+            <JobCard key={job.slug} job={job} />
           ))}
         </div>
       </div>

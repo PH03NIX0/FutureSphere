@@ -8,7 +8,8 @@ interface BlogCardProps {
   readonly excerpt: string;
   readonly imageSrc: string;
   readonly imageAlt: string;
-  /** Destination for the card. Defaults to /blogs — individual post routes are not implemented yet. */
+  readonly slug?: string;
+  /** Destination for the card. Defaults to the post slug, or /blogs. */
   readonly href?: string;
 }
 
@@ -41,11 +42,13 @@ export default function BlogCard({
   excerpt,
   imageSrc,
   imageAlt,
-  href = "/blogs",
+  slug,
+  href,
 }: BlogCardProps) {
+  const destination = href ?? (slug ? `/blogs/${slug}` : "/blogs");
   return (
     <article className="group flex h-full flex-1 flex-col rounded-blog border border-fs-border sm:bg-white bg-transparent p-5">
-      <Link href={href} className="flex h-full flex-col justify-between outline-none focus-visible:ring-2 focus-visible:ring-fs-purple focus-visible:ring-offset-2 rounded-[8px]">
+      <Link href={destination} className="flex h-full flex-col justify-between outline-none focus-visible:ring-2 focus-visible:ring-fs-purple focus-visible:ring-offset-2 rounded-[8px]">
         <div className="relative h-40 sm:h-[220px] overflow-hidden rounded-[8px] mb-[20px]">
           <Image
             src={imageSrc}
