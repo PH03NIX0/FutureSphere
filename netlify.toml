@@ -4,3 +4,8 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  # Cloudinary values are only ever read via process.env (see lib/cloudinary.ts and
+  # app/api/upload/route.ts) and are never hardcoded. CLOUDINARY_CLOUD_NAME mirrors
+  # NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME, a public identifier embedded in image URLs on
+  # nearly every page by design, which is what triggers Netlify's secrets scanner.
+  SECRETS_SCAN_OMIT_KEYS = "CLOUDINARY_API_KEY,CLOUDINARY_API_SECRET,CLOUDINARY_CLOUD_NAME"
