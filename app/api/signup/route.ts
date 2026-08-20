@@ -9,6 +9,7 @@ import {
 import { SIGNUP_COLLECTION, validateSignupBody } from "@/lib/signup";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 /**
  * Public signup-request endpoint.

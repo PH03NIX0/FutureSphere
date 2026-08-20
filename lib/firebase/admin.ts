@@ -9,18 +9,12 @@ import {
 } from "firebase-admin/app";
 import { getAuth, type Auth } from "firebase-admin/auth";
 import { getFirestore, type Firestore } from "firebase-admin/firestore";
+import { getAdminPrivateKeyFromEnv } from "@/lib/firebase/admin-credentials";
 
 /**
  * Server-only Firebase Admin. Never import this into client components.
  * Admin credentials bypass Security Rules — keep them out of the browser.
  */
-
-function getPrivateKey(): string | undefined {
-  const key = process.env.FIREBASE_ADMIN_PRIVATE_KEY;
-  if (!key) return undefined;
-  // Supports both literal \n in .env and real newlines
-  return key.replace(/\\n/g, "\n");
-}
 
 function createAdminApp(): App {
   if (getApps().length > 0) {
@@ -31,7 +25,7 @@ function createAdminApp(): App {
     process.env.FIREBASE_ADMIN_PROJECT_ID ??
     process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
   const clientEmail = process.env.FIREBASE_ADMIN_CLIENT_EMAIL;
-  const privateKey = getPrivateKey();
+  const privateKey = getAdminPrivateKeyFromEnv();
 
   // Prefer explicit service-account fields (local / most hosts).
   if (projectId && clientEmail && privateKey) {
@@ -55,7 +49,7 @@ function createAdminApp(): App {
   }
 
   throw new Error(
-    "Firebase Admin is not configured. Set FIREBASE_ADMIN_PROJECT_ID, FIREBASE_ADMIN_CLIENT_EMAIL, and FIREBASE_ADMIN_PRIVATE_KEY in .env.local (see .env.example)."
+    "Firebase Admin is not configured. Set FIREBASE_ADMIN_PROJECT_ID, FIREBASE_ADMIN_CLIENT_EMAIL, and FIREBASE_ADMIN_PRIVATE_KEY (or FIREBASE_ADMIN_PRIVATE_KEY_BASE64) in .env.local and in your host's environment variables (see .env.example)."
   );
 }
 

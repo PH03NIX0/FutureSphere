@@ -8,6 +8,29 @@ This project uses Firebase for Auth and Firestore. Application features are wire
 2. Public `NEXT_PUBLIC_FIREBASE_*` vars come from Firebase Console → Project settings → Your apps.
 3. Admin vars come from a service account JSON (Project settings → Service accounts). Never commit that JSON.
 
+## Deploying (Vercel / Netlify)
+
+The backend is the Next.js route handlers under `app/api/` (`/api/contact`, `/api/newsletter`, `/api/signup`, `/api/upload`). They run locally because `.env.local` is loaded by `next dev`. That file is gitignored, so hosts never see those secrets unless you add them in the dashboard.
+
+### Environment variables
+
+Copy every key from `.env.example` into the host:
+
+- **Vercel:** Project → Settings → Environment Variables (Production + Preview), then Redeploy.
+- **Netlify:** Site configuration → Environment variables, then trigger a new deploy.
+
+`NEXT_PUBLIC_*` values are inlined at **build** time. Changing them requires a fresh deploy, not just a runtime update.
+
+For `FIREBASE_ADMIN_PRIVATE_KEY`, paste the PEM as one quoted line with `\n` for newlines. If the host still rejects the key, set `FIREBASE_ADMIN_PRIVATE_KEY_BASE64` instead (base64 of the full PEM).
+
+### Netlify
+
+This app is not a static site. Netlify must use the Next.js runtime (`publish = .next` in `netlify.toml`). A static publish directory (`out`, `dist`, or drag-and-drop HTML) will serve the UI and 404 every `/api/*` route.
+
+### Firebase Auth domains
+
+If magic-link login is used in production: Authentication → Settings → Authorized domains. Add the Vercel/Netlify hostname (and any custom domain).
+
 ## Emulators
 
 ```bash

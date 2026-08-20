@@ -15,6 +15,7 @@ import {
 } from "@/lib/newsletter";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 type NewsletterBody = {
   email?: unknown;

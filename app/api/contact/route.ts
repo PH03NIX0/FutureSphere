@@ -9,6 +9,7 @@ import {
 } from "@/lib/http";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 /**
  * Public contact form endpoint.

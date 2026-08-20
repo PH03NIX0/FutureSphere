@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Keep Node-only SDKs out of the serverless bundle. Bundling firebase-admin
+  // is a common reason API routes work locally and 500 on Vercel/Netlify.
+  serverExternalPackages: ["firebase-admin", "cloudinary"],
   images: {
     loader: "custom",
     loaderFile: "./lib/cloudinary-image-loader.ts",
