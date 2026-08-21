@@ -3,4 +3,9 @@
   publish = ".next"
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "22"
+  # CLOUDINARY_CLOUD_NAME matches NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME and is a public identifier
+  # embedded in image URLs across the site. Netlify's scanner treats non-NEXT_PUBLIC_ variables
+  # as secrets by default, triggering false positives. CLOUDINARY_API_SECRET remains protected
+  # and monitored by secret scanning.
+  SECRETS_SCAN_OMIT_KEYS = "CLOUDINARY_CLOUD_NAME"
