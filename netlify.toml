@@ -3,9 +3,9 @@
   publish = ".next"
 
 [build.environment]
-  NODE_VERSION = "20"
-  # Cloudinary values are only ever read via process.env (see lib/cloudinary.ts and
-  # app/api/upload/route.ts) and are never hardcoded. CLOUDINARY_CLOUD_NAME mirrors
-  # NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME, a public identifier embedded in image URLs on
-  # nearly every page by design, which is what triggers Netlify's secrets scanner.
-  SECRETS_SCAN_OMIT_KEYS = "CLOUDINARY_API_KEY,CLOUDINARY_API_SECRET,CLOUDINARY_CLOUD_NAME"
+  NODE_VERSION = "22"
+  # CLOUDINARY_CLOUD_NAME matches NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME and is a public identifier
+  # embedded in image URLs across the site. Netlify's scanner treats non-NEXT_PUBLIC_ variables
+  # as secrets by default, triggering false positives. CLOUDINARY_API_SECRET remains protected
+  # and monitored by secret scanning.
+  SECRETS_SCAN_OMIT_KEYS = "CLOUDINARY_CLOUD_NAME"
