@@ -4,6 +4,7 @@ import {
   buildEmailLinkActionCodeSettings,
   clearEmailForSignIn,
   getEmailForSignIn,
+  getEmailFromContinueUrl,
   getMagicLinkContinueUrl,
   looksLikeEmailSignInLink,
   mapEmailLinkAuthError,
@@ -46,6 +47,35 @@ describe("getMagicLinkContinueUrl", () => {
         "https://futuresphere.vercel.app/"
       )
     ).toBe("https://futuresphere.vercel.app/login");
+  });
+
+  it("embeds email for cross-device completion", () => {
+    expect(
+      getMagicLinkContinueUrl(
+        "https://future-sphere-blush.vercel.app",
+        undefined,
+        "Ada@Example.COM"
+      )
+    ).toBe(
+      "https://future-sphere-blush.vercel.app/login?email=ada%40example.com"
+    );
+  });
+});
+
+describe("getEmailFromContinueUrl", () => {
+  it("reads and normalizes email query param", () => {
+    expect(
+      getEmailFromContinueUrl(
+        "https://example.com/login?mode=signIn&email=Ada%40Example.COM&oobCode=x"
+      )
+    ).toBe("ada@example.com");
+  });
+
+  it("returns null when missing or invalid", () => {
+    expect(getEmailFromContinueUrl("https://example.com/login")).toBeNull();
+    expect(
+      getEmailFromContinueUrl("https://example.com/login?email=not-an-email")
+    ).toBeNull();
   });
 });
 
@@ -93,8 +123,8 @@ describe("looksLikeEmailSignInLink", () => {
 
 describe("mapEmailLinkAuthError", () => {
   it("maps known codes to safe messages", () => {
-    expect(mapEmailLinkAuthError({ code: "auth/invalid-action-code" })).toBe(
-      "This sign-in link is invalid or has already been used. Request a new one."
+    expect(mapEmailLinkAuthError({ code: "auth/invalid-action-code" })).toContain(
+      "invalid or has already been used"
     );
     expect(mapEmailLinkAuthError({ code: "auth/expired-action-code" })).toBe(
       "This sign-in link has expired. Request a new one."
@@ -102,6 +132,12 @@ describe("mapEmailLinkAuthError", () => {
     expect(mapEmailLinkAuthError({ code: "auth/invalid-email" })).toBe(
       "Please enter a valid email address."
     );
+    expect(
+      mapEmailLinkAuthError({ code: "auth/unauthorized-continue-uri" })
+    ).toContain("Authorized domains");
+    expect(
+      mapEmailLinkAuthError({ code: "auth/operation-not-allowed" })
+    ).toContain("Email link");
   });
 
   it("never returns Firebase internal details", () => {

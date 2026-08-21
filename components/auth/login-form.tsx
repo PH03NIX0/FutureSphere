@@ -15,6 +15,7 @@ import {
   buildEmailLinkActionCodeSettings,
   clearEmailForSignIn,
   getEmailForSignIn,
+  getEmailFromContinueUrl,
   getMagicLinkContinueUrl,
   mapEmailLinkAuthError,
   storeEmailForSignIn,
@@ -47,7 +48,8 @@ export default function LoginForm() {
   );
   const [logoutError, setLogoutError] = useState<string | null>(null);
   const [signingOut, setSigningOut] = useState(false);
-  const completingRef = useRef(false);
+  /** Full email-link href captured on land — oobCode must not be consumed until the user clicks. */
+  const emailLinkHrefRef = useRef<string | null>(null);
 
   useEffect(() => {
     let auth: Auth;
@@ -61,31 +63,16 @@ export default function LoginForm() {
 
     const href = window.location.href;
     if (!isSignInWithEmailLink(auth, href)) return;
-    if (completingRef.current) return;
 
-    const storedEmail = getEmailForSignIn(window.localStorage);
-    if (!storedEmail) {
-      setFormState("awaitingEmail");
-      return;
+    // Do NOT call signInWithEmailLink here. Prefetchers / Safe Links often GET
+    // this URL and would burn the one-time oobCode before the user clicks.
+    emailLinkHrefRef.current = href;
+    const knownEmail =
+      getEmailForSignIn(window.localStorage) ?? getEmailFromContinueUrl(href);
+    if (knownEmail) {
+      setEmail(knownEmail);
     }
-
-    completingRef.current = true;
-    setFormState("completing");
-    setEmail(storedEmail);
-
-    void (async () => {
-      try {
-        await signInWithEmailLink(auth, storedEmail, href);
-        clearEmailForSignIn(window.localStorage);
-        stripAuthParamsFromUrl();
-        // AuthProvider onAuthStateChanged becomes the source of truth.
-      } catch (error) {
-        stripAuthParamsFromUrl();
-        setErrorMessage(mapEmailLinkAuthError(error));
-        setFormState("error");
-        completingRef.current = false;
-      }
-    })();
+    setFormState("awaitingEmail");
   }, []);
 
   const handleSignOut = async () => {
@@ -94,7 +81,7 @@ export default function LoginForm() {
     try {
       await signOut();
       setFormState("idle");
-      completingRef.current = false;
+      emailLinkHrefRef.current = null;
     } catch (error) {
       setLogoutError(mapSignOutAuthError(error));
     } finally {
@@ -113,20 +100,33 @@ export default function LoginForm() {
 
     const normalized = normalizeEmail(email);
     const auth = getClientAuth();
-    const href = window.location.href;
+    const linkHref = emailLinkHrefRef.current ?? window.location.href;
+    const onEmailLinkReturn =
+      formState === "awaitingEmail" || Boolean(emailLinkHrefRef.current);
 
-    // Finish sign-in when returning from email on a different device/browser.
-    if (formState === "awaitingEmail" || isSignInWithEmailLink(auth, href)) {
+    // Finish sign-in only on an explicit user click (not on mount).
+    if (onEmailLinkReturn) {
+      if (!isSignInWithEmailLink(auth, linkHref)) {
+        setErrorMessage(
+          "This sign-in link is invalid or has already been used. Request a new one (some email apps preview links and use them up)."
+        );
+        setFormState("error");
+        emailLinkHrefRef.current = null;
+        return;
+      }
+
       setFormState("completing");
       setErrorMessage("Something went wrong. Please try again.");
       try {
-        await signInWithEmailLink(auth, normalized, href);
+        await signInWithEmailLink(auth, normalized, linkHref);
         clearEmailForSignIn(window.localStorage);
+        emailLinkHrefRef.current = null;
         stripAuthParamsFromUrl();
       } catch (error) {
-        stripAuthParamsFromUrl();
+        // Keep oobCode in the URL/ref so the user can fix the email and retry
+        // once — unless the code was already consumed.
         setErrorMessage(mapEmailLinkAuthError(error));
-        setFormState("error");
+        setFormState("awaitingEmail");
       }
       return;
     }
@@ -135,16 +135,16 @@ export default function LoginForm() {
     setErrorMessage("Something went wrong. Please try again.");
 
     try {
-      const continueUrl = getMagicLinkContinueUrl(window.location.origin);
+      const continueUrl = getMagicLinkContinueUrl(
+        window.location.origin,
+        process.env.NEXT_PUBLIC_APP_URL,
+        normalized
+      );
       const actionCodeSettings = buildEmailLinkActionCodeSettings(continueUrl);
       await sendSignInLinkToEmail(auth, normalized, actionCodeSettings);
       // Same success path for all valid emails — avoid account enumeration.
       storeEmailForSignIn(normalized, window.localStorage);
-      setEmail("");
       setFormState("success");
-      setTimeout(() => {
-        setFormState((current) => (current === "success" ? "idle" : current));
-      }, 4000);
     } catch (error) {
       setErrorMessage(mapEmailLinkAuthError(error));
       setFormState("error");
@@ -226,7 +226,9 @@ export default function LoginForm() {
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
-            if (formState === "error") setFormState("idle");
+            if (formState === "error") {
+              setFormState(emailLinkHrefRef.current ? "awaitingEmail" : "idle");
+            }
           }}
           placeholder="futuresphere@gmail.com"
           className={authInputClassName}
@@ -236,13 +238,14 @@ export default function LoginForm() {
 
       {formState === "success" ? (
         <p className="font-body text-[13px] text-fs-purple" role="status">
-          Check your inbox for a magic sign-in link.
+          Check your inbox for a magic sign-in link. Open it on this device, then
+          tap Finish sign-in.
         </p>
       ) : null}
 
       {formState === "awaitingEmail" ? (
         <p className="font-body text-[13px] text-fs-purple" role="status">
-          Confirm your email to finish signing in.
+          Confirm your email and tap Finish sign-in to complete login.
         </p>
       ) : null}
 

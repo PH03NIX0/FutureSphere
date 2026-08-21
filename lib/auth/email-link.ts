@@ -10,6 +10,9 @@ export const EMAIL_FOR_SIGN_IN_KEY = "emailForSignIn";
 
 export const MAGIC_LINK_CONTINUE_PATH = "/login";
 
+/** Query param embedded in the continue URL so cross-device completion can recover the email. */
+export const EMAIL_CONTINUE_PARAM = "email";
+
 export type EmailLinkStorage = Pick<Storage, "getItem" | "setItem" | "removeItem">;
 
 /**
@@ -17,13 +20,24 @@ export type EmailLinkStorage = Pick<Storage, "getItem" | "setItem" | "removeItem
  * Uses the current origin so localhost and the production host both work
  * without hardcoding domains. Optional NEXT_PUBLIC_APP_URL overrides origin
  * (useful if the public URL differs from window.location).
+ *
+ * When `email` is provided it is added as a query param so the return trip
+ * still knows which address to complete with (same or different device).
  */
 export function getMagicLinkContinueUrl(
   origin: string,
-  appUrlEnv: string | undefined = process.env.NEXT_PUBLIC_APP_URL
+  appUrlEnv: string | undefined = process.env.NEXT_PUBLIC_APP_URL,
+  email?: string
 ): string {
   const base = (appUrlEnv?.trim() || origin).replace(/\/$/, "");
-  return `${base}${MAGIC_LINK_CONTINUE_PATH}`;
+  const url = new URL(`${base}${MAGIC_LINK_CONTINUE_PATH}`);
+  if (email) {
+    const normalized = normalizeEmail(email);
+    if (isValidEmail(normalized)) {
+      url.searchParams.set(EMAIL_CONTINUE_PARAM, normalized);
+    }
+  }
+  return url.toString();
 }
 
 export function buildEmailLinkActionCodeSettings(
@@ -49,6 +63,17 @@ export function getEmailForSignIn(storage: EmailLinkStorage): string | null {
   return isValidEmail(normalized) ? normalized : null;
 }
 
+export function getEmailFromContinueUrl(href: string): string | null {
+  try {
+    const value = new URL(href).searchParams.get(EMAIL_CONTINUE_PARAM);
+    if (!value) return null;
+    const normalized = normalizeEmail(value);
+    return isValidEmail(normalized) ? normalized : null;
+  } catch {
+    return null;
+  }
+}
+
 export function clearEmailForSignIn(storage: EmailLinkStorage): void {
   storage.removeItem(EMAIL_FOR_SIGN_IN_KEY);
 }
@@ -68,9 +93,17 @@ export function mapEmailLinkAuthError(error: unknown): string {
     case "auth/missing-email":
       return "Please enter your email to finish signing in.";
     case "auth/invalid-action-code":
-      return "This sign-in link is invalid or has already been used. Request a new one.";
+      return "This sign-in link is invalid or has already been used. Request a new one (some email apps preview links and use them up).";
     case "auth/expired-action-code":
       return "This sign-in link has expired. Request a new one.";
+    case "auth/unauthorized-continue-uri":
+    case "auth/unauthorized-domain":
+      return "This site's domain is not authorized for sign-in. Add it under Firebase Authentication → Settings → Authorized domains.";
+    case "auth/invalid-continue-uri":
+    case "auth/missing-continue-uri":
+      return "Sign-in is misconfigured (invalid continue URL). Check NEXT_PUBLIC_APP_URL and redeploy.";
+    case "auth/operation-not-allowed":
+      return "Email link sign-in is not enabled. Enable Email/Password → Email link in Firebase Authentication.";
     default:
       return "Something went wrong. Please try again.";
   }

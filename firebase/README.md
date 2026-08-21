@@ -27,9 +27,19 @@ For `FIREBASE_ADMIN_PRIVATE_KEY`, paste the PEM as one quoted line with `\n` for
 
 This app is not a static site. Netlify must use the Next.js runtime (`publish = .next` in `netlify.toml`). A static publish directory (`out`, `dist`, or drag-and-drop HTML) will serve the UI and 404 every `/api/*` route.
 
+**Secrets scanning:** Do not mark `FIREBASE_ADMIN_PROJECT_ID` (or any `NEXT_PUBLIC_*` / Cloudinary cloud name) as “Contains secret values”. The project ID is public — it lives in `.firebaserc` and is inlined into the client bundle via `NEXT_PUBLIC_FIREBASE_PROJECT_ID`. Marking it secret makes Netlify fail the build. `netlify.toml` already sets `SECRETS_SCAN_OMIT_KEYS` for those non-secret keys. Keep secret only real credentials (`FIREBASE_ADMIN_PRIVATE_KEY`, `FIREBASE_ADMIN_CLIENT_EMAIL`, `CLOUDINARY_API_SECRET`, etc.). Admin already falls back to `NEXT_PUBLIC_FIREBASE_PROJECT_ID` if `FIREBASE_ADMIN_PROJECT_ID` is unset.
+
 ### Firebase Auth domains
 
-If magic-link login is used in production: Authentication → Settings → Authorized domains. Add the Vercel/Netlify hostname (and any custom domain).
+Magic-link `sendSignInLinkToEmail` fails with Firebase `UNAUTHORIZED_DOMAIN` / `auth/unauthorized-continue-uri` (UI used to show only “Something went wrong”) when the continue-URL host is missing from Authorized domains.
+
+Continue URL is `{window.location.origin}/login` unless `NEXT_PUBLIC_APP_URL` overrides the origin at build time.
+
+For the current Vercel production host, add:
+
+- `future-sphere-blush.vercel.app`
+
+Also add any Netlify hostname and custom domain you use. `localhost` is allowed by default. Do **not** set `NEXT_PUBLIC_APP_URL` to a host that isn’t allowlisted (or to localhost in a production build).
 
 ## Emulators
 
@@ -75,14 +85,14 @@ Do not deploy open/test-mode rules.
 
 Client-only flow on `/login` using the Firebase Web SDK:
 
-1. `sendSignInLinkToEmail` with `ActionCodeSettings` (`handleCodeInApp: true`, continue URL `/login`)
-2. Email stored in `localStorage` (`emailForSignIn`) for the return trip
-3. On return, `isSignInWithEmailLink` + `signInWithEmailLink` complete auth
+1. `sendSignInLinkToEmail` with `ActionCodeSettings` (`handleCodeInApp: true`, continue URL `/login?email=...`)
+2. Email stored in `localStorage` (`emailForSignIn`) and embedded in the continue URL for the return trip
+3. On return, the page **does not** auto-complete sign-in (email prefetchers would burn the one-time `oobCode`). The user confirms email and clicks **Finish sign-in**, which calls `signInWithEmailLink`
 
 ### Firebase Console (manual)
 
 1. **Authentication → Sign-in method → Email/Password**: enable the provider, then enable **Email link (passwordless sign-in)**.
-2. **Authentication → Settings → Authorized domains**: include `localhost` and your production Vercel domain (plus any preview domains you use for magic-link testing).
+2. **Authentication → Settings → Authorized domains**: include `localhost`, your production Vercel domain (e.g. `future-sphere-blush.vercel.app`), plus any Netlify / custom domains you use for magic-link testing.
 3. No Admin credentials are used for this flow.
 
 Optional env: `NEXT_PUBLIC_APP_URL` overrides the continue-URL origin (defaults to `window.location.origin`).
